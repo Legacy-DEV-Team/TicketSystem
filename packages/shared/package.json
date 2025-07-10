@@ -1,0 +1,25 @@
+{
+  "name": "@discord-ticket-saas/shared",
+  "version": "1.0.0",
+  "description": "Shared utilities and models",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "mongoose": "^8.0.0",
+    "redis": "^4.6.0",
+    "winston": "^3.11.0",
+    "argon2": "^0.31.0",
+    "jose": "^5.1.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "typescript": "^5.2.0",
+    "rimraf": "^5.0.0"
+  }
+}
