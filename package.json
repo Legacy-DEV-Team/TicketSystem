@@ -1,0 +1,32 @@
+{
+  "name": "discord-ticket-saas",
+  "version": "1.0.0",
+  "description": "Discord Ticket Bot SaaS Platform",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:bot\" \"npm run dev:web\"",
+    "dev:bot": "cd packages/bot && npm run dev",
+    "dev:web": "cd packages/web && npm run dev",
+    "build": "npm run build:shared && npm run build:bot && npm run build:web",
+    "build:shared": "cd packages/shared && npm run build",
+    "build:bot": "cd packages/bot && npm run build",
+    "build:web": "cd packages/web && npm run build",
+    "start": "concurrently \"npm run start:bot\" \"npm run start:web\"",
+    "start:bot": "cd packages/bot && npm start",
+    "start:web": "cd packages/web && npm start",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "clean": "rimraf packages/*/dist packages/*/build packages/*/.next"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

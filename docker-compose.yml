@@ -1,0 +1,309 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: discord-ticket-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-admin123}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-discord_ticket_saas}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - discord-ticket-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ping:1})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: discord-ticket-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - discord-ticket-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD:-redis123}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Discord Bot
+  discord-bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bot
+      args:
+        NODE_VERSION: 18
+    container_name: discord-ticket-bot
+    restart: unless-stopped
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      
+      # Database
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-admin123}@mongodb:27017/${MONGO_DATABASE:-discord_ticket_saas}?authSource=admin
+      REDIS_URL: redis://:${REDIS_PASSWORD:-redis123}@redis:6379
+      
+      # Bot Configuration
+      BOT_WEBHOOK_PORT: 3001
+      BOT_WEBHOOK_URL: ${BOT_WEBHOOK_URL:-http://discord-bot:3001}
+      
+      # Security
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      
+      # Development
+      DEV_MODE: ${DEV_MODE:-false}
+    ports:
+      - "${BOT_PORT:-3001}:3001"
+    volumes:
+      - bot_logs:/app/logs
+      - transcripts:/app/transcripts
+    networks:
+      - discord-ticket-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Web Panel
+  web-panel:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+      args:
+        NODE_VERSION: 18
+    container_name: discord-ticket-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      
+      # Application
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      
+      # Database
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-admin123}@mongodb:27017/${MONGO_DATABASE:-discord_ticket_saas}?authSource=admin
+      REDIS_URL: redis://:${REDIS_PASSWORD:-redis123}@redis:6379
+      
+      # Bot Integration
+      BOT_WEBHOOK_URL: http://discord-bot:3001
+      
+      # Security
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      
+      # External URLs
+      SITE_URL: ${SITE_URL:-http://localhost:3000}
+      API_URL: ${API_URL:-http://localhost:3000/api}
+      
+      # Development
+      DEV_MODE: ${DEV_MODE:-false}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    volumes:
+      - web_logs:/app/logs
+      - transcripts:/app/transcripts:ro
+      - uploads:/app/uploads
+    networks:
+      - discord-ticket-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      discord-bot:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # NGINX Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: discord-ticket-nginx
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/sites/:/etc/nginx/sites-available/:ro
+      - nginx_logs:/var/log/nginx
+      - ssl_certs:/etc/ssl/certs:ro
+      - transcripts:/var/www/transcripts:ro
+    networks:
+      - discord-ticket-network
+    depends_on:
+      - web-panel
+      - discord-bot
+    profiles:
+      - production
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Monitoring with Prometheus (Optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: discord-ticket-prometheus
+    restart: unless-stopped
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./docker/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - discord-ticket-network
+    profiles:
+      - monitoring
+
+  # Grafana Dashboard (Optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: discord-ticket-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
+      GF_USERS_ALLOW_SIGN_UP: false
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/monitoring/grafana/:/etc/grafana/provisioning/
+    networks:
+      - discord-ticket-network
+    depends_on:
+      - prometheus
+    profiles:
+      - monitoring
+
+  # Log Aggregation with Fluentd (Optional)
+  fluentd:
+    build:
+      context: ./docker/fluentd
+      dockerfile: Dockerfile
+    container_name: discord-ticket-fluentd
+    restart: unless-stopped
+    volumes:
+      - ./docker/fluentd/conf/fluent.conf:/fluentd/etc/fluent.conf:ro
+      - bot_logs:/var/log/bot:ro
+      - web_logs:/var/log/web:ro
+      - nginx_logs:/var/log/nginx:ro
+    ports:
+      - "${FLUENTD_PORT:-24224}:24224"
+      - "${FLUENTD_PORT:-24224}:24224/udp"
+    networks:
+      - discord-ticket-network
+    profiles:
+      - logging
+
+  # Backup Service (Optional)
+  backup:
+    build:
+      context: ./docker/backup
+      dockerfile: Dockerfile
+    container_name: discord-ticket-backup
+    restart: unless-stopped
+    environment:
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-0 2 * * *}  # Daily at 2 AM
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-admin123}@mongodb:27017/${MONGO_DATABASE:-discord_ticket_saas}?authSource=admin
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-30}
+      S3_BUCKET: ${S3_BACKUP_BUCKET:-}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-}
+    volumes:
+      - mongodb_data:/data/mongodb:ro
+      - redis_data:/data/redis:ro
+      - transcripts:/data/transcripts:ro
+      - backup_data:/backups
+    networks:
+      - discord-ticket-network
+    depends_on:
+      - mongodb
+      - redis
+    profiles:
+      - backup
+
+networks:
+  discord-ticket-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  # Database volumes
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+  redis_data:
+    driver: local
+  
+  # Application volumes
+  bot_logs:
+    driver: local
+  web_logs:
+    driver: local
+  nginx_logs:
+    driver: local
+  transcripts:
+    driver: local
+  uploads:
+    driver: local
+  
+  # Monitoring volumes
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  
+  # Backup volumes
+  backup_data:
+    driver: local
+  
+  # SSL certificates
+  ssl_certs:
+    driver: local

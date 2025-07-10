@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Overview - Discord Ticket SaaS Documentation</title>
+    <meta name="description" content="Comprehensive REST API for Discord Ticket SaaS - authentication, endpoints, and examples">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="nav-logo">
+                <span class="nav-title">Discord Ticket SaaS</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../guide/getting-started.html" class="nav-link">Guide</a></li>
+                <li><a href="overview.html" class="nav-link active">API</a></li>
+                <li><a href="../examples/basic-setup.html" class="nav-link">Examples</a></li>
+                <li><a href="../contributing.html" class="nav-link">Contributing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="https://github.com/yourusername/discord-ticket-saas" class="btn btn-outline">GitHub</a>
+                <a href="https://yourdomain.com/dashboard" class="btn btn-primary">Live Demo</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>API Reference</h4>
+                            <ul>
+                                <li><a href="overview.html" class="nav-item active">Overview</a></li>
+                                <li><a href="authentication.html" class="nav-item">Authentication</a></li>
+                                <li><a href="rate-limiting.html" class="nav-item">Rate Limiting</a></li>
+                                <li><a href="errors.html" class="nav-item">Error Handling</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Endpoints</h4>
+                            <ul>
+                                <li><a href="system-config.html" class="nav-item">System Config</a></li>
+                                <li><a href="guilds.html" class="nav-item">Guilds</a></li>
+                                <li><a href="tickets.html" class="nav-item">Tickets</a></li>
+                                <li><a href="users.html" class="nav-item">Users</a></li>
+                                <li><a href="subscriptions.html" class="nav-item">Subscriptions</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Webhooks</h4>
+                            <ul>
+                                <li><a href="webhooks/overview.html" class="nav-item">Webhook Overview</a></li>
+                                <li><a href="webhooks/tickets.html" class="nav-item">Ticket Events</a></li>
+                                <li><a href="webhooks/users.html" class="nav-item">User Events</a></li>
+                                <li><a href="webhooks/subscriptions.html" class="nav-item">Subscription Events</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>API Overview</h1>
+                            <p class="article-description">Discord Ticket SaaS provides a comprehensive REST API for managing tickets, users, guilds, and system configuration. The API follows RESTful principles and uses JSON for request and response bodies.</p>
+                        </header>
+
+                        <section id="base-url">
+                            <h2>Base URL</h2>
+                            <div class="code-block">
+                                <pre><code>https://yourdomain.com/api</code></pre>
+                            </div>
+                            <p>For self-hosted instances, replace <code>yourdomain.com</code> with your domain.</p>
+                        </section>
+
+                        <section id="versioning">
+                            <h2>API Versioning</h2>
+                            <p>The API uses URL-based versioning. The current version is <code>v1</code>.</p>
+                            <div class="code-block">
+                                <pre><code>https://yourdomain.com/api/v1/...</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="request-format">
+                            <h2>Request Format</h2>
+                            
+                            <h3>Content Type</h3>
+                            <p>All requests should use <code>application/json</code> content type:</p>
+                            <div class="code-block">
+                                <pre><code>Content-Type: application/json</code></pre>
+                            </div>
+
+                            <h3>Request Body</h3>
+                            <p>Request bodies should be valid JSON:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "name": "General Support",
+  "description": "Get help with general questions",
+  "emoji": "🎫"
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="response-format">
+                            <h2>Response Format</h2>
+                            
+                            <h3>Success Responses</h3>
+                            <p>All successful responses follow this structure:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "success": true,
+  "data": {
+    // Response data here
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "requestId": "req_abc123",
+    "version": "v1"
+  }
+}</code></pre>
+                            </div>
+
+                            <h3>Error Responses</h3>
+                            <p>Error responses include detailed error information:</p>
+                            <div class="code-block">
+                                <pre><code>{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid request data",
+    "details": [
+      {
+        "field": "name",
+        "message": "Name is required",
+        "code": "REQUIRED"
+      }
+    ]
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "requestId": "req_abc123",
+    "version": "v1"
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="http-status-codes">
+                            <h2>HTTP Status Codes</h2>
+                            <p>The API uses standard HTTP status codes:</p>
+                            
+                            <div class="status-codes-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Status</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>200</code></td>
+                                            <td>OK</td>
+                                            <td>Request successful</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>201</code></td>
+                                            <td>Created</td>
+                                            <td>Resource created successfully</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>204</code></td>
+                                            <td>No Content</td>
+                                            <td>Request successful, no response body</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>400</code></td>
+                                            <td>Bad Request</td>
+                                            <td>Invalid request data</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>401</code></td>
+                                            <td>Unauthorized</td>
+                                            <td>Authentication required</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>403</code></td>
+                                            <td>Forbidden</td>
+                                            <td>Insufficient permissions</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>404</code></td>
+                                            <td>Not Found</td>
+                                            <td>Resource not found</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>429</code></td>
+                                            <td>Too Many Requests</td>
+                                            <td>Rate limit exceeded</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>500</code></td>
+                                            <td>Internal Server Error</td>
+                                            <td>Server error</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="pagination">
+                            <h2>Pagination</h2>
+                            <p>List endpoints support pagination using cursor-based pagination:</p>
+                            
+                            <h3>Request Parameters</h3>
+                            <div class="code-block">
+                                <pre><code>GET /api/v1/tickets?limit=20&cursor=eyJpZCI6IjYzZjk4...</code></pre>
+                            </div>
+                            
+                            <div class="params-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Default</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>limit</code></td>
+                                            <td>integer</td>
+                                            <td>20</td>
+                                            <td>Number of items per page (max 100)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>cursor</code></td>
+                                            <td>string</td>
+                                            <td>-</td>
+                                            <td>Cursor for next page</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>sort</code></td>
+                                            <td>string</td>
+                                            <td>created_at:desc</td>
+                                            <td>Sort order</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>Response Format</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "success": true,
+  "data": [
+    // Array of items
+  ],
+  "pagination": {
+    "hasNext": true,
+    "hasPrevious": false,
+    "nextCursor": "eyJpZCI6IjYzZjk4...",
+    "previousCursor": null,
+    "total": 150,
+    "limit": 20
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="api-endpoints">
+                            <h2>API Endpoints</h2>
+                            
+                            <h3>Core Resources</h3>
+                            <div class="endpoints-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Resource</th>
+                                            <th>Base URL</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Tickets</strong></td>
+                                            <td><code>/api/v1/tickets</code></td>
+                                            <td>Manage support tickets</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Users</strong></td>
+                                            <td><code>/api/v1/users</code></td>
+                                            <td>User management</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Guilds</strong></td>
+                                            <td><code>/api/v1/guilds</code></td>
+                                            <td>Discord server management</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Categories</strong></td>
+                                            <td><code>/api/v1/categories</code></td>
+                                            <td>Ticket categories</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Analytics</strong></td>
+                                            <td><code>/api/v1/analytics</code></td>
+                                            <td>Analytics and reporting</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>System Resources</h3>
+                            <div class="endpoints-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Resource</th>
+                                            <th>Base URL</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>System Config</strong></td>
+                                            <td><code>/api/v1/system/config</code></td>
+                                            <td>System configuration</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Subscriptions</strong></td>
+                                            <td><code>/api/v1/subscriptions</code></td>
+                                            <td>Subscription management</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Webhooks</strong></td>
+                                            <td><code>/api/v1/webhooks</code></td>
+                                            <td>Webhook management</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Health</strong></td>
+                                            <td><code>/api/v1/health</code></td>
+                                            <td>Health checks</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="example-requests">
+                            <h2>Example Requests</h2>
+                            
+                            <h3>Create a Ticket</h3>
+                            <div class="code-block">
+                                <pre><code>POST /api/v1/tickets
+Authorization: Bearer your-jwt-token
+Content-Type: application/json
+
+{
+  "title": "Payment Issue",
+  "description": "Cannot process payment for Pro subscription",
+  "category_id": "cat_123",
+  "guild_id": "guild_456",
+  "priority": "high",
+  "tags": ["payment", "subscription"]
+}</code></pre>
+                            </div>
+
+                            <h3>Get Tickets with Filtering</h3>
+                            <div class="code-block">
+                                <pre><code>GET /api/v1/tickets?status=open&guild_id=guild_456&expand=user,category
+Authorization: Bearer your-jwt-token</code></pre>
+                            </div>
+
+                            <h3>Update System Configuration</h3>
+                            <div class="code-block">
+                                <pre><code>PATCH /api/v1/system/config
+Authorization: Bearer your-admin-jwt-token
+Content-Type: application/json
+
+{
+  "discord": {
+    "primaryBot": {
+      "enabled": true
+    }
+  },
+  "payments": {
+    "stripe": {
+      "enabled": true
+    }
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="sdks">
+                            <h2>SDKs and Libraries</h2>
+                            
+                            <h3>JavaScript/TypeScript</h3>
+                            <div class="code-block">
+                                <pre><code>npm install @discord-ticket-saas/api-client</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>import { DiscordTicketAPI } from '@discord-ticket-saas/api-client';
+
+const api = new DiscordTicketAPI({
+  baseUrl: 'https://yourdomain.com/api',
+  token: 'your-jwt-token'
+});
+
+// Create a ticket
+const ticket = await api.tickets.create({
+  title: 'Payment Issue',
+  description: 'Cannot process payment',
+  category_id: 'cat_123',
+  guild_id: 'guild_456'
+});
+
+// Get tickets with filtering
+const tickets = await api.tickets.list({
+  status: 'open',
+  guild_id: 'guild_456',
+  expand: ['user', 'category']
+});</code></pre>
+                            </div>
+
+                            <h3>Python</h3>
+                            <div class="code-block">
+                                <pre><code>pip install discord-ticket-saas</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>from discord_ticket_saas import DiscordTicketAPI
+
+api = DiscordTicketAPI(
+    base_url='https://yourdomain.com/api',
+    token='your-jwt-token'
+)
+
+# Create a ticket
+ticket = api.tickets.create({
+    'title': 'Payment Issue',
+    'description': 'Cannot process payment',
+    'category_id': 'cat_123',
+    'guild_id': 'guild_456'
+})
+
+# Get tickets
+tickets = api.tickets.list(
+    status='open',
+    guild_id='guild_456',
+    expand=['user', 'category']
+)</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <ul>
+                                <li><a href="authentication.html"><strong>Authentication</strong></a> - Learn about API authentication</li>
+                                <li><a href="rate-limiting.html"><strong>Rate Limiting</strong></a> - Understand rate limiting</li>
+                                <li><a href="webhooks/overview.html"><strong>Webhooks</strong></a> - Set up real-time notifications</li>
+                                <li><a href="tickets.html"><strong>Tickets API</strong></a> - Manage support tickets</li>
+                                <li><a href="users.html"><strong>Users API</strong></a> - User management endpoints</li>
+                            </ul>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="footer-logo">
+                    <p class="footer-description">Professional Discord ticket management system</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Documentation</h4>
+                        <ul>
+                            <li><a href="../guide/getting-started.html">Getting Started</a></li>
+                            <li><a href="overview.html">API Reference</a></li>
+                            <li><a href="../examples/basic-setup.html">Examples</a></li>
+                            <li><a href="../contributing.html">Contributing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/YOUR_INVITE">Discord</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas">GitHub</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas/discussions">Discussions</a></li>
+                            <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Discord Ticket SaaS. Released under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html>

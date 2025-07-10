@@ -1,0 +1,333 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  NODE_VERSION: '18'
+  PNPM_VERSION: '8'
+
+jobs:
+  validate-tag:
+    name: Validate Tag
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is-prerelease: ${{ steps.version.outputs.is-prerelease }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Validate and extract version
+        id: version
+        run: |
+          # Extract version from tag (remove 'v' prefix)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+          # Check if this is a prerelease (contains alpha, beta, rc)
+          if [[ $VERSION =~ (alpha|beta|rc) ]]; then
+            echo "is-prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-prerelease=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "📦 Version: $VERSION"
+          echo "🏷️ Prerelease: ${{ steps.version.outputs.is-prerelease }}"
+
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    needs: validate-tag
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping:1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Run tests
+        run: pnpm test
+        env:
+          MONGODB_URI: mongodb://localhost:27017/discord-ticket-saas-test
+          REDIS_URL: redis://localhost:6379
+          NODE_ENV: test
+          
+      - name: Build packages
+        run: pnpm build
+        
+      - name: Create release artifacts
+        run: |
+          # Create distribution archives
+          tar -czf discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz \
+            packages/*/dist \
+            package.json \
+            pnpm-workspace.yaml \
+            README.md \
+            LICENSE \
+            docker/ \
+            docs/
+            
+          # Create checksums
+          sha256sum discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz > checksums.txt
+          
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-artifacts
+          path: |
+            discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz
+            checksums.txt
+
+  docker-release:
+    name: Docker Release
+    runs-on: ubuntu-latest
+    needs: [validate-tag, build-and-test]
+    
+    strategy:
+      matrix:
+        service: [bot, web]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            yourusername/discord-ticket-${{ matrix.service }}
+            ghcr.io/${{ github.repository }}-${{ matrix.service }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest,enable={{is_default_branch}}
+            
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.${{ matrix.service }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ needs.validate-tag.outputs.version }}
+            BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            VCS_REF=${{ github.sha }}
+
+  github-release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate-tag, build-and-test, docker-release]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Download release artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: release-artifacts
+          
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo "")
+          
+          if [ -n "$PREVIOUS_TAG" ]; then
+            echo "## Changes since $PREVIOUS_TAG" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            
+            # Get commits since last tag
+            git log --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" \
+              $PREVIOUS_TAG..HEAD >> CHANGELOG.md
+          else
+            echo "## Initial Release" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "🎉 First release of Discord Ticket SaaS!" >> CHANGELOG.md
+          fi
+          
+          echo "" >> CHANGELOG.md
+          echo "## Docker Images" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "- \`yourusername/discord-ticket-bot:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          echo "- \`yourusername/discord-ticket-web:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          echo "- \`ghcr.io/${{ github.repository }}-bot:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          echo "- \`ghcr.io/${{ github.repository }}-web:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          
+          echo "" >> CHANGELOG.md
+          echo "## Installation" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "\`\`\`bash" >> CHANGELOG.md
+          echo "# Download and extract" >> CHANGELOG.md
+          echo "wget https://github.com/${{ github.repository }}/releases/download/v${{ needs.validate-tag.outputs.version }}/discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
+          echo "tar -xzf discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          echo "# Or use Docker" >> CHANGELOG.md
+          echo "docker-compose up -d" >> CHANGELOG.md
+          echo "\`\`\`" >> CHANGELOG.md
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.validate-tag.outputs.version }}
+          name: Discord Ticket SaaS v${{ needs.validate-tag.outputs.version }}
+          body_path: CHANGELOG.md
+          prerelease: ${{ needs.validate-tag.outputs.is-prerelease }}
+          files: |
+            discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz
+            checksums.txt
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-release:
+    name: NPM Release
+    runs-on: ubuntu-latest
+    needs: [validate-tag, build-and-test]
+    if: needs.validate-tag.outputs.is-prerelease == 'false'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build packages
+        run: pnpm build
+        
+      - name: Update package versions
+        run: |
+          # Update version in all package.json files
+          VERSION=${{ needs.validate-tag.outputs.version }}
+          
+          # Update root package.json
+          npm version $VERSION --no-git-tag-version
+          
+          # Update package versions
+          cd packages/shared && npm version $VERSION --no-git-tag-version
+          cd ../bot && npm version $VERSION --no-git-tag-version
+          cd ../web && npm version $VERSION --no-git-tag-version
+          
+      - name: Publish shared package
+        run: |
+          cd packages/shared
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  notify-release:
+    name: Notify Release
+    runs-on: ubuntu-latest
+    needs: [validate-tag, github-release, docker-release, npm-release]
+    if: always()
+    
+    steps:
+      - name: Send Discord notification
+        if: needs.github-release.result == 'success'
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            🚀 **New Release Published!**
+            
+            📦 **Version**: v${{ needs.validate-tag.outputs.version }}
+            🏷️ **Type**: ${{ needs.validate-tag.outputs.is-prerelease == 'true' && 'Pre-release' || 'Stable Release' }}
+            
+            📥 **Download**: [GitHub Releases](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.validate-tag.outputs.version }})
+            🐳 **Docker**: `yourusername/discord-ticket-bot:${{ needs.validate-tag.outputs.version }}`
+            📚 **Docs**: https://yourusername.github.io/discord-ticket-saas/
+            
+            ✅ All artifacts published successfully!
+            
+      - name: Send failure notification
+        if: failure()
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            ❌ **Release Failed**
+            
+            📦 **Version**: v${{ needs.validate-tag.outputs.version }}
+            🔗 **Workflow**: [View Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            Please check the workflow logs for details.
