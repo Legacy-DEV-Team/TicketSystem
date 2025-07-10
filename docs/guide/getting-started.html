@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Discord Ticket SaaS Documentation</title>
+    <meta name="description" content="Get started with Discord Ticket SaaS - setup guide and configuration">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="nav-logo">
+                <span class="nav-title">Discord Ticket SaaS</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="getting-started.html" class="nav-link active">Guide</a></li>
+                <li><a href="../api/overview.html" class="nav-link">API</a></li>
+                <li><a href="../examples/basic-setup.html" class="nav-link">Examples</a></li>
+                <li><a href="../contributing.html" class="nav-link">Contributing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="https://github.com/yourusername/discord-ticket-saas" class="btn btn-outline">GitHub</a>
+                <a href="https://yourdomain.com/dashboard" class="btn btn-primary">Live Demo</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item active">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Getting Started</h1>
+                            <p class="article-description">Welcome to Discord Ticket SaaS! This guide will help you set up and configure your professional ticket management system in just a few minutes.</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Overview</h2>
+                            <p>Discord Ticket SaaS is a comprehensive solution for managing customer support tickets within Discord servers. It provides:</p>
+                            <ul>
+                                <li><strong>Thread-based tickets</strong> with automatic numbering</li>
+                                <li><strong>Web dashboard</strong> for configuration and analytics</li>
+                                <li><strong>Multi-guild support</strong> with custom branding</li>
+                                <li><strong>Enterprise security</strong> with industry-standard encryption</li>
+                                <li><strong>SaaS billing</strong> with multiple subscription tiers</li>
+                            </ul>
+                        </section>
+
+                        <section id="prerequisites">
+                            <h2>Prerequisites</h2>
+                            <p>Before getting started, ensure you have:</p>
+                            <ul>
+                                <li>A Discord server where you have <strong>Administrator</strong> permissions</li>
+                                <li>A Discord application/bot (we'll help you create one)</li>
+                                <li>Basic understanding of Discord permissions and roles</li>
+                            </ul>
+                        </section>
+
+                        <section id="quick-setup">
+                            <h2>Quick Setup (5 minutes)</h2>
+                            
+                            <div class="setup-step">
+                                <h3>Step 1: Add the Bot</h3>
+                                <ol>
+                                    <li><a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot" target="_blank"><strong>Click here to add the bot</strong></a> to your Discord server</li>
+                                    <li>Select your server from the dropdown</li>
+                                    <li>Ensure all permissions are checked (required for full functionality)</li>
+                                    <li>Click <strong>"Authorize"</strong></li>
+                                </ol>
+                            </div>
+
+                            <div class="setup-step">
+                                <h3>Step 2: Access the Dashboard</h3>
+                                <ol>
+                                    <li>Visit <a href="https://yourdomain.com/dashboard" target="_blank"><strong>https://yourdomain.com/dashboard</strong></a></li>
+                                    <li>Click <strong>"Login with Discord"</strong></li>
+                                    <li>Authorize the application to access your Discord account</li>
+                                    <li>You'll be redirected to your dashboard</li>
+                                </ol>
+                            </div>
+
+                            <div class="setup-step">
+                                <h3>Step 3: Configure Your First Category</h3>
+                                <ol>
+                                    <li>In the dashboard, select your server</li>
+                                    <li>Navigate to <strong>"Ticket Categories"</strong></li>
+                                    <li>Click <strong>"Create Category"</strong></li>
+                                    <li>Fill in the details:</li>
+                                </ol>
+                                <div class="code-block">
+                                    <pre><code>Name: General Support
+Description: Get help with general questions
+Channel: #support-tickets
+Emoji: 🎫</code></pre>
+                                </div>
+                                <ol start="5">
+                                    <li>Click <strong>"Save Category"</strong></li>
+                                </ol>
+                            </div>
+
+                            <div class="setup-step">
+                                <h3>Step 4: Test Your Setup</h3>
+                                <ol>
+                                    <li>Go to your Discord server</li>
+                                    <li>The bot will automatically create buttons in your configured channel</li>
+                                    <li>Click the <strong>"🎫 General Support"</strong> button</li>
+                                    <li>A new ticket thread will be created with the format <code>ticket-0001</code></li>
+                                </ol>
+                                
+                                <div class="success-message">
+                                    <strong>🎉 Congratulations!</strong> Your ticket system is now active.
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="architecture">
+                            <h2>Architecture Overview</h2>
+                            <p>Understanding the system architecture helps with configuration and troubleshooting:</p>
+                            
+                            <div class="architecture-diagram">
+                                <div class="arch-component">
+                                    <div class="arch-icon">🤖</div>
+                                    <h4>Discord Bot</h4>
+                                    <p>Handles all Discord interactions (buttons, modals, threads)</p>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-component">
+                                    <div class="arch-icon">🌐</div>
+                                    <h4>Web Dashboard</h4>
+                                    <p>Configuration interface and analytics</p>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-component">
+                                    <div class="arch-icon">🗄️</div>
+                                    <h4>Database</h4>
+                                    <p>Stores tickets, users, configurations, and analytics</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="key-concepts">
+                            <h2>Key Concepts</h2>
+                            
+                            <div class="concept-grid">
+                                <div class="concept-card">
+                                    <h3>Tickets</h3>
+                                    <ul>
+                                        <li><strong>Thread-based</strong>: Each ticket is a Discord thread</li>
+                                        <li><strong>Automatic numbering</strong>: <code>ticket-0001</code>, <code>ticket-0002</code>, etc.</li>
+                                        <li><strong>Role-based access</strong>: Control who can see and respond to tickets</li>
+                                        <li><strong>Auto-close</strong>: Configurable inactivity timer (default: 72 hours)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-card">
+                                    <h3>Categories</h3>
+                                    <ul>
+                                        <li><strong>Flexible routing</strong>: Direct tickets to specific channels</li>
+                                        <li><strong>Permission control</strong>: Require or block specific roles</li>
+                                        <li><strong>Custom branding</strong>: Unique emojis and descriptions</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-card">
+                                    <h3>Guilds (Servers)</h3>
+                                    <ul>
+                                        <li><strong>Multi-guild</strong>: Manage multiple Discord servers</li>
+                                        <li><strong>Per-guild config</strong>: Each server has independent settings</li>
+                                        <li><strong>Custom domains</strong>: White-label solutions for enterprises</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="subscription-tiers">
+                            <h2>Subscription Tiers</h2>
+                            <p>Choose the plan that fits your needs:</p>
+                            
+                            <div class="pricing-table">
+                                <div class="pricing-tier">
+                                    <h3>Free</h3>
+                                    <div class="price">$0</div>
+                                    <ul>
+                                        <li>1 Discord Server</li>
+                                        <li>50 Monthly Tickets</li>
+                                        <li>7 days Transcript Retention</li>
+                                        <li>❌ Custom Bot Token</li>
+                                        <li>❌ Custom Domain</li>
+                                        <li>❌ Priority Support</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="pricing-tier featured">
+                                    <h3>Pro</h3>
+                                    <div class="price">$9.99<span>/mo</span></div>
+                                    <ul>
+                                        <li>5 Discord Servers</li>
+                                        <li>500 Monthly Tickets</li>
+                                        <li>30 days Transcript Retention</li>
+                                        <li>✅ Custom Bot Token</li>
+                                        <li>❌ Custom Domain</li>
+                                        <li>✅ Priority Support</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="pricing-tier">
+                                    <h3>Enterprise</h3>
+                                    <div class="price">$49.99<span>/mo</span></div>
+                                    <ul>
+                                        <li>Unlimited Discord Servers</li>
+                                        <li>Unlimited Monthly Tickets</li>
+                                        <li>365 days Transcript Retention</li>
+                                        <li>✅ Custom Bot Token</li>
+                                        <li>✅ Custom Domain</li>
+                                        <li>✅ Priority Support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="cta-section">
+                                <a href="/guide/subscription" class="btn btn-primary">Upgrade your plan →</a>
+                            </div>
+                        </section>
+
+                        <section id="security">
+                            <h2>Security & Privacy</h2>
+                            <p>We take security seriously:</p>
+                            <ul>
+                                <li><strong>Password Hashing</strong>: Argon2id with configurable parameters</li>
+                                <li><strong>Token Encryption</strong>: AES-256-GCM with unique IVs</li>
+                                <li><strong>JWT Signing</strong>: EdDSA (Ed25519) for authentication</li>
+                                <li><strong>Data Encryption</strong>: All sensitive data encrypted at rest</li>
+                                <li><strong>GDPR Compliance</strong>: Data export and deletion tools</li>
+                            </ul>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>Now that you have the basics working:</p>
+                            <ol>
+                                <li><a href="permissions.html"><strong>Configure permissions</strong></a> - Set up role-based access</li>
+                                <li><a href="categories.html"><strong>Customize categories</strong></a> - Create specialized ticket types</li>
+                                <li><a href="analytics.html"><strong>Set up analytics</strong></a> - Track your team's performance</li>
+                                <li><a href="auto-close.html"><strong>Configure auto-close</strong></a> - Automate ticket management</li>
+                            </ol>
+                        </section>
+
+                        <section id="need-help">
+                            <h2>Need Help?</h2>
+                            <div class="help-grid">
+                                <div class="help-item">
+                                    <h3>📚 Documentation</h3>
+                                    <p>Browse our complete guides</p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>💬 Discord Support</h3>
+                                    <p><a href="https://discord.gg/YOUR_INVITE">Get help from our community</a></p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>📧 Email Support</h3>
+                                    <p><a href="mailto:support@yourdomain.com">Direct access to our team</a></p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>🐛 GitHub Issues</h3>
+                                    <p><a href="https://github.com/yourusername/discord-ticket-saas/issues">Report bugs or request features</a></p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="footer-logo">
+                    <p class="footer-description">Professional Discord ticket management system</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Documentation</h4>
+                        <ul>
+                            <li><a href="getting-started.html">Getting Started</a></li>
+                            <li><a href="../api/overview.html">API Reference</a></li>
+                            <li><a href="../examples/basic-setup.html">Examples</a></li>
+                            <li><a href="../contributing.html">Contributing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/YOUR_INVITE">Discord</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas">GitHub</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas/discussions">Discussions</a></li>
+                            <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Discord Ticket SaaS. Released under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html>

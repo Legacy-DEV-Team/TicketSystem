@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Ticket SaaS - Documentation</title>
+    <meta name="description" content="Professional Discord ticket management system documentation">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/logo.svg" alt="Discord Ticket SaaS" class="nav-logo">
+                <span class="nav-title">Discord Ticket SaaS</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="guide/getting-started.html" class="nav-link">Guide</a></li>
+                <li><a href="api/overview.html" class="nav-link">API</a></li>
+                <li><a href="examples/basic-setup.html" class="nav-link">Examples</a></li>
+                <li><a href="contributing.html" class="nav-link">Contributing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="https://github.com/yourusername/discord-ticket-saas" class="btn btn-outline">GitHub</a>
+                <a href="https://yourdomain.com/dashboard" class="btn btn-primary">Live Demo</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discord Ticket SaaS</h1>
+                <p class="hero-subtitle">Professional Discord Ticket Management</p>
+                <p class="hero-description">Multi-guild support, custom domains, and enterprise-grade security</p>
+                <div class="hero-actions">
+                    <a href="guide/getting-started.html" class="btn btn-primary btn-large">Get Started</a>
+                    <a href="https://github.com/yourusername/discord-ticket-saas" class="btn btn-outline btn-large">View on GitHub</a>
+                    <a href="https://yourdomain.com/dashboard" class="btn btn-secondary btn-large">Live Demo</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/hero-dashboard.png" alt="Discord Ticket SaaS Dashboard" class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎫</div>
+                    <h3 class="feature-title">Thread-Based Tickets</h3>
+                    <p class="feature-description">Modern Discord threads with automatic numbering and rich formatting. No slash commands needed - everything works with buttons.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3 class="feature-title">Multi-Guild Management</h3>
+                    <p class="feature-description">Manage unlimited Discord servers from a single dashboard. Perfect for communities, businesses, and enterprises.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3 class="feature-title">Enterprise Security</h3>
+                    <p class="feature-description">Argon2id password hashing, AES-256-GCM encryption, and EdDSA JWT signing. SOC 2 compliant infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Advanced Analytics</h3>
+                    <p class="feature-description">Real-time insights into ticket volume, response times, customer satisfaction, and team performance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Custom Branding</h3>
+                    <p class="feature-description">White-label solutions with custom domains, bot tokens, and complete branding control for your organization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3 class="feature-title">Subscription Management</h3>
+                    <p class="feature-description">Built-in billing with Stripe, PayPal, and Patreon integration. Automatic feature gating and usage tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">API & Webhooks</h3>
+                    <p class="feature-description">Comprehensive REST API with webhook support for real-time integrations with your existing tools and workflows.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">Rich Transcripts</h3>
+                    <p class="feature-description">Beautiful HTML transcripts with full conversation history, attachments, and export capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Auto-Close System</h3>
+                    <p class="feature-description">Configurable inactivity timers with smart notifications. Keeps your support queue clean and organized.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="quick-start">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <div class="quick-start-grid">
+                <div class="quick-start-col">
+                    <h3>For Server Owners</h3>
+                    <div class="code-block">
+                        <pre><code># 1. Add the bot to your Discord server
+https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot
+
+# 2. Access the web dashboard
+https://yourdomain.com/dashboard
+
+# 3. Configure your first ticket category
+# 4. Start supporting your community!</code></pre>
+                    </div>
+                </div>
+                <div class="quick-start-col">
+                    <h3>For Developers</h3>
+                    <div class="code-block">
+                        <pre><code># Clone and install
+git clone https://github.com/yourusername/discord-ticket-saas.git
+cd discord-ticket-saas
+npm install
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your configuration
+
+# Start development servers
+npm run dev</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <a href="guide/getting-started.html" class="btn btn-primary btn-large">Read the full documentation →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <h2 class="section-title">Architecture Overview</h2>
+            <p class="section-description">Discord Ticket SaaS is built with a modern, scalable architecture:</p>
+            
+            <div class="architecture-diagram">
+                <div class="arch-node">
+                    <div class="arch-icon">🤖</div>
+                    <span>Discord Bot</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <div class="arch-icon">🌐</div>
+                    <span>Web Panel</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <div class="arch-icon">🗄️</div>
+                    <span>MongoDB</span>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-node">
+                    <div class="arch-icon">⚡</div>
+                    <span>Redis</span>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-node">
+                    <div class="arch-icon">💰</div>
+                    <span>Payment Providers</span>
+                </div>
+            </div>
+
+            <div class="architecture-features">
+                <ul>
+                    <li><strong>Discord Bot</strong>: Multi-guild Discord.js bot with custom token support</li>
+                    <li><strong>Web Panel</strong>: Next.js dashboard with admin configuration</li>
+                    <li><strong>Database</strong>: MongoDB for data persistence, Redis for sessions</li>
+                    <li><strong>Security</strong>: Argon2id + AES-256-GCM + EdDSA encryption</li>
+                    <li><strong>Payments</strong>: Stripe, PayPal, and Patreon integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Navigation -->
+    <section class="docs-nav">
+        <div class="container">
+            <h2 class="section-title">Documentation</h2>
+            <div class="docs-grid">
+                <div class="doc-category">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="guide/getting-started.html">Introduction</a></li>
+                        <li><a href="guide/installation.html">Installation</a></li>
+                        <li><a href="guide/configuration.html">Configuration</a></li>
+                        <li><a href="guide/first-setup.html">First Setup</a></li>
+                    </ul>
+                </div>
+                <div class="doc-category">
+                    <h3>API Reference</h3>
+                    <ul>
+                        <li><a href="api/overview.html">Overview</a></li>
+                        <li><a href="api/authentication.html">Authentication</a></li>
+                        <li><a href="api/rate-limiting.html">Rate Limiting</a></li>
+                        <li><a href="api/errors.html">Error Handling</a></li>
+                    </ul>
+                </div>
+                <div class="doc-category">
+                    <h3>Deployment</h3>
+                    <ul>
+                        <li><a href="deployment/overview.html">Overview</a></li>
+                        <li><a href="deployment/docker.html">Docker</a></li>
+                        <li><a href="deployment/railway.html">Railway</a></li>
+                        <li><a href="deployment/security.html">Security</a></li>
+                    </ul>
+                </div>
+                <div class="doc-category">
+                    <h3>Examples</h3>
+                    <ul>
+                        <li><a href="examples/basic-setup.html">Basic Setup</a></li>
+                        <li><a href="examples/multi-server.html">Multi-Server Bot</a></li>
+                        <li><a href="examples/webhooks.html">Webhook Handling</a></li>
+                        <li><a href="examples/custom-integration.html">Custom Integration</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+        <div class="container">
+            <h2 class="section-title">Community & Support</h2>
+            <div class="community-grid">
+                <div class="community-item">
+                    <div class="community-icon">📚</div>
+                    <h3>Documentation</h3>
+                    <p>Complete setup guides and API reference</p>
+                    <a href="guide/getting-started.html" class="community-link">Browse Docs</a>
+                </div>
+                <div class="community-item">
+                    <div class="community-icon">💬</div>
+                    <h3>Discord Server</h3>
+                    <p>Get help from our community</p>
+                    <a href="https://discord.gg/YOUR_INVITE" class="community-link">Join Discord</a>
+                </div>
+                <div class="community-item">
+                    <div class="community-icon">🐛</div>
+                    <h3>GitHub Issues</h3>
+                    <p>Report bugs and request features</p>
+                    <a href="https://github.com/yourusername/discord-ticket-saas/issues" class="community-link">Open Issue</a>
+                </div>
+                <div class="community-item">
+                    <div class="community-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>Enterprise support available</p>
+                    <a href="mailto:support@yourdomain.com" class="community-link">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/logo.svg" alt="Discord Ticket SaaS" class="footer-logo">
+                    <p class="footer-description">Professional Discord ticket management system</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Documentation</h4>
+                        <ul>
+                            <li><a href="guide/getting-started.html">Getting Started</a></li>
+                            <li><a href="api/overview.html">API Reference</a></li>
+                            <li><a href="examples/basic-setup.html">Examples</a></li>
+                            <li><a href="contributing.html">Contributing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/YOUR_INVITE">Discord</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas">GitHub</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas/discussions">Discussions</a></li>
+                            <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="https://yourdomain.com/terms">Terms of Service</a></li>
+                            <li><a href="https://yourdomain.com/privacy">Privacy Policy</a></li>
+                            <li><a href="https://yourdomain.com/cookies">Cookie Policy</a></li>
+                            <li><a href="#license">License</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Discord Ticket SaaS. Released under the MIT License.</p>
+                <p>Built with ❤️ for the Discord community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/script.js"></script>
+</body>
+</html>

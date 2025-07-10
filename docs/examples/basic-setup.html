@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Setup Example - Discord Ticket SaaS Documentation</title>
+    <meta name="description" content="Step-by-step example of setting up Discord Ticket SaaS">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="nav-logo">
+                <span class="nav-title">Discord Ticket SaaS</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../guide/getting-started.html" class="nav-link">Guide</a></li>
+                <li><a href="../api/overview.html" class="nav-link">API</a></li>
+                <li><a href="basic-setup.html" class="nav-link active">Examples</a></li>
+                <li><a href="../contributing.html" class="nav-link">Contributing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="https://github.com/yourusername/discord-ticket-saas" class="btn btn-outline">GitHub</a>
+                <a href="https://yourdomain.com/dashboard" class="btn btn-primary">Live Demo</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Content -->
+                <div class="docs-content" style="max-width: 800px; margin: 0 auto;">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Basic Setup Example</h1>
+                            <p class="article-description">A complete walkthrough of setting up Discord Ticket SaaS for a gaming community.</p>
+                        </header>
+
+                        <section id="scenario">
+                            <h2>Scenario</h2>
+                            <p>Let's set up Discord Ticket SaaS for "GameHub", a gaming community Discord server with 5,000 members. They need:</p>
+                            <ul>
+                                <li>Support tickets for technical issues</li>
+                                <li>Bug reports for their custom game</li>
+                                <li>Partnership inquiries</li>
+                                <li>Auto-close after 48 hours of inactivity</li>
+                            </ul>
+                        </section>
+
+                        <section id="step-1">
+                            <h2>Step 1: Environment Setup</h2>
+                            <p>First, clone and configure the project:</p>
+                            <div class="code-block">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/discord-ticket-saas.git
+cd discord-ticket-saas
+
+# Install dependencies
+npm install
+
+# Copy environment template
+cp .env.example .env</code></pre>
+                            </div>
+
+                            <p>Edit the <code>.env</code> file with your configuration:</p>
+                            <div class="code-block">
+                                <pre><code># Database
+MONGODB_URI=mongodb://localhost:27017/discord-ticket-saas
+REDIS_URL=redis://localhost:6379
+
+# Web Panel
+WEB_PORT=3000
+WEB_BASE_URL=http://localhost:3000
+JWT_SECRET=your-super-secret-jwt-key-here
+
+# Default Admin (will be created on first run)
+DEFAULT_ADMIN_EMAIL=admin@gamehub.com
+DEFAULT_ADMIN_PASSWORD=SecurePassword123!</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="step-2">
+                            <h2>Step 2: Start the Services</h2>
+                            <p>Start the development environment:</p>
+                            <div class="code-block">
+                                <pre><code># Start all services with Docker
+docker-compose up -d
+
+# Or start manually
+npm run dev</code></pre>
+                            </div>
+                            
+                            <p>You should see:</p>
+                            <div class="code-block">
+                                <pre><code>✅ MongoDB connected
+✅ Redis connected
+🌐 Web panel running on http://localhost:3000
+🤖 Discord bot started</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="step-3">
+                            <h2>Step 3: Admin Configuration</h2>
+                            <p>Access the admin panel at <code>http://localhost:3000/admin</code> and login with your default admin credentials.</p>
+                            
+                            <h3>Configure Discord Bot</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "discord": {
+    "primaryBot": {
+      "enabled": true,
+      "token": "YOUR_BOT_TOKEN_HERE",
+      "clientId": "YOUR_CLIENT_ID_HERE",
+      "clientSecret": "YOUR_CLIENT_SECRET_HERE"
+    }
+  }
+}</code></pre>
+                            </div>
+
+                            <h3>Set Auto-Close Timer</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "tickets": {
+    "autoClose": {
+      "enabled": true,
+      "timeoutHours": 48,
+      "warningHours": 24
+    }
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="step-4">
+                            <h2>Step 4: Add Bot to Discord Server</h2>
+                            <p>Generate an invite link with proper permissions:</p>
+                            <div class="code-block">
+                                <pre><code>https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot</code></pre>
+                            </div>
+                            
+                            <p>Required permissions:</p>
+                            <ul>
+                                <li>View Channels</li>
+                                <li>Send Messages</li>
+                                <li>Manage Messages</li>
+                                <li>Create Public Threads</li>
+                                <li>Manage Threads</li>
+                                <li>Use External Emojis</li>
+                            </ul>
+                        </section>
+
+                        <section id="step-5">
+                            <h2>Step 5: Create Ticket Categories</h2>
+                            <p>In the web dashboard, create ticket categories for GameHub:</p>
+
+                            <h3>Technical Support</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "name": "Technical Support",
+  "description": "Get help with technical issues",
+  "emoji": "🔧",
+  "channel": "#tech-support",
+  "requiredRoles": [],
+  "blockedRoles": ["@Muted"],
+  "priority": "medium"
+}</code></pre>
+                            </div>
+
+                            <h3>Bug Reports</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "name": "Bug Reports",
+  "description": "Report bugs in our game",
+  "emoji": "🐛",
+  "channel": "#bug-reports",
+  "requiredRoles": ["@Verified"],
+  "blockedRoles": ["@Muted"],
+  "priority": "high"
+}</code></pre>
+                            </div>
+
+                            <h3>Partnership Inquiries</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "name": "Partnership",
+  "description": "Business partnerships and collaborations",
+  "emoji": "🤝",
+  "channel": "#partnerships",
+  "requiredRoles": [],
+  "blockedRoles": ["@Muted"],
+  "priority": "low"
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="step-6">
+                            <h2>Step 6: Set Up Roles and Permissions</h2>
+                            <p>Configure Discord roles for your team:</p>
+
+                            <h3>Support Team Roles</h3>
+                            <ul>
+                                <li><strong>@Support Manager</strong> - Full access to all tickets</li>
+                                <li><strong>@Tech Support</strong> - Access to technical tickets</li>
+                                <li><strong>@Community Manager</strong> - Access to general tickets</li>
+                            </ul>
+
+                            <h3>Channel Permissions</h3>
+                            <div class="code-block">
+                                <pre><code># #tech-support channel
+@everyone: View Channel (No), Send Messages (No)
+@Support Manager: All Permissions
+@Tech Support: View Channel, Send Messages, Manage Messages
+Bot: All Permissions
+
+# #bug-reports channel  
+@everyone: View Channel (No), Send Messages (No)
+@Support Manager: All Permissions
+@Tech Support: View Channel, Send Messages
+Bot: All Permissions</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="step-7">
+                            <h2>Step 7: Test the System</h2>
+                            
+                            <h3>Create a Test Ticket</h3>
+                            <ol>
+                                <li>Go to your Discord server</li>
+                                <li>Navigate to the <code>#tech-support</code> channel</li>
+                                <li>Click the "🔧 Technical Support" button</li>
+                                <li>Fill out the modal form</li>
+                                <li>Verify the ticket thread is created</li>
+                            </ol>
+
+                            <h3>Verify Auto-Close</h3>
+                            <p>The bot will automatically:</p>
+                            <ul>
+                                <li>Send warning at 24 hours of inactivity</li>
+                                <li>Close ticket at 48 hours of inactivity</li>
+                                <li>Generate HTML transcript</li>
+                                <li>Send transcript to staff channel</li>
+                            </ul>
+                        </section>
+
+                        <section id="step-8">
+                            <h2>Step 8: Monitor and Analytics</h2>
+                            <p>Use the web dashboard to monitor your ticket system:</p>
+
+                            <h3>Dashboard Metrics</h3>
+                            <ul>
+                                <li>Total tickets created today/week/month</li>
+                                <li>Average response time</li>
+                                <li>Average resolution time</li>
+                                <li>Most active support agents</li>
+                                <li>Ticket volume by category</li>
+                            </ul>
+
+                            <h3>Export Data</h3>
+                            <div class="code-block">
+                                <pre><code># API endpoint to export ticket data
+GET /api/v1/analytics/export
+Authorization: Bearer your-jwt-token
+
+# Response includes CSV download link
+{
+  "success": true,
+  "data": {
+    "downloadUrl": "/exports/tickets-2024-01-15.csv",
+    "expiresAt": "2024-01-16T10:00:00Z"
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="customization">
+                            <h2>Advanced Customization</h2>
+                            
+                            <h3>Custom Embed Colors</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "branding": {
+    "primaryColor": "#FF6B35",
+    "successColor": "#4CAF50", 
+    "warningColor": "#FF9800",
+    "errorColor": "#F44336"
+  }
+}</code></pre>
+                            </div>
+
+                            <h3>Webhook Integration</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "webhooks": {
+    "enabled": true,
+    "url": "https://your-server.com/webhook",
+    "events": ["ticket.created", "ticket.closed"],
+    "secret": "webhook-secret-key"
+  }
+}</code></pre>
+                            </div>
+
+                            <h3>Auto-Responses</h3>
+                            <div class="code-block">
+                                <pre><code>{
+  "autoResponses": {
+    "enabled": true,
+    "responses": [
+      {
+        "trigger": "password reset",
+        "response": "Please visit https://gamehub.com/reset to reset your password."
+      },
+      {
+        "trigger": "server status", 
+        "response": "Check our server status at https://status.gamehub.com"
+      }
+    ]
+  }
+}</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="production">
+                            <h2>Going to Production</h2>
+                            
+                            <h3>Environment Variables</h3>
+                            <div class="code-block">
+                                <pre><code># Production settings
+NODE_ENV=production
+WEB_BASE_URL=https://tickets.gamehub.com
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/tickets
+REDIS_URL=rediss://user:pass@redis-host:6380
+
+# Security
+JWT_SECRET=super-secure-production-key
+ENCRYPTION_KEY=32-character-encryption-key
+CSRF_SECRET=csrf-protection-secret
+
+# Payment providers (if using Pro/Enterprise)
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...</code></pre>
+                            </div>
+
+                            <h3>Docker Deployment</h3>
+                            <div class="code-block">
+                                <pre><code># Build and deploy
+docker build -t discord-ticket-saas .
+docker run -d --name ticket-system \
+  --env-file .env.production \
+  -p 3000:3000 \
+  discord-ticket-saas</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <ul>
+                                <li><a href="../guide/configuration.html">Advanced Configuration</a></li>
+                                <li><a href="../api/webhooks/overview.html">Webhook Integration</a></li>
+                                <li><a href="multi-server.html">Multi-Server Setup</a></li>
+                                <li><a href="../guide/analytics.html">Analytics & Reporting</a></li>
+                            </ul>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../assets/logo.svg" alt="Discord Ticket SaaS" class="footer-logo">
+                    <p class="footer-description">Professional Discord ticket management system</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Documentation</h4>
+                        <ul>
+                            <li><a href="../guide/getting-started.html">Getting Started</a></li>
+                            <li><a href="../api/overview.html">API Reference</a></li>
+                            <li><a href="basic-setup.html">Examples</a></li>
+                            <li><a href="../contributing.html">Contributing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/YOUR_INVITE">Discord</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas">GitHub</a></li>
+                            <li><a href="https://github.com/yourusername/discord-ticket-saas/discussions">Discussions</a></li>
+                            <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Discord Ticket SaaS. Released under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html>
