@@ -1,0 +1,19 @@
+{
+  "name": "discord-ticket-saas-docs",
+  "version": "1.0.0",
+  "description": "Documentation for Discord Ticket SaaS",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.31",
+    "vue": "^3.3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/discord-ticket-saas.git"
+  },
+  "license": "MIT"
+}

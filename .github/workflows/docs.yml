@@ -1,0 +1,146 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Needed for git-based last modified dates
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'docs/package-lock.json'
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        
+      - name: Install dependencies
+        run: |
+          cd docs
+          npm ci
+          
+      - name: Build documentation
+        run: |
+          cd docs
+          npm run docs:build
+          
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/.vitepress/dist
+
+  deploy-docs:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-docs
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        
+      - name: Update deployment status
+        if: always()
+        run: |
+          if [[ "${{ steps.deployment.outcome }}" == "success" ]]; then
+            echo "✅ Documentation deployed successfully"
+            echo "📚 Available at: ${{ steps.deployment.outputs.page_url }}"
+          else
+            echo "❌ Documentation deployment failed"
+            exit 1
+          fi
+
+  validate-links:
+    name: Validate Documentation Links
+    runs-on: ubuntu-latest
+    needs: deploy-docs
+    if: success()
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Install link checker
+        run: npm install -g markdown-link-check
+        
+      - name: Check internal links
+        run: |
+          find docs -name "*.md" -exec markdown-link-check {} \;
+          
+      - name: Check external links (sample)
+        run: |
+          # Check a few external links to ensure they're working
+          curl -f -s -I "https://discord.com/developers/docs" > /dev/null || echo "Warning: Discord API docs unreachable"
+          curl -f -s -I "https://www.mongodb.com/docs" > /dev/null || echo "Warning: MongoDB docs unreachable"
+          curl -f -s -I "https://redis.io/documentation" > /dev/null || echo "Warning: Redis docs unreachable"
+
+  notify-deployment:
+    name: Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-docs, validate-links]
+    if: always()
+    
+    steps:
+      - name: Send Discord notification
+        if: success()
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            📚 **Documentation Updated**
+            
+            🌍 **Live Site**: https://yourusername.github.io/discord-ticket-saas/
+            🔗 **Commit**: [`{{ github.sha }}`]({{ github.event.head_commit.url }})
+            👤 **Author**: {{ github.event.head_commit.author.name }}
+            
+            ✅ All checks passed and documentation is live!
+            
+      - name: Send failure notification
+        if: failure()
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            ❌ **Documentation Deployment Failed**
+            
+            🔗 **Commit**: [`{{ github.sha }}`]({{ github.event.head_commit.url }})
+            👤 **Author**: {{ github.event.head_commit.author.name }}
+            
+            Please check the [workflow logs]({{ github.server_url }}/{{ github.repository }}/actions/runs/{{ github.run_id }}) for details.
