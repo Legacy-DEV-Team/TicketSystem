@@ -1,9 +1,8 @@
 import { StringSelectMenuInteraction } from 'discord.js';
-import { logger } from '@ticket-system/shared';
 
 export class SelectHandler {
   async handle(interaction: StringSelectMenuInteraction) {
-    const [action, ...params] = interaction.customId.split('_');
+    const [action] = interaction.customId.split('_');
 
     switch (action) {
       case 'move':

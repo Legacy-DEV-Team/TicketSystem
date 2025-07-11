@@ -1,9 +1,8 @@
 import { ModalSubmitInteraction } from 'discord.js';
-import { logger } from '@ticket-system/shared';
 
 export class ModalHandler {
   async handle(interaction: ModalSubmitInteraction) {
-    const [action, ...params] = interaction.customId.split('_');
+    const [action] = interaction.customId.split('_');
 
     switch (action) {
       case 'rename':

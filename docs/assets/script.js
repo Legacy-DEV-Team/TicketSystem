@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(html => {
             console.log('Header HTML loaded, length:', html.length);
             // Update asset paths in the loaded HTML to be relative to the current page
-            const updatedHtml = html.replace(/src="\.\.\/public\//g, `src="${basePath}public/`);
+            const updatedHtml = html.replace(/src="\.\.\/public\//g, `src="${basePath}public/`)
+                                   .replace(/src="public\//g, `src="${basePath}public/`);
             
             const headerPlaceholder = document.getElementById('header-placeholder');
             if (headerPlaceholder) {
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Footer HTML loaded, length:', html.length);
             // Update asset paths in the loaded HTML to be relative to the current page
             const updatedHtml = html.replace(/src="\.\.\/public\//g, `src="${basePath}public/`)
+                                   .replace(/src="public\//g, `src="${basePath}public/`)
                                    .replace(/src="\.\.\/assets\//g, `src="${basePath}assets/`);
             
             const footerPlaceholder = document.getElementById('footer-placeholder');

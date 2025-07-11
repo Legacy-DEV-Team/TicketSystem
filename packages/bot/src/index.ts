@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Collection } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 import express from 'express';
 import { CronJob } from 'cron';
 import {
@@ -6,8 +6,7 @@ import {
   logger,
   AuthService,
   SystemConfig,
-  Guild,
-  ISystemConfig
+  Guild
 } from '@ticket-system/shared';
 
 import { ButtonHandler } from './handlers/buttonHandler';
@@ -263,7 +262,7 @@ class DiscordBot {
   public async stop() {
     await this.client.destroy();
     
-    for (const [guildId, customBot] of this.customBots) {
+    for (const [, customBot] of this.customBots) {
       await customBot.destroy();
     }
     

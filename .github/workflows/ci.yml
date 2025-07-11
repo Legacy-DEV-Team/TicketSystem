@@ -210,9 +210,9 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
           
-      - name: Audit npm packages
+      - name: Audit pnpm packages
         run: |
-          npm audit --audit-level moderate
+          pnpm audit --audit-level moderate
           
       - name: Check for secrets
         uses: trufflesecurity/trufflehog@main

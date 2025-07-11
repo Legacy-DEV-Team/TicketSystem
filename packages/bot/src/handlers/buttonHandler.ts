@@ -1,5 +1,4 @@
-import { ButtonInteraction, EmbedBuilder } from 'discord.js';
-import { Guild, Ticket, TICKET_STATUS, logger } from '@ticket-system/shared';
+import { ButtonInteraction } from 'discord.js';
 
 export class ButtonHandler {
   async handle(interaction: ButtonInteraction) {
@@ -20,7 +19,7 @@ export class ButtonHandler {
     }
   }
 
-  private async handleTicketCreate(interaction: ButtonInteraction, categoryId: string) {
+  private async handleTicketCreate(interaction: ButtonInteraction, _categoryId: string) {
     await interaction.reply({
       content: 'Ticket creation functionality will be implemented.',
       ephemeral: true
