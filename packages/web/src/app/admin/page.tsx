@@ -108,16 +108,18 @@ export default function AdminPage() {
     }
   };
 
-  const updateConfig = (path: string, value: any) => {
+  const updateConfig = (path: string, value: unknown) => {
     if (!config) return;
     
     const keys = path.split('.');
     const newConfig = { ...config };
-    let current: any = newConfig;
+    let current = newConfig as Record<string, unknown>;
     
     for (let i = 0; i < keys.length - 1; i++) {
-      current[keys[i]] = { ...current[keys[i]] };
-      current = current[keys[i]];
+      const key = keys[i];
+      const currentValue = current[key] as Record<string, unknown>;
+      current[key] = { ...currentValue };
+      current = current[key] as Record<string, unknown>;
     }
     
     current[keys[keys.length - 1]] = value;

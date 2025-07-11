@@ -206,7 +206,7 @@ class DiscordBot {
     }
   }
 
-  private async handleConfigUpdate(guildId: string, config: any) {
+  private async handleConfigUpdate(guildId: string, config: { customBotToken?: string }) {
     const guild = await Guild.findOne({ guildId });
     if (!guild) return;
 

@@ -14,8 +14,8 @@ export interface ISubscription extends Document {
   amount: number;
   currency: string;
   interval: 'month' | 'year';
-  webhookData: any[];
-  metadata: Map<string, any>;
+  webhookData: Record<string, unknown>[];
+  metadata: Map<string, unknown>;
   createdAt: Date;
   updatedAt: Date;
 }

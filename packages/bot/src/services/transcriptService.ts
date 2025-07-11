@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { logger } from '@ticket-system/shared';
+import { logger, ITicket, ITicketMessage } from '@ticket-system/shared';
 
 export class TranscriptService {
   private transcriptDir: string;
@@ -10,7 +10,7 @@ export class TranscriptService {
     this.ensureDirectoryExists();
   }
 
-  async generateTranscript(ticket: any): Promise<string> {
+  async generateTranscript(ticket: ITicket): Promise<string> {
     try {
       const guildDir = path.join(this.transcriptDir, ticket.guildId);
       if (!fs.existsSync(guildDir)) {
@@ -37,10 +37,10 @@ export class TranscriptService {
     }
   }
 
-  private generateHTML(ticket: any): string {
+  private generateHTML(ticket: ITicket): string {
     const messages = ticket.messages || [];
     
-    const messagesHtml = messages.map((msg: any) => `
+    const messagesHtml = messages.map((msg: ITicketMessage) => `
       <div class="message">
         <div class="message-header">
           <span class="author">${msg.authorUsername}</span>

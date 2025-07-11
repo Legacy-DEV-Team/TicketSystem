@@ -15,7 +15,7 @@ export type TicketInput = z.infer<typeof TicketSchema>;
 export type SystemConfigInput = z.infer<typeof SystemConfigSchema>;
 export type SubscriptionInput = z.infer<typeof SubscriptionSchema>;
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -206,12 +206,12 @@ export interface DiscordThreadMember {
 export interface PaymentProvider {
   name: string;
   enabled: boolean;
-  config: Record<string, any>;
+  config: Record<string, unknown>;
 }
 
 export interface WebhookPayload {
   event: string;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   timestamp: number;
   signature?: string;
 }
@@ -279,8 +279,8 @@ export interface MiddlewareContext {
   };
   guild?: {
     id: string;
-    config: any;
-    subscription: any;
+    config: Record<string, unknown>;
+    subscription: Record<string, unknown>;
   };
 }
 

@@ -2,6 +2,8 @@ import * as argon2 from 'argon2';
 import * as crypto from 'crypto';
 import { SignJWT, jwtVerify, generateKeyPair } from 'jose';
 
+
+
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
@@ -47,8 +49,8 @@ export class AuthService {
       crv: 'Ed25519'
     });
     
-    this.jwtPrivateKey = new Uint8Array(await crypto.subtle.exportKey('raw', privateKey as any));
-    this.jwtPublicKey = new Uint8Array(await crypto.subtle.exportKey('raw', publicKey as any));
+    this.jwtPrivateKey = new Uint8Array(await crypto.subtle.exportKey('raw', privateKey as crypto.webcrypto.CryptoKey));
+    this.jwtPublicKey = new Uint8Array(await crypto.subtle.exportKey('raw', publicKey as crypto.webcrypto.CryptoKey));
   }
 
   async hashPassword(password: string): Promise<string> {
@@ -96,8 +98,7 @@ export class AuthService {
       throw new Error('Invalid encrypted token format');
     }
 
-    const [ivHex, authTagHex, encrypted] = parts;
-    const iv = Buffer.from(ivHex, 'hex');
+    const [, authTagHex, encrypted] = parts;
     const authTag = Buffer.from(authTagHex, 'hex');
 
     const decipher = crypto.createDecipher('aes-256-gcm', this.encryptionKey);

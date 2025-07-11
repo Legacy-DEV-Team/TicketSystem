@@ -49,23 +49,23 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export class LogService {
-  static info(message: string, meta?: any) {
+  static info(message: string, meta?: Record<string, unknown>) {
     logger.info(message, meta);
   }
 
-  static error(message: string, error?: Error | any) {
-    logger.error(message, { error: error?.stack || error });
+  static error(message: string, error?: Error | unknown) {
+    logger.error(message, { error: error instanceof Error ? error.stack : error });
   }
 
-  static warn(message: string, meta?: any) {
+  static warn(message: string, meta?: Record<string, unknown>) {
     logger.warn(message, meta);
   }
 
-  static debug(message: string, meta?: any) {
+  static debug(message: string, meta?: Record<string, unknown>) {
     logger.debug(message, meta);
   }
 
-  static child(defaultMeta: any) {
+  static child(defaultMeta: Record<string, unknown>) {
     return logger.child(defaultMeta);
   }
 }

@@ -1,4 +1,4 @@
-import { Ticket, Guild, logger } from '@ticket-system/shared';
+import { Ticket, Guild, logger, ITicket } from '@ticket-system/shared';
 import { TranscriptService } from './transcriptService';
 
 export class AutoCloseService {
@@ -27,7 +27,7 @@ export class AutoCloseService {
     }
   }
 
-  private async closeTicket(ticket: any) {
+  private async closeTicket(ticket: ITicket) {
     try {
       await this.transcriptService.generateTranscript(ticket);
       
