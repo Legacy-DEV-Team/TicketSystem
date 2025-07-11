@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Ticket System Documentation</title>
+    <meta name="description" content="User management guide for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item active">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>User Management</h1>
+                            <p class="article-description">Complete guide to managing users and staff in Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>User Management Overview</h2>
+                            <p>User management in Ticket System allows you to organize and manage your support staff effectively. This guide covers:</p>
+                            <ul>
+                                <li>Understanding user roles and permissions</li>
+                                <li>Adding and managing staff members</li>
+                                <li>Performance tracking and analytics</li>
+                                <li>Training and onboarding</li>
+                                <li>Best practices for team management</li>
+                            </ul>
+                        </section>
+
+                        <section id="user-roles">
+                            <h2>User Roles and Permissions</h2>
+                            
+                            <h3>1. Role Hierarchy</h3>
+                            <div class="role-hierarchy">
+                                <div class="role-level">
+                                    <h4>Administrator</h4>
+                                    <ul>
+                                        <li>Full system access</li>
+                                        <li>Can manage all settings</li>
+                                        <li>Can assign and remove staff</li>
+                                        <li>Can view all analytics</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>Senior Staff</h4>
+                                    <ul>
+                                        <li>Can close tickets</li>
+                                        <li>Can manage transcripts</li>
+                                        <li>Can view category analytics</li>
+                                        <li>Can train new staff</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>Support Staff</h4>
+                                    <ul>
+                                        <li>Can view and respond to tickets</li>
+                                        <li>Can add users to tickets</li>
+                                        <li>Can generate transcripts</li>
+                                        <li>Can view basic analytics</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>User</h4>
+                                    <ul>
+                                        <li>Can create tickets</li>
+                                        <li>Can view own tickets</li>
+                                        <li>Basic access only</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Permission Matrix</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Administrator</th>
+                                            <th>Senior Staff</th>
+                                            <th>Support Staff</th>
+                                            <th>User</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Create Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>View Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Respond to Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Close Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delete Tickets</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Categories</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>View Analytics</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>Limited</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Staff</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="adding-staff">
+                            <h2>Adding and Managing Staff</h2>
+                            
+                            <h3>1. Adding New Staff</h3>
+                            <ol>
+                                <li>Navigate to "Staff Management" in the dashboard</li>
+                                <li>Click "Add Staff Member"</li>
+                                <li>Enter the Discord user ID or username</li>
+                                <li>Select the appropriate role</li>
+                                <li>Assign to specific categories (optional)</li>
+                                <li>Set training status and notes</li>
+                                <li>Click "Add Staff Member"</li>
+                            </ol>
+
+                            <h3>2. Staff Assignment</h3>
+                            <ul>
+                                <li><strong>Category Assignment</strong>: Assign staff to specific categories</li>
+                                <li><strong>Role Assignment</strong>: Set appropriate permission level</li>
+                                <li><strong>Training Status</strong>: Track training completion</li>
+                                <li><strong>Performance Monitoring</strong>: Track individual performance</li>
+                            </ul>
+
+                            <h3>3. Staff Management Features</h3>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <h4>Staff Directory</h4>
+                                    <ul>
+                                        <li>View all staff members</li>
+                                        <li>Filter by role or category</li>
+                                        <li>Search staff by name</li>
+                                        <li>View contact information</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>Performance Tracking</h4>
+                                    <ul>
+                                        <li>Response time metrics</li>
+                                        <li>Ticket resolution rate</li>
+                                        <li>Customer satisfaction</li>
+                                        <li>Activity monitoring</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>Training Management</h4>
+                                    <ul>
+                                        <li>Training status tracking</li>
+                                        <li>Skill assessment</li>
+                                        <li>Certification tracking</li>
+                                        <li>Training materials</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="performance-tracking">
+                            <h2>Performance Tracking</h2>
+                            
+                            <h3>1. Key Performance Indicators</h3>
+                            <div class="kpi-grid">
+                                <div class="kpi-card">
+                                    <h4>Response Time</h4>
+                                    <ul>
+                                        <li>Average first response time</li>
+                                        <li>Response time by category</li>
+                                        <li>Response time trends</li>
+                                        <li>Individual staff metrics</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="kpi-card">
+                                    <h4>Resolution Rate</h4>
+                                    <ul>
+                                        <li>Tickets resolved per staff member</li>
+                                        <li>Resolution time by category</li>
+                                        <li>Escalation rate</li>
+                                        <li>Customer satisfaction</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="kpi-card">
+                                    <h4>Activity Metrics</h4>
+                                    <ul>
+                                        <li>Active hours per day</li>
+                                        <li>Tickets handled per session</li>
+                                        <li>Availability tracking</li>
+                                        <li>Productivity trends</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Performance Reports</h3>
+                            <ul>
+                                <li><strong>Individual Reports</strong>: Personal performance metrics</li>
+                                <li><strong>Team Reports</strong>: Overall team performance</li>
+                                <li><strong>Category Reports</strong>: Performance by ticket type</li>
+                                <li><strong>Trend Reports</strong>: Performance over time</li>
+                            </ul>
+
+                            <h3>3. Performance Alerts</h3>
+                            <ul>
+                                <li><strong>Low Performance</strong>: Alert when metrics drop</li>
+                                <li><strong>High Workload</strong>: Alert when staff is overwhelmed</li>
+                                <li><strong>Response Time</strong>: Alert for slow responses</li>
+                                <li><strong>Quality Issues</strong>: Alert for customer complaints</li>
+                            </ul>
+                        </section>
+
+                        <section id="training-onboarding">
+                            <h2>Training and Onboarding</h2>
+                            
+                            <h3>1. Training Program</h3>
+                            <div class="training-stages">
+                                <div class="stage">
+                                    <h4>Stage 1: Basic Training</h4>
+                                    <ul>
+                                        <li>System overview and navigation</li>
+                                        <li>Basic ticket handling</li>
+                                        <li>Communication guidelines</li>
+                                        <li>Security and privacy</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="stage">
+                                    <h4>Stage 2: Advanced Training</h4>
+                                    <ul>
+                                        <li>Complex ticket resolution</li>
+                                        <li>Escalation procedures</li>
+                                        <li>Analytics and reporting</li>
+                                        <li>Team collaboration</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="stage">
+                                    <h4>Stage 3: Specialization</h4>
+                                    <ul>
+                                        <li>Category-specific training</li>
+                                        <li>Technical expertise</li>
+                                        <li>Leadership skills</li>
+                                        <li>Mentoring others</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Onboarding Process</h3>
+                            <ol>
+                                <li><strong>Account Setup</strong>: Create staff account and assign roles</li>
+                                <li><strong>System Access</strong>: Grant appropriate permissions</li>
+                                <li><strong>Initial Training</strong>: Complete basic training modules</li>
+                                <li><strong>Shadowing</strong>: Work with experienced staff</li>
+                                <li><strong>Supervised Work</strong>: Handle tickets under supervision</li>
+                                <li><strong>Independent Work</strong>: Handle tickets independently</li>
+                                <li><strong>Performance Review</strong>: Regular performance assessments</li>
+                            </ol>
+
+                            <h3>3. Training Resources</h3>
+                            <ul>
+                                <li><strong>Documentation</strong>: Comprehensive guides and manuals</li>
+                                <li><strong>Video Tutorials</strong>: Step-by-step video guides</li>
+                                <li><strong>Interactive Training</strong>: Hands-on practice scenarios</li>
+                                <li><strong>Mentoring Program</strong>: One-on-one guidance</li>
+                            </ul>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Best Practices</h2>
+                            
+                            <h3>1. Staff Management</h3>
+                            <ul>
+                                <li>Start with clear role definitions</li>
+                                <li>Provide comprehensive training</li>
+                                <li>Set clear performance expectations</li>
+                                <li>Regular feedback and coaching</li>
+                                <li>Recognize and reward good performance</li>
+                            </ul>
+
+                            <h3>2. Performance Optimization</h3>
+                                <li>Monitor key metrics regularly</li>
+                                <li>Identify and address bottlenecks</li>
+                                <li>Provide ongoing training</li>
+                                <li>Foster team collaboration</li>
+                                <li>Encourage continuous improvement</li>
+                            </ul>
+
+                            <h3>3. Team Building</h3>
+                            <ul>
+                                <li>Create a positive work environment</li>
+                                <li>Encourage knowledge sharing</li>
+                                <li>Organize team activities</li>
+                                <li>Celebrate team achievements</li>
+                                <li>Maintain open communication</li>
+                            </ul>
+
+                            <h3>4. Quality Assurance</h3>
+                            <ul>
+                                <li>Regular quality reviews</li>
+                                <li>Customer feedback collection</li>
+                                <li>Continuous process improvement</li>
+                                <li>Standard operating procedures</li>
+                                <li>Quality metrics tracking</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Staff Can't Access Tickets</h4>
+                                    <ul>
+                                        <li>Check role permissions</li>
+                                        <li>Verify category assignments</li>
+                                        <li>Check Discord role hierarchy</li>
+                                        <li>Review access logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Performance Issues</h4>
+                                    <ul>
+                                        <li>Review workload distribution</li>
+                                        <li>Check training completion</li>
+                                        <li>Analyze performance metrics</li>
+                                        <li>Provide additional support</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Training Problems</h4>
+                                    <ul>
+                                        <li>Review training materials</li>
+                                        <li>Assess learning style</li>
+                                        <li>Provide additional resources</li>
+                                        <li>Consider mentoring</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Team Conflicts</h4>
+                                    <ul>
+                                        <li>Address issues promptly</li>
+                                        <li>Facilitate communication</li>
+                                        <li>Set clear expectations</li>
+                                        <li>Provide conflict resolution</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After setting up user management:</p>
+                            <ol>
+                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Set up performance tracking</li>
+                                <li><strong><a href="categories.html">Optimize Categories</a></strong> - Assign staff to categories</li>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Set up automated workflows</li>
+                                <li><strong><a href="dashboard.html">Customize Dashboard</a></strong> - Configure team views</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

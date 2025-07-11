@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Setup - Ticket System Documentation</title>
+    <meta name="description" content="First setup guide for Ticket System - Professional Discord ticket management system">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item active">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>First Setup</h1>
+                            <p class="article-description">Complete your first Ticket System setup and create your first ticket category</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>First Setup Overview</h2>
+                            <p>This guide will walk you through setting up your first ticket system after installation and configuration. You'll learn how to:</p>
+                            <ul>
+                                <li>Access the admin dashboard</li>
+                                <li>Create your first ticket category</li>
+                                <li>Configure basic permissions</li>
+                                <li>Test the ticket system</li>
+                                <li>Set up monitoring</li>
+                            </ul>
+                        </section>
+
+                        <section id="access-dashboard">
+                            <h2>Access the Admin Dashboard</h2>
+                            
+                            <h3>1. Navigate to Your Domain</h3>
+                            <p>Open your web browser and go to your configured domain:</p>
+                            <div class="code-block">
+                                <pre><code>https://yourdomain.com</code></pre>
+                            </div>
+
+                            <h3>2. Sign in with Discord</h3>
+                            <ol>
+                                <li>Click "Sign in with Discord"</li>
+                                <li>Authorize the application to access your Discord account</li>
+                                <li>You'll be redirected to the dashboard</li>
+                            </ol>
+
+                            <h3>3. Verify Admin Access</h3>
+                            <p>Ensure you have administrator permissions in your Discord server. The dashboard will show:</p>
+                            <ul>
+                                <li>Your Discord servers</li>
+                                <li>System configuration options</li>
+                                <li>Analytics and monitoring</li>
+                            </ul>
+                        </section>
+
+                        <section id="create-category">
+                            <h2>Create Your First Ticket Category</h2>
+                            
+                            <h3>1. Navigate to Categories</h3>
+                            <ol>
+                                <li>Select your Discord server from the dropdown</li>
+                                <li>Click on "Ticket Categories" in the sidebar</li>
+                                <li>Click "Create Category"</li>
+                            </ol>
+
+                            <h3>2. Configure Category Settings</h3>
+                            <div class="setup-form">
+                                <h4>Basic Information</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: "General Support"</li>
+                                    <li><strong>Description</strong>: "Get help with general questions and issues"</li>
+                                    <li><strong>Emoji</strong>: 🎫</li>
+                                    <li><strong>Color</strong>: #5865F2 (Discord Blue)</li>
+                                </ul>
+
+                                <h4>Channel Configuration</h4>
+                                <ul>
+                                    <li><strong>Channel</strong>: Select or create #support-tickets</li>
+                                    <li><strong>Button Text</strong>: "Create Ticket"</li>
+                                    <li><strong>Button Style</strong>: Primary (Blue)</li>
+                                </ul>
+
+                                <h4>Permissions</h4>
+                                <ul>
+                                    <li><strong>Required Roles</strong>: None (anyone can create tickets)</li>
+                                    <li><strong>Blocked Roles</strong>: None</li>
+                                    <li><strong>Staff Roles</strong>: @Support, @Moderator</li>
+                                </ul>
+                            </div>
+
+                            <h3>3. Advanced Settings</h3>
+                            <div class="setup-form">
+                                <h4>Auto-Close Settings</h4>
+                                <ul>
+                                    <li><strong>Auto-Close Enabled</strong>: Yes</li>
+                                    <li><strong>Inactivity Time</strong>: 72 hours</li>
+                                    <li><strong>Warning Time</strong>: 24 hours before close</li>
+                                </ul>
+
+                                <h4>Notification Settings</h4>
+                                <ul>
+                                    <li><strong>Staff Notifications</strong>: Enabled</li>
+                                    <li><strong>Log Channel</strong>: #ticket-logs</li>
+                                    <li><strong>Transcript Channel</strong>: #transcripts</li>
+                                </ul>
+                            </div>
+
+                            <h3>4. Save and Test</h3>
+                            <ol>
+                                <li>Click "Save Category"</li>
+                                <li>Verify the category appears in your Discord server</li>
+                                <li>Test creating a ticket</li>
+                            </ol>
+                        </section>
+
+                        <section id="configure-permissions">
+                            <h2>Configure Basic Permissions</h2>
+                            
+                            <h3>1. Create Support Roles</h3>
+                            <p>In your Discord server, create the following roles:</p>
+                            <ul>
+                                <li><strong>@Support</strong> - Basic support staff</li>
+                                <li><strong>@Moderator</strong> - Senior support staff</li>
+                                <li><strong>@Admin</strong> - Administrative access</li>
+                            </ul>
+
+                            <h3>2. Set Role Permissions</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>@Support</th>
+                                            <th>@Moderator</th>
+                                            <th>@Admin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>View Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Respond to Tickets</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Close Tickets</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delete Tickets</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Categories</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>3. Assign Roles to Staff</h3>
+                            <ol>
+                                <li>Go to Server Settings → Roles</li>
+                                <li>Assign appropriate roles to your staff members</li>
+                                <li>Test permissions by having staff create and manage tickets</li>
+                            </ol>
+                        </section>
+
+                        <section id="test-system">
+                            <h2>Test Your Ticket System</h2>
+                            
+                            <h3>1. Create a Test Ticket</h3>
+                            <ol>
+                                <li>Go to your Discord server</li>
+                                <li>Navigate to the #support-tickets channel</li>
+                                <li>Click the "🎫 Create Ticket" button</li>
+                                <li>Verify a new thread is created with the format <code>ticket-0001</code></li>
+                            </ol>
+
+                            <h3>2. Test Ticket Management</h3>
+                            <ol>
+                                <li>Send a message in the ticket thread</li>
+                                <li>Have a staff member respond</li>
+                                <li>Test the close ticket functionality</li>
+                                <li>Verify the transcript is generated</li>
+                            </ol>
+
+                            <h3>3. Test Permissions</h3>
+                            <ul>
+                                <li>Have different role members try to access tickets</li>
+                                <li>Test who can close and delete tickets</li>
+                                <li>Verify staff notifications work correctly</li>
+                                <li>Check that blocked users cannot create tickets</li>
+                            </ul>
+
+                            <h3>4. Test Auto-Close</h3>
+                            <div class="warning-box">
+                                <p><strong>Note:</strong> For testing, you may want to temporarily set auto-close to a shorter duration (e.g., 1 hour) to verify it works correctly.</p>
+                            </div>
+                        </section>
+
+                        <section id="setup-monitoring">
+                            <h2>Set Up Monitoring</h2>
+                            
+                            <h3>1. Configure Health Checks</h3>
+                            <div class="code-block">
+                                <pre><code># Health check endpoints
+GET /api/health          # Web application
+GET /health              # Bot service
+GET /api/admin/status    # System status
+
+# Test health checks
+curl -f https://yourdomain.com/api/health
+curl -f https://yourdomain.com/health</code></pre>
+                            </div>
+
+                            <h3>2. Set Up Logging</h3>
+                            <ul>
+                                <li>Configure log rotation</li>
+                                <li>Set up log monitoring</li>
+                                <li>Configure error alerts</li>
+                                <li>Set up performance monitoring</li>
+                            </ul>
+
+                            <h3>3. Configure Alerts</h3>
+                            <div class="alert-config">
+                                <h4>Recommended Alerts</h4>
+                                <ul>
+                                    <li><strong>Service Down</strong>: Bot or web service unavailable</li>
+                                    <li><strong>High Error Rate</strong>: >5% error rate</li>
+                                    <li><strong>Database Issues</strong>: Connection failures</li>
+                                    <li><strong>Payment Failures</strong>: Failed webhook processing</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="optimization">
+                            <h2>Performance Optimization</h2>
+                            
+                            <h3>1. Database Optimization</h3>
+                            <ul>
+                                <li>Create indexes for frequently queried fields</li>
+                                <li>Set up database monitoring</li>
+                                <li>Configure connection pooling</li>
+                                <li>Set up regular backups</li>
+                            </ul>
+
+                            <h3>2. Cache Configuration</h3>
+                            <ul>
+                                <li>Configure Redis for session storage</li>
+                                <li>Set up caching for frequently accessed data</li>
+                                <li>Configure cache expiration policies</li>
+                                <li>Monitor cache hit rates</li>
+                            </ul>
+
+                            <h3>3. Network Optimization</h3>
+                            <ul>
+                                <li>Enable HTTP/2</li>
+                                <li>Configure CDN for static assets</li>
+                                <li>Set up proper caching headers</li>
+                                <li>Optimize image delivery</li>
+                            </ul>
+                        </section>
+
+                        <section id="security-checklist">
+                            <h2>Security Checklist</h2>
+                            
+                            <div class="checklist">
+                                <h3>✅ Completed Items</h3>
+                                <ul>
+                                    <li>✅ SSL certificate installed</li>
+                                    <li>✅ Strong encryption keys generated</li>
+                                    <li>✅ Database access restricted</li>
+                                    <li>✅ Admin panel secured</li>
+                                    <li>✅ Webhook signatures verified</li>
+                                    <li>✅ Rate limiting configured</li>
+                                    <li>✅ Regular backups scheduled</li>
+                                    <li>✅ Monitoring alerts configured</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>Congratulations! Your ticket system is now operational. Here's what to do next:</p>
+                            <ol>
+                                <li><strong><a href="categories.html">Create More Categories</a></strong> - Set up specialized ticket types</li>
+                                <li><strong><a href="permissions.html">Fine-tune Permissions</a></strong> - Configure role-based access</li>
+                                <li><strong><a href="analytics.html">Set Up Analytics</a></strong> - Track performance and usage</li>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Automate ticket management</li>
+                                <li><strong><a href="dashboard.html">Customize Dashboard</a></strong> - Personalize the interface</li>
+                            </ol>
+                        </section>
+
+                        <section id="support">
+                            <h2>Need Help?</h2>
+                            <div class="help-grid">
+                                <div class="help-item">
+                                    <h3>📚 Documentation</h3>
+                                    <p>Browse our complete guides</p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>💬 Discord Support</h3>
+                                    <p><a href="https://discord.gg/tb3KrFc2ED">Get help from our community</a></p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>📧 Email Support</h3>
+                                    <p><a href="mailto:support@ticketsystem.fyi">Direct access to our team</a></p>
+                                </div>
+                                <div class="help-item">
+                                    <h3>🐛 GitHub Issues</h3>
+                                    <p><a href="https://github.com/Legacy-DEV-Team/TicketSystem/issues">Report bugs or request features</a></p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Overview - Ticket System Documentation</title>
+    <meta name="description" content="Dashboard overview and configuration for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item active">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Dashboard Overview</h1>
+                            <p class="article-description">Complete guide to the Ticket System web dashboard</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Dashboard Overview</h2>
+                            <p>The Ticket System dashboard provides a comprehensive web interface for managing your ticket system. This guide covers:</p>
+                            <ul>
+                                <li>Dashboard layout and navigation</li>
+                                <li>Key features and functionality</li>
+                                <li>Configuration options</li>
+                                <li>User interface customization</li>
+                                <li>Mobile responsiveness</li>
+                            </ul>
+                        </section>
+
+                        <section id="accessing-dashboard">
+                            <h2>Accessing the Dashboard</h2>
+                            
+                            <h3>1. Login Process</h3>
+                            <ol>
+                                <li>Navigate to your domain: <code>https://yourdomain.com</code></li>
+                                <li>Click "Sign in with Discord"</li>
+                                <li>Authorize the application</li>
+                                <li>You'll be redirected to the dashboard</li>
+                            </ol>
+
+                            <h3>2. Server Selection</h3>
+                            <p>If you manage multiple Discord servers:</p>
+                            <ul>
+                                <li>Select the server from the dropdown</li>
+                                <li>Ensure you have admin permissions</li>
+                                <li>Switch between servers as needed</li>
+                            </ul>
+
+                            <h3>3. Permission Requirements</h3>
+                            <ul>
+                                <li><strong>Administrator</strong>: Full dashboard access</li>
+                                <li><strong>Senior Staff</strong>: Limited admin access</li>
+                                <li><strong>Support Staff</strong>: Basic dashboard access</li>
+                            </ul>
+                        </section>
+
+                        <section id="dashboard-layout">
+                            <h2>Dashboard Layout</h2>
+                            
+                            <h3>1. Navigation Sidebar</h3>
+                            <div class="dashboard-layout">
+                                <div class="nav-section">
+                                    <h4>Main Navigation</h4>
+                                    <ul>
+                                        <li><strong>Overview</strong>: System summary and quick stats</li>
+                                        <li><strong>Categories</strong>: Manage ticket categories</li>
+                                        <li><strong>Tickets</strong>: View and manage active tickets</li>
+                                        <li><strong>Analytics</strong>: Performance reports and metrics</li>
+                                        <li><strong>Staff</strong>: Manage support staff</li>
+                                        <li><strong>Settings</strong>: System configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Main Content Area</h3>
+                            <ul>
+                                <li><strong>Breadcrumbs</strong>: Navigate between sections</li>
+                                <li><strong>Page Header</strong>: Section title and actions</li>
+                                <li><strong>Content Area</strong>: Main functionality</li>
+                                <li><strong>Sidebar</strong>: Additional options and filters</li>
+                            </ul>
+
+                            <h3>3. Top Navigation Bar</h3>
+                            <ul>
+                                <li><strong>Server Selector</strong>: Choose Discord server</li>
+                                <li><strong>User Menu</strong>: Profile and logout</li>
+                                <li><strong>Notifications</strong>: System alerts</li>
+                                <li><strong>Help</strong>: Documentation and support</li>
+                            </ul>
+                        </section>
+
+                        <section id="key-features">
+                            <h2>Key Features</h2>
+                            
+                            <h3>1. Overview Dashboard</h3>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <h4>Quick Stats</h4>
+                                    <ul>
+                                        <li>Active tickets count</li>
+                                        <li>Today's new tickets</li>
+                                        <li>Average response time</li>
+                                        <li>Staff online status</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>Recent Activity</h4>
+                                    <ul>
+                                        <li>Latest ticket updates</li>
+                                        <li>Staff responses</li>
+                                        <li>System notifications</li>
+                                        <li>Performance alerts</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>Quick Actions</h4>
+                                    <ul>
+                                        <li>Create new category</li>
+                                        <li>View all tickets</li>
+                                        <li>Generate reports</li>
+                                        <li>Manage staff</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Category Management</h3>
+                            <ul>
+                                <li><strong>Create Categories</strong>: Set up new ticket types</li>
+                                <li><strong>Edit Categories</strong>: Modify existing categories</li>
+                                <li><strong>Reorder Categories</strong>: Change display order</li>
+                                <li><strong>Category Analytics</strong>: Performance metrics</li>
+                            </ul>
+
+                            <h3>3. Ticket Management</h3>
+                            <ul>
+                                <li><strong>View All Tickets</strong>: Browse active and closed tickets</li>
+                                <li><strong>Search Tickets</strong>: Find specific tickets</li>
+                                <li><strong>Filter Options</strong>: Filter by status, category, staff</li>
+                                <li><strong>Bulk Actions</strong>: Manage multiple tickets</li>
+                            </ul>
+
+                            <h3>4. Staff Management</h3>
+                            <ul>
+                                <li><strong>Staff Directory</strong>: View all support staff</li>
+                                <li><strong>Performance Tracking</strong>: Individual staff metrics</li>
+                                <li><strong>Role Assignment</strong>: Assign staff to categories</li>
+                                <li><strong>Activity Monitoring</strong>: Track staff activity</li>
+                            </ul>
+                        </section>
+
+                        <section id="configuration-options">
+                            <h2>Configuration Options</h2>
+                            
+                            <h3>1. System Settings</h3>
+                            <div class="settings-grid">
+                                <div class="setting-group">
+                                    <h4>General Settings</h4>
+                                    <ul>
+                                        <li>System name and branding</li>
+                                        <li>Default language</li>
+                                        <li>Timezone configuration</li>
+                                        <li>Notification preferences</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <h4>Security Settings</h4>
+                                    <ul>
+                                        <li>Session timeout</li>
+                                        <li>Two-factor authentication</li>
+                                        <li>IP whitelisting</li>
+                                        <li>Audit logging</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <h4>Integration Settings</h4>
+                                    <ul>
+                                        <li>Discord bot configuration</li>
+                                        <li>Payment provider settings</li>
+                                        <li>Email notification setup</li>
+                                        <li>Webhook configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Appearance Customization</h3>
+                            <ul>
+                                <li><strong>Theme Selection</strong>: Light, dark, or auto</li>
+                                <li><strong>Color Scheme</strong>: Customize dashboard colors</li>
+                                <li><strong>Logo Upload</strong>: Add your organization logo</li>
+                                <li><strong>Custom CSS</strong>: Advanced styling options</li>
+                            </ul>
+
+                            <h3>3. Notification Settings</h3>
+                            <ul>
+                                <li><strong>Email Notifications</strong>: Configure email alerts</li>
+                                <li><strong>Discord Notifications</strong>: Bot notification settings</li>
+                                <li><strong>Dashboard Alerts</strong>: In-app notification preferences</li>
+                                <li><strong>Webhook Notifications</strong>: External system integration</li>
+                            </ul>
+                        </section>
+
+                        <section id="mobile-responsiveness">
+                            <h2>Mobile Responsiveness</h2>
+                            
+                            <h3>1. Mobile Features</h3>
+                            <ul>
+                                <li><strong>Responsive Design</strong>: Works on all screen sizes</li>
+                                <li><strong>Touch-Friendly</strong>: Optimized for touch interfaces</li>
+                                <li><strong>Mobile Navigation</strong>: Collapsible sidebar</li>
+                                <li><strong>Quick Actions</strong>: Easy access to common tasks</li>
+                            </ul>
+
+                            <h3>2. Mobile Limitations</h3>
+                            <ul>
+                                <li>Some advanced features may be simplified</li>
+                                <li>Bulk actions are limited</li>
+                                <li>Complex analytics are optimized</li>
+                                <li>File uploads may be restricted</li>
+                            </ul>
+
+                            <h3>3. Mobile Best Practices</h3>
+                            <ul>
+                                <li>Use landscape mode for better viewing</li>
+                                <li>Enable notifications for important alerts</li>
+                                <li>Bookmark frequently used pages</li>
+                                <li>Use the mobile app when available</li>
+                            </ul>
+                        </section>
+
+                        <section id="security-features">
+                            <h2>Security Features</h2>
+                            
+                            <h3>1. Authentication</h3>
+                            <ul>
+                                <li><strong>Discord OAuth2</strong>: Secure login via Discord</li>
+                                <li><strong>Session Management</strong>: Automatic session timeout</li>
+                                <li><strong>Permission-Based Access</strong>: Role-based dashboard access</li>
+                                <li><strong>Audit Logging</strong>: Track all user actions</li>
+                            </ul>
+
+                            <h3>2. Data Protection</h3>
+                            <ul>
+                                <li><strong>HTTPS Encryption</strong>: All data encrypted in transit</li>
+                                <li><strong>Data Encryption</strong>: Sensitive data encrypted at rest</li>
+                                <li><strong>GDPR Compliance</strong>: Data protection regulations</li>
+                                <li><strong>Data Retention</strong>: Configurable data retention policies</li>
+                            </ul>
+
+                            <h3>3. Access Control</h3>
+                            <ul>
+                                <li><strong>IP Restrictions</strong>: Limit access by IP address</li>
+                                <li><strong>Two-Factor Authentication</strong>: Additional security layer</li>
+                                <li><strong>Session Monitoring</strong>: Track active sessions</li>
+                                <li><strong>Login Alerts</strong>: Notify of suspicious activity</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Login Problems</h4>
+                                    <ul>
+                                        <li>Check Discord authorization</li>
+                                        <li>Verify server permissions</li>
+                                        <li>Clear browser cache</li>
+                                        <li>Try incognito mode</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Loading Issues</h4>
+                                    <ul>
+                                        <li>Check internet connection</li>
+                                        <li>Verify domain configuration</li>
+                                        <li>Clear browser cache</li>
+                                        <li>Try different browser</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Permission Errors</h4>
+                                    <ul>
+                                        <li>Check Discord role permissions</li>
+                                        <li>Verify server admin access</li>
+                                        <li>Contact system administrator</li>
+                                        <li>Review audit logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Performance Issues</h4>
+                                    <ul>
+                                        <li>Check server resources</li>
+                                        <li>Clear browser cache</li>
+                                        <li>Disable browser extensions</li>
+                                        <li>Contact support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After familiarizing yourself with the dashboard:</p>
+                            <ol>
+                                <li><strong><a href="user-management.html">Manage Staff</a></strong> - Set up your support team</li>
+                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Set up reporting and monitoring</li>
+                                <li><strong><a href="custom-domains.html">Set Up Custom Domains</a></strong> - Configure branding</li>
+                                <li><strong><a href="categories.html">Create Categories</a></strong> - Set up ticket types</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

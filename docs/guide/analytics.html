@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics & Reports - Ticket System Documentation</title>
+    <meta name="description" content="Analytics and reporting guide for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item active">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Analytics & Reports</h1>
+                            <p class="article-description">Complete guide to analytics and reporting in Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Analytics Overview</h2>
+                            <p>Ticket System provides comprehensive analytics and reporting to help you understand and optimize your support operations. This guide covers:</p>
+                            <ul>
+                                <li>Understanding key metrics and KPIs</li>
+                                <li>Setting up analytics dashboards</li>
+                                <li>Generating custom reports</li>
+                                <li>Performance monitoring and alerts</li>
+                                <li>Data export and integration</li>
+                            </ul>
+                        </section>
+
+                        <section id="key-metrics">
+                            <h2>Key Metrics and KPIs</h2>
+                            
+                            <h3>1. Volume Metrics</h3>
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Ticket Volume</h4>
+                                    <ul>
+                                        <li>Total tickets created</li>
+                                        <li>Tickets per day/week/month</li>
+                                        <li>Peak usage times</li>
+                                        <li>Seasonal trends</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>Category Distribution</h4>
+                                    <ul>
+                                        <li>Tickets by category</li>
+                                        <li>Category popularity trends</li>
+                                        <li>Category performance comparison</li>
+                                        <li>Category growth rates</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>User Activity</h4>
+                                    <ul>
+                                        <li>Active users per period</li>
+                                        <li>User engagement rates</li>
+                                        <li>Repeat user patterns</li>
+                                        <li>User satisfaction scores</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Performance Metrics</h3>
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Response Time</h4>
+                                    <ul>
+                                        <li>Average first response time</li>
+                                        <li>Response time by category</li>
+                                        <li>Response time by staff member</li>
+                                        <li>Response time trends</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>Resolution Time</h4>
+                                    <ul>
+                                        <li>Average resolution time</li>
+                                        <li>Resolution time by complexity</li>
+                                        <li>Resolution time by category</li>
+                                        <li>Resolution efficiency trends</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>Staff Performance</h4>
+                                    <ul>
+                                        <li>Tickets handled per staff member</li>
+                                        <li>Staff response times</li>
+                                        <li>Staff resolution rates</li>
+                                        <li>Staff satisfaction scores</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>3. Quality Metrics</h3>
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <h4>Customer Satisfaction</h4>
+                                    <ul>
+                                        <li>Overall satisfaction scores</li>
+                                        <li>Satisfaction by category</li>
+                                        <li>Satisfaction by staff member</li>
+                                        <li>Satisfaction trends</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>Escalation Rate</h4>
+                                    <ul>
+                                        <li>Percentage of escalated tickets</li>
+                                        <li>Escalation reasons</li>
+                                        <li>Escalation by category</li>
+                                        <li>Escalation trends</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h4>Auto-Close Rate</h4>
+                                    <ul>
+                                        <li>Percentage of auto-closed tickets</li>
+                                        <li>Auto-close by category</li>
+                                        <li>Warning response rates</li>
+                                        <li>Auto-close trends</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="dashboard-setup">
+                            <h2>Setting Up Analytics Dashboards</h2>
+                            
+                            <h3>1. Default Dashboards</h3>
+                            <div class="dashboard-types">
+                                <div class="dashboard-type">
+                                    <h4>Overview Dashboard</h4>
+                                    <ul>
+                                        <li>Key performance indicators</li>
+                                        <li>Recent activity summary</li>
+                                        <li>Quick action buttons</li>
+                                        <li>System status indicators</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="dashboard-type">
+                                    <h4>Performance Dashboard</h4>
+                                    <ul>
+                                        <li>Staff performance metrics</li>
+                                        <li>Response time analysis</li>
+                                        <li>Resolution efficiency</li>
+                                        <li>Quality indicators</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="dashboard-type">
+                                    <h4>Category Dashboard</h4>
+                                    <ul>
+                                        <li>Category-specific metrics</li>
+                                        <li>Category comparison</li>
+                                        <li>Category trends</li>
+                                        <li>Category optimization</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Custom Dashboards</h3>
+                            <ol>
+                                <li>Navigate to "Analytics" → "Dashboards"</li>
+                                <li>Click "Create Dashboard"</li>
+                                <li>Choose dashboard type and layout</li>
+                                <li>Add widgets and metrics</li>
+                                <li>Configure refresh intervals</li>
+                                <li>Set up sharing permissions</li>
+                                <li>Save and activate dashboard</li>
+                            </ol>
+
+                            <h3>3. Dashboard Widgets</h3>
+                            <ul>
+                                <li><strong>Charts</strong>: Line, bar, pie, and area charts</li>
+                                <li><strong>Tables</strong>: Data tables with sorting and filtering</li>
+                                <li><strong>Metrics</strong>: Key performance indicators</li>
+                                <li><strong>Alerts</strong>: Real-time notifications</li>
+                                <li><strong>Filters</strong>: Date range and category filters</li>
+                            </ul>
+                        </section>
+
+                        <section id="custom-reports">
+                            <h2>Generating Custom Reports</h2>
+                            
+                            <h3>1. Report Types</h3>
+                            <div class="report-types">
+                                <div class="report-type">
+                                    <h4>Performance Reports</h4>
+                                    <ul>
+                                        <li>Staff performance analysis</li>
+                                        <li>Response time reports</li>
+                                        <li>Resolution efficiency reports</li>
+                                        <li>Quality assessment reports</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="report-type">
+                                    <h4>Volume Reports</h4>
+                                    <ul>
+                                        <li>Ticket volume analysis</li>
+                                        <li>Category distribution reports</li>
+                                        <li>Trend analysis reports</li>
+                                        <li>Seasonal pattern reports</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="report-type">
+                                    <h4>Quality Reports</h4>
+                                    <ul>
+                                        <li>Customer satisfaction reports</li>
+                                        <li>Escalation analysis</li>
+                                        <li>Auto-close reports</li>
+                                        <li>Quality improvement reports</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Creating Custom Reports</h3>
+                            <ol>
+                                <li>Go to "Analytics" → "Reports"</li>
+                                <li>Click "Create Report"</li>
+                                <li>Select report type and template</li>
+                                <li>Configure date range and filters</li>
+                                <li>Choose metrics and dimensions</li>
+                                <li>Set up formatting and styling</li>
+                                <li>Configure delivery schedule</li>
+                                <li>Save and generate report</li>
+                            </ol>
+
+                            <h3>3. Report Scheduling</h3>
+                            <ul>
+                                <li><strong>Daily Reports</strong>: Key metrics and alerts</li>
+                                <li><strong>Weekly Reports</strong>: Performance summaries</li>
+                                <li><strong>Monthly Reports</strong>: Comprehensive analysis</li>
+                                <li><strong>Custom Schedules</strong>: Flexible timing options</li>
+                            </ul>
+                        </section>
+
+                        <section id="performance-monitoring">
+                            <h2>Performance Monitoring and Alerts</h2>
+                            
+                            <h3>1. Alert Types</h3>
+                            <div class="alert-types">
+                                <div class="alert-type">
+                                    <h4>Performance Alerts</h4>
+                                    <ul>
+                                        <li>High response times</li>
+                                        <li>Low resolution rates</li>
+                                        <li>Staff overload</li>
+                                        <li>Quality issues</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="alert-type">
+                                    <h4>Volume Alerts</h4>
+                                    <ul>
+                                        <li>Unusual ticket volume</li>
+                                        <li>Category spikes</li>
+                                        <li>System overload</li>
+                                        <li>Capacity warnings</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="alert-type">
+                                    <h4>System Alerts</h4>
+                                    <ul>
+                                        <li>Service disruptions</li>
+                                        <li>Performance degradation</li>
+                                        <li>Error rate increases</li>
+                                        <li>Maintenance notifications</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Alert Configuration</h3>
+                            <ol>
+                                <li>Navigate to "Analytics" → "Alerts"</li>
+                                <li>Click "Create Alert"</li>
+                                <li>Select alert type and metric</li>
+                                <li>Set threshold values</li>
+                                <li>Configure notification channels</li>
+                                <li>Set alert frequency</li>
+                                <li>Test alert functionality</li>
+                                <li>Save and activate alert</li>
+                            </ol>
+
+                            <h3>3. Notification Channels</h3>
+                            <ul>
+                                <li><strong>Email</strong>: Direct email notifications</li>
+                                <li><strong>Discord</strong>: Bot notifications in channels</li>
+                                <li><strong>Dashboard</strong>: In-app notifications</li>
+                                <li><strong>Webhooks</strong>: External system integration</li>
+                            </ul>
+                        </section>
+
+                        <section id="data-export">
+                            <h2>Data Export and Integration</h2>
+                            
+                            <h3>1. Export Formats</h3>
+                            <ul>
+                                <li><strong>CSV</strong>: Comma-separated values for spreadsheets</li>
+                                <li><strong>JSON</strong>: Structured data for APIs</li>
+                                <li><strong>PDF</strong>: Formatted reports for sharing</li>
+                                <li><strong>Excel</strong>: Native Excel format with charts</li>
+                            </ul>
+
+                            <h3>2. Export Options</h3>
+                            <div class="export-options">
+                                <div class="export-option">
+                                    <h4>Real-time Export</h4>
+                                    <ul>
+                                        <li>Export current data</li>
+                                        <li>Custom date ranges</li>
+                                        <li>Filtered data sets</li>
+                                        <li>Formatted reports</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="export-option">
+                                    <h4>Scheduled Export</h4>
+                                    <ul>
+                                        <li>Automated exports</li>
+                                        <li>Regular report delivery</li>
+                                        <li>Email delivery</li>
+                                        <li>Cloud storage integration</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="export-option">
+                                    <h4>API Integration</h4>
+                                    <ul>
+                                        <li>REST API access</li>
+                                        <li>Webhook integration</li>
+                                        <li>Third-party tools</li>
+                                        <li>Custom applications</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>3. Integration Options</h3>
+                            <ul>
+                                <li><strong>Business Intelligence Tools</strong>: Power BI, Tableau</li>
+                                <li><strong>Spreadsheet Applications</strong>: Excel, Google Sheets</li>
+                                <li><strong>CRM Systems</strong>: Salesforce, HubSpot</li>
+                                <li><strong>Project Management</strong>: Jira, Asana</li>
+                            </ul>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Analytics Best Practices</h2>
+                            
+                            <h3>1. Data Quality</h3>
+                            <ul>
+                                <li>Ensure accurate data collection</li>
+                                <li>Regular data validation</li>
+                                <li>Clean and normalize data</li>
+                                <li>Document data sources</li>
+                            </ul>
+
+                            <h3>2. Metric Selection</h3>
+                            <ul>
+                                <li>Focus on actionable metrics</li>
+                                <li>Align metrics with goals</li>
+                                <li>Use balanced scorecards</li>
+                                <li>Regular metric review</li>
+                            </ul>
+
+                            <h3>3. Reporting Strategy</h3>
+                            <ul>
+                                <li>Create regular reporting cadence</li>
+                                <li>Tailor reports to audience</li>
+                                <li>Use visualizations effectively</li>
+                                <li>Provide context and insights</li>
+                            </ul>
+
+                            <h3>4. Continuous Improvement</h3>
+                            <ul>
+                                <li>Regular performance reviews</li>
+                                <li>Identify improvement opportunities</li>
+                                <li>Test and optimize processes</li>
+                                <li>Monitor impact of changes</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Data Not Loading</h4>
+                                    <ul>
+                                        <li>Check data collection settings</li>
+                                        <li>Verify database connections</li>
+                                        <li>Check for data processing errors</li>
+                                        <li>Review system logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Incorrect Metrics</h4>
+                                    <ul>
+                                        <li>Verify calculation formulas</li>
+                                        <li>Check data filters</li>
+                                        <li>Review time zone settings</li>
+                                        <li>Validate data sources</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Report Generation Issues</h4>
+                                    <ul>
+                                        <li>Check export permissions</li>
+                                        <li>Verify file format support</li>
+                                        <li>Review storage space</li>
+                                        <li>Test export functionality</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Alert Problems</h4>
+                                    <ul>
+                                        <li>Check alert configuration</li>
+                                        <li>Verify notification channels</li>
+                                        <li>Test alert triggers</li>
+                                        <li>Review alert logs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After setting up analytics:</p>
+                            <ol>
+                                <li><strong><a href="user-management.html">Optimize Staff Performance</a></strong> - Use analytics to improve team efficiency</li>
+                                <li><strong><a href="categories.html">Optimize Categories</a></strong> - Use data to improve category configuration</li>
+                                <li><strong><a href="auto-close.html">Fine-tune Auto-Close</a></strong> - Use analytics to optimize auto-close settings</li>
+                                <li><strong><a href="custom-domains.html">Set Up Custom Branding</a></strong> - Configure custom domains and branding</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

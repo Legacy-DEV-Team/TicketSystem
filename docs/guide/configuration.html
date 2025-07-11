@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Ticket System Documentation</title>
+    <meta name="description" content="Configuration guide for Ticket System - Professional Discord ticket management system">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item active">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Configuration</h1>
+                            <p class="article-description">Complete configuration guide for Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Configuration Overview</h2>
+                            <p>Ticket System requires configuration in several areas:</p>
+                            <ul>
+                                <li><strong>Discord Bot</strong> - Bot tokens, permissions, and OAuth settings</li>
+                                <li><strong>Payment Providers</strong> - Stripe, PayPal, and Patreon integration</li>
+                                <li><strong>Domain Settings</strong> - Custom domains and SSL configuration</li>
+                                <li><strong>Feature Limits</strong> - Subscription tier restrictions</li>
+                                <li><strong>Security</strong> - Encryption keys and authentication</li>
+                            </ul>
+                        </section>
+
+                        <section id="discord-configuration">
+                            <h2>Discord Configuration</h2>
+                            
+                            <h3>Bot Setup</h3>
+                            <ol>
+                                <li>Go to the <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a></li>
+                                <li>Create a new application or use an existing one</li>
+                                <li>Navigate to the "Bot" section</li>
+                                <li>Create a bot and copy the token</li>
+                                <li>Configure the following permissions:
+                                    <ul>
+                                        <li>Send Messages</li>
+                                        <li>Manage Threads</li>
+                                        <li>Use Slash Commands</li>
+                                        <li>Attach Files</li>
+                                        <li>Embed Links</li>
+                                        <li>Read Message History</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h3>OAuth Configuration</h3>
+                            <ol>
+                                <li>In your Discord application, go to "OAuth2" → "General"</li>
+                                <li>Add your redirect URI: <code>https://yourdomain.com/api/auth/callback/discord</code></li>
+                                <li>Copy the Client ID and Client Secret</li>
+                                <li>Configure the scopes: <code>identify guilds</code></li>
+                            </ol>
+
+                            <div class="code-block">
+                                <pre><code># Example Discord configuration
+discord:
+  defaultBot:
+    token: "your-bot-token-here"
+    clientId: "your-client-id"
+    enabled: true
+  oauth:
+    clientId: "your-oauth-client-id"
+    clientSecret: "your-oauth-client-secret"
+    redirectUri: "https://yourdomain.com/api/auth/callback/discord"</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="payment-configuration">
+                            <h2>Payment Configuration</h2>
+                            
+                            <h3>Stripe Setup</h3>
+                            <ol>
+                                <li>Create a <a href="https://stripe.com" target="_blank">Stripe account</a></li>
+                                <li>Get your API keys from the Dashboard</li>
+                                <li>Configure webhook endpoint: <code>https://yourdomain.com/api/webhooks/stripe</code></li>
+                                <li>Set webhook events: <code>customer.subscription.created</code>, <code>customer.subscription.updated</code>, <code>customer.subscription.deleted</code></li>
+                            </ol>
+
+                            <div class="code-block">
+                                <pre><code># Stripe configuration
+payments:
+  stripe:
+    publicKey: "pk_test_..."
+    secretKey: "sk_test_..."
+    webhookSecret: "whsec_..."
+    enabled: true</code></pre>
+                            </div>
+
+                            <h3>PayPal Setup</h3>
+                            <ol>
+                                <li>Create a <a href="https://developer.paypal.com" target="_blank">PayPal Developer account</a></li>
+                                <li>Create an app and get Client ID and Secret</li>
+                                <li>Configure webhook URL: <code>https://yourdomain.com/api/webhooks/paypal</code></li>
+                                <li>Set environment (sandbox/production)</li>
+                            </ol>
+
+                            <div class="code-block">
+                                <pre><code># PayPal configuration
+payments:
+  paypal:
+    clientId: "your-paypal-client-id"
+    clientSecret: "your-paypal-client-secret"
+    webhookId: "your-webhook-id"
+    environment: "sandbox"  # or "production"
+    enabled: true</code></pre>
+                            </div>
+
+                            <h3>Patreon Setup</h3>
+                            <ol>
+                                <li>Create a <a href="https://www.patreon.com/portal2" target="_blank">Patreon Creator account</a></li>
+                                <li>Register your application</li>
+                                <li>Get Client ID and Secret</li>
+                                <li>Configure redirect URI: <code>https://yourdomain.com/api/auth/callback/patreon</code></li>
+                            </ol>
+
+                            <div class="code-block">
+                                <pre><code># Patreon configuration
+payments:
+  patreon:
+    clientId: "your-patreon-client-id"
+    clientSecret: "your-patreon-client-secret"
+    accessToken: "your-access-token"
+    refreshToken: "your-refresh-token"
+    enabled: true</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="domain-configuration">
+                            <h2>Domain Configuration</h2>
+                            
+                            <h3>Primary Domain</h3>
+                            <p>Set your primary domain for the application:</p>
+                            <div class="code-block">
+                                <pre><code>domain:
+  primary: "https://yourdomain.com"
+  allowCustomDomains: true
+  sslEnabled: true</code></pre>
+                            </div>
+
+                            <h3>Custom Domains</h3>
+                            <p>For enterprise customers, you can enable custom domains:</p>
+                            <ol>
+                                <li>Set <code>allowCustomDomains: true</code></li>
+                                <li>Configure DNS records for customer domains</li>
+                                <li>Set up SSL certificates for each domain</li>
+                                <li>Configure NGINX virtual hosts</li>
+                            </ol>
+                        </section>
+
+                        <section id="feature-limits">
+                            <h2>Feature Limits</h2>
+                            
+                            <h3>Subscription Tiers</h3>
+                            <div class="code-block">
+                                <pre><code>features:
+  maxFreeGuilds: 1
+  maxProGuilds: 5
+  maxEnterpriseGuilds: -1  # Unlimited
+  transcriptRetentionDays: 365</code></pre>
+                            </div>
+
+                            <h3>Usage Limits</h3>
+                            <ul>
+                                <li><strong>Free Tier</strong>: 1 server, 50 tickets/month, 7-day retention</li>
+                                <li><strong>Pro Tier</strong>: 5 servers, 500 tickets/month, 30-day retention</li>
+                                <li><strong>Enterprise Tier</strong>: Unlimited servers, unlimited tickets, 365-day retention</li>
+                            </ul>
+                        </section>
+
+                        <section id="security-configuration">
+                            <h2>Security Configuration</h2>
+                            
+                            <h3>Encryption Keys</h3>
+                            <p>Generate secure encryption keys for your installation:</p>
+                            <div class="code-block">
+                                <pre><code># Generate master key (32 bytes)
+openssl rand -base64 32
+
+# Generate JWT keys (Ed25519)
+openssl genpkey -algorithm Ed25519 -out private.pem
+openssl pkey -in private.pem -pubout -out public.pem
+
+# Convert to base64 for configuration
+base64 -w 0 private.pem
+base64 -w 0 public.pem</code></pre>
+                            </div>
+
+                            <h3>Environment Variables</h3>
+                            <div class="code-block">
+                                <pre><code># Security configuration
+NEXTAUTH_SECRET=your-nextauth-secret-here
+NEXTAUTH_URL=https://yourdomain.com
+
+# Encryption keys
+MASTER_KEY=your-base64-encoded-master-key
+JWT_PRIVATE_KEY=your-base64-encoded-private-key
+JWT_PUBLIC_KEY=your-base64-encoded-public-key</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="database-configuration">
+                            <h2>Database Configuration</h2>
+                            
+                            <h3>MongoDB Setup</h3>
+                            <div class="code-block">
+                                <pre><code># Local MongoDB
+MONGODB_URI=mongodb://localhost:27017/ticket-system
+
+# MongoDB Atlas
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ticket-system
+
+# With authentication
+MONGODB_URI=mongodb://username:password@localhost:27017/ticket-system?authSource=admin</code></pre>
+                            </div>
+
+                            <h3>Redis Setup</h3>
+                            <div class="code-block">
+                                <pre><code># Local Redis
+REDIS_URL=redis://localhost:6379
+
+# Redis Cloud
+REDIS_URL=redis://username:password@host:port
+
+# With SSL
+REDIS_URL=rediss://username:password@host:port</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="monitoring-configuration">
+                            <h2>Monitoring Configuration</h2>
+                            
+                            <h3>Health Checks</h3>
+                            <div class="code-block">
+                                <pre><code># Health check endpoints
+GET /api/health          # Web application health
+GET /health              # Bot health
+GET /api/admin/status    # System status</code></pre>
+                            </div>
+
+                            <h3>Logging</h3>
+                            <div class="code-block">
+                                <pre><code># Log levels
+LOG_LEVEL=info          # error, warn, info, debug
+LOG_FORMAT=json         # json, simple
+LOG_FILE=logs/app.log   # File logging</code></pre>
+                            </div>
+
+                            <h3>Metrics</h3>
+                            <p>Configure metrics collection for monitoring:</p>
+                            <ul>
+                                <li><strong>Application Metrics</strong>: Response times, error rates</li>
+                                <li><strong>Business Metrics</strong>: Ticket volume, user activity</li>
+                                <li><strong>System Metrics</strong>: CPU, memory, disk usage</li>
+                            </ul>
+                        </section>
+
+                        <section id="testing-configuration">
+                            <h2>Testing Your Configuration</h2>
+                            
+                            <h3>1. Verify Bot Connection</h3>
+                            <div class="code-block">
+                                <pre><code># Test bot connectivity
+curl -X GET http://localhost:3001/health
+
+# Check bot status in Discord
+# The bot should appear online in your server</code></pre>
+                            </div>
+
+                            <h3>2. Test OAuth Flow</h3>
+                            <ol>
+                                <li>Visit <code>https://yourdomain.com/api/auth/signin</code></li>
+                                <li>Click "Sign in with Discord"</li>
+                                <li>Complete the OAuth flow</li>
+                                <li>Verify you're redirected back to the dashboard</li>
+                            </ol>
+
+                            <h3>3. Test Payment Integration</h3>
+                            <ol>
+                                <li>Create a test subscription</li>
+                                <li>Verify webhook processing</li>
+                                <li>Check database records</li>
+                                <li>Test subscription management</li>
+                            </ol>
+
+                            <h3>4. Verify Database Connections</h3>
+                            <div class="code-block">
+                                <pre><code># Test MongoDB connection
+mongosh --eval "db.runCommand({ping:1})"
+
+# Test Redis connection
+redis-cli ping
+
+# Check application logs for connection errors</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Configuration Issues</h3>
+                            <ul>
+                                <li><strong>Invalid Bot Token</strong>: Check token format and permissions</li>
+                                <li><strong>OAuth Redirect Errors</strong>: Verify redirect URI matches exactly</li>
+                                <li><strong>Payment Webhook Failures</strong>: Check webhook URL and signature verification</li>
+                                <li><strong>Database Connection Errors</strong>: Verify connection strings and network access</li>
+                                <li><strong>SSL Certificate Issues</strong>: Check certificate validity and NGINX configuration</li>
+                            </ul>
+
+                            <h3>Configuration Validation</h3>
+                            <div class="code-block">
+                                <pre><code># Validate configuration
+npm run validate:config
+
+# Check environment variables
+npm run check:env
+
+# Test all integrations
+npm run test:integrations</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After completing configuration:</p>
+                            <ol>
+                                <li><strong><a href="first-setup.html">First Setup</a></strong> - Create your first ticket category</li>
+                                <li><strong><a href="bot-setup.html">Bot Setup</a></strong> - Configure Discord bot permissions</li>
+                                <li><strong><a href="dashboard.html">Dashboard Setup</a></strong> - Configure the web interface</li>
+                                <li><strong><a href="analytics.html">Analytics Setup</a></strong> - Configure monitoring and reporting</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

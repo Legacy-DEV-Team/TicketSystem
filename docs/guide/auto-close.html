@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Close System - Ticket System Documentation</title>
+    <meta name="description" content="Auto-close system configuration for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item active">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Auto-Close System</h1>
+                            <p class="article-description">Complete guide to configuring the auto-close system for automatic ticket management</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Auto-Close Overview</h2>
+                            <p>The auto-close system automatically closes inactive tickets to keep your support system organized. This guide covers:</p>
+                            <ul>
+                                <li>Understanding how auto-close works</li>
+                                <li>Configuring auto-close settings</li>
+                                <li>Setting up warning notifications</li>
+                                <li>Customizing auto-close behavior</li>
+                                <li>Monitoring and troubleshooting</li>
+                            </ul>
+                        </section>
+
+                        <section id="how-it-works">
+                            <h2>How Auto-Close Works</h2>
+                            
+                            <h3>1. Inactivity Detection</h3>
+                            <p>The system monitors ticket activity and tracks:</p>
+                            <ul>
+                                <li>Last message timestamp</li>
+                                <li>User who sent the last message</li>
+                                <li>Ticket status (open/closed)</li>
+                                <li>Category-specific settings</li>
+                            </ul>
+
+                            <h3>2. Warning System</h3>
+                            <p>Before closing a ticket, the system:</p>
+                            <ol>
+                                <li>Sends a warning message to the ticket</li>
+                                <li>Notifies staff about impending closure</li>
+                                <li>Allows time for response</li>
+                                <li>Closes the ticket if no response</li>
+                            </ol>
+
+                            <h3>3. Closure Process</h3>
+                            <p>When auto-closing a ticket:</p>
+                            <ul>
+                                <li>Generates a transcript</li>
+                                <li>Sends closure notification</li>
+                                <li>Archives the ticket thread</li>
+                                <li>Updates analytics</li>
+                            </ul>
+                        </section>
+
+                        <section id="configuration">
+                            <h2>Configuring Auto-Close</h2>
+                            
+                            <h3>1. Global Settings</h3>
+                            <div class="setup-form">
+                                <h4>Basic Configuration</h4>
+                                <ul>
+                                    <li><strong>Auto-Close Enabled</strong>: Enable/disable the system</li>
+                                    <li><strong>Default Inactivity Time</strong>: Hours before auto-close (default: 72)</li>
+                                    <li><strong>Warning Time</strong>: Hours before warning (default: 24)</li>
+                                    <li><strong>Check Interval</strong>: How often to check for inactive tickets</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Category-Specific Settings</h3>
+                            <p>Each category can have different auto-close settings:</p>
+                            <ul>
+                                <li><strong>General Support</strong>: 72 hours (3 days)</li>
+                                <li><strong>Bug Reports</strong>: 168 hours (7 days)</li>
+                                <li><strong>Premium Support</strong>: 48 hours (2 days)</li>
+                                <li><strong>Feature Requests</strong>: 336 hours (14 days)</li>
+                            </ul>
+
+                            <h3>3. Warning Configuration</h3>
+                            <div class="setup-form">
+                                <h4>Warning Messages</h4>
+                                <ul>
+                                    <li><strong>Warning Message</strong>: Custom message sent before closure</li>
+                                    <li><strong>Warning Color</strong>: Color of the warning embed</li>
+                                    <li><strong>Mention Users</strong>: Mention ticket participants</li>
+                                    <li><strong>Staff Notification</strong>: Notify staff of warnings</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="advanced-settings">
+                            <h2>Advanced Settings</h2>
+                            
+                            <h3>1. Conditional Auto-Close</h3>
+                            <p>Set different rules based on conditions:</p>
+                            <ul>
+                                <li><strong>User Role</strong>: Different times for different user types</li>
+                                <li><strong>Ticket Priority</strong>: Faster closure for low-priority tickets</li>
+                                <li><strong>Staff Response</strong>: Extend time if staff has responded</li>
+                                <li><strong>Weekend/Holiday</strong>: Extended times during non-business hours</li>
+                            </ul>
+
+                            <h3>2. Escalation Rules</h3>
+                            <p>Configure escalation before closure:</p>
+                            <ul>
+                                <li><strong>Escalation Time</strong>: Time before escalation</li>
+                                <li><strong>Escalation Roles</strong>: Roles to escalate to</li>
+                                <li><strong>Escalation Message</strong>: Custom escalation message</li>
+                                <li><strong>Escalation Extension</strong>: Additional time after escalation</li>
+                            </ul>
+
+                            <h3>3. Exception Rules</h3>
+                            <p>Set up exceptions to auto-close:</p>
+                            <ul>
+                                <li><strong>Staff Tickets</strong>: Never auto-close staff tickets</li>
+                                <li><strong>VIP Users</strong>: Extended time for VIP users</li>
+                                <li><strong>Active Discussions</strong>: Extend if recent activity</li>
+                                <li><strong>Custom Tags</strong>: Skip auto-close for tagged tickets</li>
+                            </ul>
+                        </section>
+
+                        <section id="notification-system">
+                            <h2>Notification System</h2>
+                            
+                            <h3>1. Warning Notifications</h3>
+                            <div class="notification-example">
+                                <h4>Example Warning Message</h4>
+                                <div class="embed-example">
+                                    <div class="embed-header">
+                                        <span class="embed-icon">⚠️</span>
+                                        <span class="embed-title">Ticket Auto-Close Warning</span>
+                                    </div>
+                                    <div class="embed-content">
+                                        <p>This ticket will be automatically closed in <strong>24 hours</strong> due to inactivity.</p>
+                                        <p>If you need further assistance, please respond to this message.</p>
+                                        <p><em>Ticket: #ticket-0001 | Category: General Support</em></p>
+                                    </div>
+                                    <div class="embed-footer">
+                                        <span>Auto-Close System</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>2. Closure Notifications</h3>
+                            <div class="notification-example">
+                                <h4>Example Closure Message</h4>
+                                <div class="embed-example">
+                                    <div class="embed-header">
+                                        <span class="embed-icon">🔒</span>
+                                        <span class="embed-title">Ticket Closed</span>
+                                    </div>
+                                    <div class="embed-content">
+                                        <p>This ticket has been automatically closed due to inactivity.</p>
+                                        <p>A transcript has been generated and saved.</p>
+                                        <p><em>Ticket: #ticket-0001 | Duration: 3 days, 2 hours</em></p>
+                                    </div>
+                                    <div class="embed-footer">
+                                        <span>Auto-Close System</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>3. Staff Notifications</h3>
+                            <ul>
+                                <li><strong>Warning Alerts</strong>: Notify staff of impending closures</li>
+                                <li><strong>Closure Reports</strong>: Daily summary of closed tickets</li>
+                                <li><strong>Escalation Alerts</strong>: Notify when tickets are escalated</li>
+                                <li><strong>Exception Reports</strong>: Report on auto-close exceptions</li>
+                            </ul>
+                        </section>
+
+                        <section id="monitoring">
+                            <h2>Monitoring Auto-Close</h2>
+                            
+                            <h3>1. Dashboard Metrics</h3>
+                            <ul>
+                                <li><strong>Auto-Closed Tickets</strong>: Number of tickets closed automatically</li>
+                                <li><strong>Warning Response Rate</strong>: Percentage of warnings that get responses</li>
+                                <li><strong>Average Closure Time</strong>: Average time before auto-close</li>
+                                <li><strong>Category Performance</strong>: Auto-close metrics by category</li>
+                            </ul>
+
+                            <h3>2. Logs and Reports</h3>
+                            <div class="code-block">
+                                <pre><code># View auto-close logs
+GET /api/admin/auto-close/logs
+
+# Generate auto-close report
+GET /api/admin/auto-close/report?start=2024-01-01&end=2024-01-31
+
+# Export auto-close data
+GET /api/admin/auto-close/export?format=csv</code></pre>
+                            </div>
+
+                            <h3>3. Alert Configuration</h3>
+                            <ul>
+                                <li><strong>High Closure Rate</strong>: Alert if too many tickets are auto-closed</li>
+                                <li><strong>Low Response Rate</strong>: Alert if warnings aren't getting responses</li>
+                                <li><strong>System Errors</strong>: Alert on auto-close system failures</li>
+                                <li><strong>Performance Issues</strong>: Alert on slow auto-close processing</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Auto-Close Not Working</h4>
+                                    <ul>
+                                        <li>Check if auto-close is enabled</li>
+                                        <li>Verify inactivity time settings</li>
+                                        <li>Check bot permissions</li>
+                                        <li>Review system logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Warnings Not Sending</h4>
+                                    <ul>
+                                        <li>Check warning time configuration</li>
+                                        <li>Verify bot can send messages</li>
+                                        <li>Check notification settings</li>
+                                        <li>Review warning message format</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Incorrect Closure Times</h4>
+                                    <ul>
+                                        <li>Check category-specific settings</li>
+                                        <li>Verify timezone configuration</li>
+                                        <li>Check exception rules</li>
+                                        <li>Review activity detection logic</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Missing Transcripts</h4>
+                                    <ul>
+                                        <li>Check transcript generation settings</li>
+                                        <li>Verify storage permissions</li>
+                                        <li>Check transcript channel configuration</li>
+                                        <li>Review transcript format settings</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Debug Commands</h3>
+                            <div class="code-block">
+                                <pre><code># Check auto-close status
+GET /api/admin/auto-close/status
+
+# Test auto-close for specific ticket
+POST /api/admin/auto-close/test
+{
+  "ticketId": "ticket-0001",
+  "categoryId": "general-support"
+}
+
+# View auto-close configuration
+GET /api/admin/auto-close/config
+
+# Manually trigger auto-close check
+POST /api/admin/auto-close/check</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Best Practices</h2>
+                            
+                            <h3>1. Timing Configuration</h3>
+                            <ul>
+                                <li>Start with longer times and adjust based on usage</li>
+                                <li>Consider your support team's response time</li>
+                                <li>Account for weekends and holidays</li>
+                                <li>Set different times for different categories</li>
+                            </ul>
+
+                            <h3>2. Warning Strategy</h3>
+                            <ul>
+                                <li>Send warnings at least 24 hours before closure</li>
+                                <li>Use clear, friendly warning messages</li>
+                                <li>Include information about reopening tickets</li>
+                                <li>Mention users to ensure they see the warning</li>
+                            </ul>
+
+                            <h3>3. Exception Handling</h3>
+                                <li>Set up exceptions for VIP users</li>
+                                <li>Never auto-close staff tickets</li>
+                                <li>Consider business hours in timing</li>
+                                <li>Allow manual extension of auto-close</li>
+                            </ul>
+
+                            <h3>4. Monitoring and Optimization</h3>
+                            <ul>
+                                <li>Regularly review auto-close metrics</li>
+                                <li>Adjust settings based on user feedback</li>
+                                <li>Monitor warning response rates</li>
+                                <li>Optimize settings for your specific use case</li>
+                            </ul>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After configuring auto-close:</p>
+                            <ol>
+                                <li><strong><a href="dashboard.html">Set Up Dashboard</a></strong> - Configure monitoring and analytics</li>
+                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Track auto-close performance</li>
+                                <li><strong><a href="user-management.html">Train Staff</a></strong> - Educate staff on auto-close system</li>
+                                <li><strong><a href="categories.html">Optimize Categories</a></strong> - Fine-tune category-specific settings</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

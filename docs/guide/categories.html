@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Categories - Ticket System Documentation</title>
+    <meta name="description" content="Ticket categories configuration for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item active">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Ticket Categories</h1>
+                            <p class="article-description">Complete guide to creating and managing ticket categories</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Categories Overview</h2>
+                            <p>Ticket categories allow you to organize different types of support requests. This guide covers:</p>
+                            <ul>
+                                <li>Creating and configuring categories</li>
+                                <li>Setting up category-specific permissions</li>
+                                <li>Customizing category appearance</li>
+                                <li>Managing category workflows</li>
+                                <li>Advanced category features</li>
+                            </ul>
+                        </section>
+
+                        <section id="creating-categories">
+                            <h2>Creating Categories</h2>
+                            
+                            <h3>1. Access Category Management</h3>
+                            <ol>
+                                <li>Log into your dashboard</li>
+                                <li>Select your Discord server</li>
+                                <li>Navigate to "Ticket Categories"</li>
+                                <li>Click "Create Category"</li>
+                            </ol>
+
+                            <h3>2. Basic Category Settings</h3>
+                            <div class="setup-form">
+                                <h4>General Information</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: Descriptive name (e.g., "General Support")</li>
+                                    <li><strong>Description</strong>: Brief description of the category</li>
+                                    <li><strong>Emoji</strong>: Visual identifier (e.g., 🎫, 🐛, 💰)</li>
+                                    <li><strong>Color</strong>: Category color for visual distinction</li>
+                                </ul>
+
+                                <h4>Channel Configuration</h4>
+                                <ul>
+                                    <li><strong>Channel</strong>: Discord channel where tickets will be created</li>
+                                    <li><strong>Button Text</strong>: Text displayed on the ticket button</li>
+                                    <li><strong>Button Style</strong>: Primary, Secondary, Success, Danger</li>
+                                </ul>
+                            </div>
+
+                            <h3>3. Permission Settings</h3>
+                            <div class="setup-form">
+                                <h4>Access Control</h4>
+                                <ul>
+                                    <li><strong>Required Roles</strong>: Roles needed to create tickets</li>
+                                    <li><strong>Blocked Roles</strong>: Roles prevented from creating tickets</li>
+                                    <li><strong>Staff Roles</strong>: Roles that can manage tickets</li>
+                                </ul>
+
+                                <h4>Visibility</h4>
+                                <ul>
+                                    <li><strong>Public</strong>: Visible to all users</li>
+                                    <li><strong>Private</strong>: Only visible to staff</li>
+                                    <li><strong>Hidden</strong>: Completely hidden from users</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="category-examples">
+                            <h2>Category Examples</h2>
+                            
+                            <h3>General Support</h3>
+                            <div class="category-example">
+                                <h4>Configuration</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: General Support</li>
+                                    <li><strong>Description</strong>: Get help with general questions and issues</li>
+                                    <li><strong>Emoji</strong>: 🎫</li>
+                                    <li><strong>Color</strong>: #5865F2 (Discord Blue)</li>
+                                    <li><strong>Channel</strong>: #support-tickets</li>
+                                    <li><strong>Required Roles</strong>: None</li>
+                                    <li><strong>Staff Roles</strong>: @Support, @Moderator</li>
+                                </ul>
+                            </div>
+
+                            <h3>Bug Reports</h3>
+                            <div class="category-example">
+                                <h4>Configuration</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: Bug Reports</li>
+                                    <li><strong>Description</strong>: Report bugs and technical issues</li>
+                                    <li><strong>Emoji</strong>: 🐛</li>
+                                    <li><strong>Color</strong>: #ED4245 (Red)</li>
+                                    <li><strong>Channel</strong>: #bug-reports</li>
+                                    <li><strong>Required Roles</strong>: @Tester, @Developer</li>
+                                    <li><strong>Staff Roles</strong>: @Developer, @Admin</li>
+                                </ul>
+                            </div>
+
+                            <h3>Premium Support</h3>
+                            <div class="category-example">
+                                <h4>Configuration</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: Premium Support</li>
+                                    <li><strong>Description</strong>: Priority support for premium users</li>
+                                    <li><strong>Emoji</strong>: 💎</li>
+                                    <li><strong>Color</strong>: #FFD700 (Gold)</li>
+                                    <li><strong>Channel</strong>: #premium-support</li>
+                                    <li><strong>Required Roles</strong>: @Premium, @VIP</li>
+                                    <li><strong>Staff Roles</strong>: @Senior Staff, @Admin</li>
+                                </ul>
+                            </div>
+
+                            <h3>Feature Requests</h3>
+                            <div class="category-example">
+                                <h4>Configuration</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: Feature Requests</li>
+                                    <li><strong>Description</strong>: Suggest new features and improvements</li>
+                                    <li><strong>Emoji</strong>: 💡</li>
+                                    <li><strong>Color</strong>: #57F287 (Green)</li>
+                                    <li><strong>Channel</strong>: #feature-requests</li>
+                                    <li><strong>Required Roles</strong>: None</li>
+                                    <li><strong>Staff Roles</strong>: @Developer, @Admin</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="advanced-settings">
+                            <h2>Advanced Category Settings</h2>
+                            
+                            <h3>1. Auto-Close Configuration</h3>
+                            <div class="setup-form">
+                                <h4>Inactivity Settings</h4>
+                                <ul>
+                                    <li><strong>Auto-Close Enabled</strong>: Enable/disable automatic closing</li>
+                                    <li><strong>Inactivity Time</strong>: Hours before auto-close (default: 72)</li>
+                                    <li><strong>Warning Time</strong>: Hours before warning (default: 24)</li>
+                                    <li><strong>Warning Message</strong>: Custom warning message</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Notification Settings</h3>
+                            <div class="setup-form">
+                                <h4>Staff Notifications</h4>
+                                <ul>
+                                    <li><strong>Staff Notifications</strong>: Notify staff of new tickets</li>
+                                    <li><strong>Log Channel</strong>: Channel for ticket logs</li>
+                                    <li><strong>Transcript Channel</strong>: Channel for transcripts</li>
+                                    <li><strong>Mention Staff</strong>: Mention staff roles in notifications</li>
+                                </ul>
+                            </div>
+
+                            <h3>3. Custom Fields</h3>
+                            <p>Add custom fields to ticket creation:</p>
+                            <ul>
+                                <li><strong>Text Fields</strong>: Short text inputs</li>
+                                <li><strong>Text Areas</strong>: Long text inputs</li>
+                                <li><strong>Dropdowns</strong>: Predefined options</li>
+                                <li><strong>Checkboxes</strong>: Multiple choice options</li>
+                            </ul>
+
+                            <h3>4. Workflow Automation</h3>
+                            <ul>
+                                <li><strong>Auto-Assign</strong>: Automatically assign tickets to staff</li>
+                                <li><strong>Escalation Rules</strong>: Escalate tickets based on criteria</li>
+                                <li><strong>Tagging</strong>: Auto-tag tickets based on content</li>
+                                <li><strong>Priority Assignment</strong>: Set priority based on user role</li>
+                            </ul>
+                        </section>
+
+                        <section id="category-management">
+                            <h2>Managing Categories</h2>
+                            
+                            <h3>1. Editing Categories</h3>
+                            <ol>
+                                <li>Go to "Ticket Categories" in the dashboard</li>
+                                <li>Click the edit icon next to the category</li>
+                                <li>Modify the settings as needed</li>
+                                <li>Click "Save Changes"</li>
+                            </ol>
+
+                            <h3>2. Reordering Categories</h3>
+                            <ul>
+                                <li>Drag and drop categories to reorder</li>
+                                <li>Order affects button placement in Discord</li>
+                                <li>Most important categories should be first</li>
+                                <li>Changes apply immediately</li>
+                            </ul>
+
+                            <h3>3. Disabling Categories</h3>
+                            <ul>
+                                <li>Temporarily disable categories without deleting</li>
+                                <li>Disabled categories don't show buttons</li>
+                                <li>Existing tickets remain active</li>
+                                <li>Can be re-enabled at any time</li>
+                            </ul>
+
+                            <h3>4. Deleting Categories</h3>
+                            <div class="warning-box">
+                                <p><strong>Warning:</strong> Deleting a category will remove all associated buttons and settings. Existing tickets will remain but new tickets cannot be created.</p>
+                            </div>
+                        </section>
+
+                        <section id="category-analytics">
+                            <h2>Category Analytics</h2>
+                            
+                            <h3>1. Performance Metrics</h3>
+                            <ul>
+                                <li><strong>Ticket Volume</strong>: Number of tickets created</li>
+                                <li><strong>Response Time</strong>: Average time to first response</li>
+                                <li><strong>Resolution Time</strong>: Average time to close</li>
+                                <li><strong>Staff Performance</strong>: Individual staff metrics</li>
+                            </ul>
+
+                            <h3>2. Category Comparison</h3>
+                            <ul>
+                                <li>Compare performance across categories</li>
+                                <li>Identify bottlenecks and issues</li>
+                                <li>Track category usage trends</li>
+                                <li>Optimize category configuration</li>
+                            </ul>
+
+                            <h3>3. Custom Reports</h3>
+                            <ul>
+                                <li>Generate category-specific reports</li>
+                                <li>Export data for analysis</li>
+                                <li>Set up automated reporting</li>
+                                <li>Track custom metrics</li>
+                            </ul>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Best Practices</h2>
+                            
+                            <h3>1. Category Design</h3>
+                            <ul>
+                                <li>Use clear, descriptive names</li>
+                                <li>Keep categories focused and specific</li>
+                                <li>Use appropriate emojis and colors</li>
+                                <li>Limit the number of categories (5-10 recommended)</li>
+                            </ul>
+
+                            <h3>2. Permission Strategy</h3>
+                            <ul>
+                                <li>Start with open categories and add restrictions as needed</li>
+                                <li>Use role-based access for specialized categories</li>
+                                <li>Regularly review and update permissions</li>
+                                <li>Document permission requirements</li>
+                            </ul>
+
+                            <h3>3. Workflow Optimization</h3>
+                            <ul>
+                                <li>Set appropriate auto-close times</li>
+                                <li>Configure escalation rules for urgent issues</li>
+                                <li>Use custom fields to gather necessary information</li>
+                                <li>Set up proper notification channels</li>
+                            </ul>
+
+                            <h3>4. Maintenance</h3>
+                            <ul>
+                                <li>Regularly review category performance</li>
+                                <li>Update categories based on usage patterns</li>
+                                <li>Clean up unused categories</li>
+                                <li>Monitor and optimize workflows</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Buttons Not Appearing</h4>
+                                    <ul>
+                                        <li>Check if category is enabled</li>
+                                        <li>Verify bot permissions in channel</li>
+                                        <li>Check category order and visibility</li>
+                                        <li>Refresh Discord client</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Permission Errors</h4>
+                                    <ul>
+                                        <li>Verify required roles are set correctly</li>
+                                        <li>Check if user has required roles</li>
+                                        <li>Review blocked roles configuration</li>
+                                        <li>Test with different user accounts</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Auto-Close Not Working</h4>
+                                    <ul>
+                                        <li>Check auto-close is enabled</li>
+                                        <li>Verify inactivity time settings</li>
+                                        <li>Check bot permissions</li>
+                                        <li>Review warning message configuration</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Notifications Not Sending</h4>
+                                    <ul>
+                                        <li>Verify notification channels exist</li>
+                                        <li>Check bot permissions in channels</li>
+                                        <li>Review staff role assignments</li>
+                                        <li>Test notification settings</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After setting up your categories:</p>
+                            <ol>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Set up automatic ticket management</li>
+                                <li><strong><a href="dashboard.html">Customize Dashboard</a></strong> - Configure the web interface</li>
+                                <li><strong><a href="analytics.html">Set Up Analytics</a></strong> - Track category performance</li>
+                                <li><strong><a href="user-management.html">Manage Staff</a></strong> - Assign and train support staff</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

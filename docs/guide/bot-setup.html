@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Setup - Ticket System Documentation</title>
+    <meta name="description" content="Discord bot setup guide for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item active">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Discord Bot Setup</h1>
+                            <p class="article-description">Complete guide to setting up your Discord bot for Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Bot Setup Overview</h2>
+                            <p>This guide covers everything you need to know about configuring your Discord bot for Ticket System, including:</p>
+                            <ul>
+                                <li>Creating and configuring the bot application</li>
+                                <li>Setting up proper permissions</li>
+                                <li>Configuring OAuth2 for authentication</li>
+                                <li>Testing bot functionality</li>
+                                <li>Troubleshooting common issues</li>
+                            </ul>
+                        </section>
+
+                        <section id="create-application">
+                            <h2>Create Discord Application</h2>
+                            
+                            <h3>1. Access Developer Portal</h3>
+                            <ol>
+                                <li>Go to the <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a></li>
+                                <li>Click "New Application"</li>
+                                <li>Enter a name for your application (e.g., "Ticket System Bot")</li>
+                                <li>Click "Create"</li>
+                            </ol>
+
+                            <h3>2. Configure Application Settings</h3>
+                            <div class="setup-form">
+                                <h4>General Information</h4>
+                                <ul>
+                                    <li><strong>Name</strong>: Ticket System Bot</li>
+                                    <li><strong>Description</strong>: Professional ticket management system</li>
+                                    <li><strong>Icon</strong>: Upload your bot icon (512x512 recommended)</li>
+                                </ul>
+
+                                <h4>Bot Configuration</h4>
+                                <ul>
+                                    <li><strong>Username</strong>: TicketSystem</li>
+                                    <li><strong>Public Bot</strong>: No (for private use)</li>
+                                    <li><strong>Requires OAuth2 Code Grant</strong>: Yes</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="configure-bot">
+                            <h2>Configure Bot Settings</h2>
+                            
+                            <h3>1. Bot Permissions</h3>
+                            <p>Navigate to the "Bot" section and configure the following permissions:</p>
+                            
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Required</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Send Messages</td>
+                                            <td>✅</td>
+                                            <td>Send ticket responses and notifications</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Threads</td>
+                                            <td>✅</td>
+                                            <td>Create and manage ticket threads</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Use Slash Commands</td>
+                                            <td>✅</td>
+                                            <td>Register and use slash commands</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attach Files</td>
+                                            <td>✅</td>
+                                            <td>Send transcripts and attachments</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Embed Links</td>
+                                            <td>✅</td>
+                                            <td>Send rich embeds with links</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Read Message History</td>
+                                            <td>✅</td>
+                                            <td>Access message history for transcripts</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Add Reactions</td>
+                                            <td>✅</td>
+                                            <td>Add reactions to messages</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Use External Emojis</td>
+                                            <td>✅</td>
+                                            <td>Use custom emojis in responses</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Messages</td>
+                                            <td>✅</td>
+                                            <td>Edit and delete messages when needed</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>2. Generate Bot Token</h3>
+                            <ol>
+                                <li>In the Bot section, click "Reset Token"</li>
+                                <li>Copy the generated token</li>
+                                <li>Store it securely (you'll need it for configuration)</li>
+                                <li>Never share this token publicly</li>
+                            </ol>
+
+                            <div class="warning-box">
+                                <p><strong>Security Warning:</strong> Keep your bot token secure. If compromised, reset it immediately and update your configuration.</p>
+                            </div>
+                        </section>
+
+                        <section id="oauth2-setup">
+                            <h2>OAuth2 Configuration</h2>
+                            
+                            <h3>1. Configure OAuth2 Settings</h3>
+                            <ol>
+                                <li>Navigate to "OAuth2" → "General"</li>
+                                <li>Copy the Client ID and Client Secret</li>
+                                <li>Add your redirect URI: <code>https://yourdomain.com/api/auth/callback/discord</code></li>
+                            </ol>
+
+                            <h3>2. Configure Scopes</h3>
+                            <p>Set the following scopes for OAuth2:</p>
+                            <ul>
+                                <li><strong>identify</strong> - Access user information</li>
+                                <li><strong>guilds</strong> - Access server information</li>
+                                <li><strong>guilds.join</strong> - Join servers (if needed)</li>
+                            </ul>
+
+                            <h3>3. Generate OAuth2 URL</h3>
+                            <p>Use this URL format for OAuth2:</p>
+                            <div class="code-block">
+                                <pre><code>https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands&redirect_uri=https%3A%2F%2Fyourdomain.com%2Fapi%2Fauth%2Fcallback%2Fdiscord&response_type=code</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="invite-bot">
+                            <h2>Invite Bot to Server</h2>
+                            
+                            <h3>1. Generate Invite Link</h3>
+                            <ol>
+                                <li>Go to "OAuth2" → "URL Generator"</li>
+                                <li>Select the following scopes:
+                                    <ul>
+                                        <li>bot</li>
+                                        <li>applications.commands</li>
+                                    </ul>
+                                </li>
+                                <li>Select the required permissions (as listed above)</li>
+                                <li>Copy the generated URL</li>
+                            </ol>
+
+                            <h3>2. Add Bot to Server</h3>
+                            <ol>
+                                <li>Open the generated invite URL</li>
+                                <li>Select your Discord server</li>
+                                <li>Ensure all permissions are checked</li>
+                                <li>Click "Authorize"</li>
+                                <li>Verify the bot appears in your server</li>
+                            </ol>
+
+                            <h3>3. Verify Bot Permissions</h3>
+                            <ul>
+                                <li>Check that the bot has the correct role permissions</li>
+                                <li>Verify the bot can see the channels it needs to access</li>
+                                <li>Test that the bot can send messages</li>
+                            </ul>
+                        </section>
+
+                        <section id="configure-webhook">
+                            <h2>Configure Webhook Integration</h2>
+                            
+                            <h3>1. Webhook URL</h3>
+                            <p>Set up the webhook URL for communication between the web panel and bot:</p>
+                            <div class="code-block">
+                                <pre><code># In your environment configuration
+BOT_WEBHOOK_URL=http://localhost:3001
+BOT_WEBHOOK_PORT=3001</code></pre>
+                            </div>
+
+                            <h3>2. Webhook Security</h3>
+                            <ul>
+                                <li>Generate a secure webhook secret</li>
+                                <li>Configure webhook signature verification</li>
+                                <li>Set up rate limiting for webhook endpoints</li>
+                                <li>Monitor webhook delivery status</li>
+                            </ul>
+
+                            <h3>3. Test Webhook Connection</h3>
+                            <div class="code-block">
+                                <pre><code># Test webhook connectivity
+curl -X POST http://localhost:3001/webhook/test \
+  -H "Content-Type: application/json" \
+  -H "X-Webhook-Signature: your-signature" \
+  -d '{"test": true}'</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="slash-commands">
+                            <h2>Slash Commands Setup</h2>
+                            
+                            <h3>1. Register Commands</h3>
+                            <p>Ticket System uses the following slash commands:</p>
+                            <ul>
+                                <li><code>/ticket</code> - Create a new ticket</li>
+                                <li><code>/close</code> - Close the current ticket</li>
+                                <li><code>/transcript</code> - Generate ticket transcript</li>
+                                <li><code>/add</code> - Add user to ticket</li>
+                                <li><code>/remove</code> - Remove user from ticket</li>
+                            </ul>
+
+                            <h3>2. Command Permissions</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Command</th>
+                                            <th>Who Can Use</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>/ticket</td>
+                                            <td>Anyone</td>
+                                            <td>Create a new support ticket</td>
+                                        </tr>
+                                        <tr>
+                                            <td>/close</td>
+                                            <td>Staff</td>
+                                            <td>Close the current ticket</td>
+                                        </tr>
+                                        <tr>
+                                            <td>/transcript</td>
+                                            <td>Staff</td>
+                                            <td>Generate ticket transcript</td>
+                                        </tr>
+                                        <tr>
+                                            <td>/add</td>
+                                            <td>Staff</td>
+                                            <td>Add user to ticket</td>
+                                        </tr>
+                                        <tr>
+                                            <td>/remove</td>
+                                            <td>Staff</td>
+                                            <td>Remove user from ticket</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="testing">
+                            <h2>Testing Bot Functionality</h2>
+                            
+                            <h3>1. Basic Connectivity Test</h3>
+                            <div class="code-block">
+                                <pre><code># Check if bot is online
+# The bot should appear online in your Discord server
+
+# Test bot response
+# Send a message in a channel the bot can see</code></pre>
+                            </div>
+
+                            <h3>2. Permission Test</h3>
+                            <ul>
+                                <li>Test creating a ticket thread</li>
+                                <li>Verify the bot can send messages in the thread</li>
+                                <li>Test slash command functionality</li>
+                                <li>Verify webhook communication</li>
+                            </ul>
+
+                            <h3>3. Integration Test</h3>
+                            <ol>
+                                <li>Create a ticket through the web panel</li>
+                                <li>Verify the bot creates the thread</li>
+                                <li>Send messages in the thread</li>
+                                <li>Test closing the ticket</li>
+                                <li>Verify transcript generation</li>
+                            </ol>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Bot Not Responding</h4>
+                                    <ul>
+                                        <li>Check if bot is online</li>
+                                        <li>Verify token is correct</li>
+                                        <li>Check bot permissions</li>
+                                        <li>Review application logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Permission Errors</h4>
+                                    <ul>
+                                        <li>Verify bot role permissions</li>
+                                        <li>Check channel permissions</li>
+                                        <li>Ensure bot has required scopes</li>
+                                        <li>Re-invite bot with correct permissions</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Webhook Failures</h4>
+                                    <ul>
+                                        <li>Check webhook URL configuration</li>
+                                        <li>Verify network connectivity</li>
+                                        <li>Check webhook signature</li>
+                                        <li>Review webhook logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>OAuth2 Issues</h4>
+                                    <ul>
+                                        <li>Verify redirect URI matches exactly</li>
+                                        <li>Check client ID and secret</li>
+                                        <li>Ensure scopes are correct</li>
+                                        <li>Clear browser cache and cookies</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Debug Commands</h3>
+                            <div class="code-block">
+                                <pre><code># Check bot status
+curl -X GET http://localhost:3001/health
+
+# Check webhook status
+curl -X GET http://localhost:3001/webhook/status
+
+# View bot logs
+pm2 logs discord-ticket-bot
+
+# Test OAuth2 flow
+curl -X GET https://yourdomain.com/api/auth/signin</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="security">
+                            <h2>Security Best Practices</h2>
+                            
+                            <h3>1. Token Security</h3>
+                            <ul>
+                                <li>Store tokens in environment variables</li>
+                                <li>Never commit tokens to version control</li>
+                                <li>Rotate tokens regularly</li>
+                                <li>Use different tokens for development and production</li>
+                            </ul>
+
+                            <h3>2. Permission Principle</h3>
+                            <ul>
+                                <li>Grant minimum required permissions</li>
+                                <li>Regularly audit bot permissions</li>
+                                <li>Remove unused permissions</li>
+                                <li>Monitor bot activity</li>
+                            </ul>
+
+                            <h3>3. Network Security</h3>
+                            <ul>
+                                <li>Use HTTPS for all webhook communications</li>
+                                <li>Implement webhook signature verification</li>
+                                <li>Set up rate limiting</li>
+                                <li>Monitor for suspicious activity</li>
+                            </ul>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After setting up your Discord bot:</p>
+                            <ol>
+                                <li><strong><a href="permissions.html">Configure Permissions</a></strong> - Set up role-based access</li>
+                                <li><strong><a href="categories.html">Create Categories</a></strong> - Set up ticket categories</li>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Set up automatic ticket management</li>
+                                <li><strong><a href="dashboard.html">Set Up Dashboard</a></strong> - Configure the web interface</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

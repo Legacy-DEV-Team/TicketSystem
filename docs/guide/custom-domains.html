@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Domains - Ticket System Documentation</title>
+    <meta name="description" content="Custom domains configuration for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item active">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Custom Domains</h1>
+                            <p class="article-description">Complete guide to setting up custom domains for Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Custom Domains Overview</h2>
+                            <p>Custom domains allow you to brand your Ticket System with your own domain name. This guide covers:</p>
+                            <ul>
+                                <li>Understanding custom domain benefits</li>
+                                <li>Setting up DNS configuration</li>
+                                <li>Configuring SSL certificates</li>
+                                <li>Branding and customization</li>
+                                <li>Multi-domain management</li>
+                            </ul>
+                        </section>
+
+                        <section id="benefits">
+                            <h2>Benefits of Custom Domains</h2>
+                            
+                            <h3>1. Professional Branding</h3>
+                            <ul>
+                                <li>Use your own domain name</li>
+                                <li>Maintain brand consistency</li>
+                                <li>Build customer trust</li>
+                                <li>Professional appearance</li>
+                            </ul>
+
+                            <h3>2. SEO and Marketing</h3>
+                            <ul>
+                                <li>Better search engine rankings</li>
+                                <li>Easier to remember URLs</li>
+                                <li>Improved marketing campaigns</li>
+                                <li>Brand recognition</li>
+                            </ul>
+
+                            <h3>3. Security and Trust</h3>
+                            <ul>
+                                <li>SSL certificate branding</li>
+                                <li>Enhanced security perception</li>
+                                <li>Reduced phishing risk</li>
+                                <li>Professional security indicators</li>
+                            </ul>
+
+                            <h3>4. Enterprise Features</h3>
+                            <ul>
+                                <li>Multi-domain support</li>
+                                <li>White-label solutions</li>
+                                <li>Custom branding options</li>
+                                <li>Advanced security features</li>
+                            </ul>
+                        </section>
+
+                        <section id="dns-configuration">
+                            <h2>DNS Configuration</h2>
+                            
+                            <h3>1. Domain Setup</h3>
+                            <ol>
+                                <li>Purchase a domain from a registrar (GoDaddy, Namecheap, etc.)</li>
+                                <li>Access your domain's DNS management panel</li>
+                                <li>Add the required DNS records</li>
+                                <li>Wait for DNS propagation (24-48 hours)</li>
+                            </ol>
+
+                            <h3>2. Required DNS Records</h3>
+                            <div class="dns-records">
+                                <div class="record-type">
+                                    <h4>A Record</h4>
+                                    <ul>
+                                        <li><strong>Type</strong>: A</li>
+                                        <li><strong>Name</strong>: @ (or your subdomain)</li>
+                                        <li><strong>Value</strong>: Your server IP address</li>
+                                        <li><strong>TTL</strong>: 3600 (or default)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="record-type">
+                                    <h4>CNAME Record</h4>
+                                    <ul>
+                                        <li><strong>Type</strong>: CNAME</li>
+                                        <li><strong>Name</strong>: www</li>
+                                        <li><strong>Value</strong>: yourdomain.com</li>
+                                        <li><strong>TTL</strong>: 3600 (or default)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="record-type">
+                                    <h4>MX Record (Optional)</h4>
+                                    <ul>
+                                        <li><strong>Type</strong>: MX</li>
+                                        <li><strong>Name</strong>: @</li>
+                                        <li><strong>Value</strong>: mail.yourdomain.com</li>
+                                        <li><strong>Priority</strong>: 10</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>3. Example DNS Configuration</h3>
+                            <div class="code-block">
+                                <pre><code># Example DNS records for tickets.yourcompany.com
+
+# A Record - Main domain
+Type: A
+Name: @
+Value: 203.0.113.1
+TTL: 3600
+
+# CNAME Record - www subdomain
+Type: CNAME
+Name: www
+Value: tickets.yourcompany.com
+TTL: 3600
+
+# A Record - API subdomain (if needed)
+Type: A
+Name: api
+Value: 203.0.113.1
+TTL: 3600</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="ssl-certificates">
+                            <h2>SSL Certificate Configuration</h2>
+                            
+                            <h3>1. Let's Encrypt (Recommended)</h3>
+                            <div class="ssl-setup">
+                                <h4>Automatic Setup</h4>
+                                <ol>
+                                    <li>Install Certbot on your server</li>
+                                    <li>Run: <code>certbot --nginx -d yourdomain.com</code></li>
+                                    <li>Follow the prompts</li>
+                                    <li>Test the certificate</li>
+                                </ol>
+                            </div>
+
+                            <h3>2. Commercial Certificates</h3>
+                            <ul>
+                                <li><strong>Wildcard Certificates</strong>: Cover all subdomains</li>
+                                <li><strong>Multi-Domain Certificates</strong>: Cover multiple domains</li>
+                                <li><strong>Extended Validation</strong>: Enhanced security indicators</li>
+                                <li><strong>Custom Branding</strong>: Your company name in certificate</li>
+                            </ul>
+
+                            <h3>3. Certificate Management</h3>
+                            <ul>
+                                <li><strong>Auto-Renewal</strong>: Automatic certificate renewal</li>
+                                <li><strong>Monitoring</strong>: Certificate expiration alerts</li>
+                                <li><strong>Backup</strong>: Certificate backup procedures</li>
+                                <li><strong>Rollover</strong>: Seamless certificate updates</li>
+                            </ul>
+                        </section>
+
+                        <section id="web-server-configuration">
+                            <h2>Web Server Configuration</h2>
+                            
+                            <h3>1. NGINX Configuration</h3>
+                            <div class="code-block">
+                                <pre><code># /etc/nginx/sites-available/yourdomain.com
+server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name yourdomain.com www.yourdomain.com;
+
+    # SSL Configuration
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512;
+    ssl_prefer_server_ciphers off;
+
+    # Security Headers
+    add_header X-Frame-Options DENY;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+
+    # Main application
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Bot webhook endpoint
+    location /webhook/ {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }</code></pre>
+                            </div>
+
+                            <h3>2. Apache Configuration</h3>
+                            <div class="code-block">
+                                <pre><code>&lt;VirtualHost *:80&gt;
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
+    Redirect permanent / https://yourdomain.com/
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
+    
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/yourdomain.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/yourdomain.com/privkey.pem
+    
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:3000/
+    ProxyPassReverse / http://localhost:3000/
+    
+    ProxyPass /webhook/ http://localhost:3001/webhook/
+    ProxyPassReverse /webhook/ http://localhost:3001/webhook/
+&lt;/VirtualHost&gt;</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="branding-customization">
+                            <h2>Branding and Customization</h2>
+                            
+                            <h3>1. Logo and Branding</h3>
+                            <ul>
+                                <li><strong>Logo Upload</strong>: Add your company logo</li>
+                                <li><strong>Favicon</strong>: Custom browser icon</li>
+                                <li><strong>Color Scheme</strong>: Match your brand colors</li>
+                                <li><strong>Typography</strong>: Use your brand fonts</li>
+                            </ul>
+
+                            <h3>2. Content Customization</h3>
+                            <ul>
+                                <li><strong>Page Titles</strong>: Custom page titles</li>
+                                <li><strong>Meta Descriptions</strong>: SEO-optimized descriptions</li>
+                                <li><strong>Custom Pages</strong>: Add your own content</li>
+                                <li><strong>Footer Information</strong>: Company details and links</li>
+                            </ul>
+
+                            <h3>3. Email Branding</h3>
+                            <ul>
+                                <li><strong>Email Templates</strong>: Custom email designs</li>
+                                <li><strong>Sender Information</strong>: Your company details</li>
+                                <li><strong>Email Domain</strong>: Use your domain for emails</li>
+                                <li><strong>Email Signatures</strong>: Professional signatures</li>
+                            </ul>
+
+                            <h3>4. Advanced Customization</h3>
+                            <ul>
+                                <li><strong>Custom CSS</strong>: Advanced styling options</li>
+                                <li><strong>JavaScript</strong>: Custom functionality</li>
+                                <li><strong>API Integration</strong>: Connect with your systems</li>
+                                <li><strong>Custom Domains</strong>: Multiple domain support</li>
+                            </ul>
+                        </section>
+
+                        <section id="multi-domain-setup">
+                            <h2>Multi-Domain Setup</h2>
+                            
+                            <h3>1. Enterprise Features</h3>
+                            <div class="enterprise-features">
+                                <div class="feature-card">
+                                    <h4>Multiple Domains</h4>
+                                    <ul>
+                                        <li>Support multiple domains</li>
+                                        <li>Domain-specific branding</li>
+                                        <li>Separate configurations</li>
+                                        <li>Domain isolation</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>White-Label Solutions</h4>
+                                    <ul>
+                                        <li>Complete brand removal</li>
+                                        <li>Custom domain branding</li>
+                                        <li>White-label support</li>
+                                        <li>Custom documentation</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="feature-card">
+                                    <h4>Advanced Security</h4>
+                                    <ul>
+                                        <li>Domain-specific SSL</li>
+                                        <li>Custom security policies</li>
+                                        <li>Advanced monitoring</li>
+                                        <li>Compliance features</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Domain Management</h3>
+                            <ol>
+                                <li>Add new domains in the dashboard</li>
+                                <li>Configure DNS records for each domain</li>
+                                <li>Set up SSL certificates</li>
+                                <li>Configure domain-specific settings</li>
+                                <li>Test domain functionality</li>
+                                <li>Monitor domain health</li>
+                            </ol>
+
+                            <h3>3. Domain Isolation</h3>
+                            <ul>
+                                <li><strong>Separate Databases</strong>: Isolated data per domain</li>
+                                <li><strong>Custom Configurations</strong>: Domain-specific settings</li>
+                                <li><strong>Independent Analytics</strong>: Separate reporting</li>
+                                <li><strong>Custom Integrations</strong>: Domain-specific APIs</li>
+                            </ul>
+                        </section>
+
+                        <section id="monitoring-maintenance">
+                            <h2>Monitoring and Maintenance</h2>
+                            
+                            <h3>1. Domain Health Monitoring</h3>
+                            <ul>
+                                <li><strong>SSL Certificate Monitoring</strong>: Expiration alerts</li>
+                                <li><strong>DNS Health Checks</strong>: Record validation</li>
+                                <li><strong>Uptime Monitoring</strong>: Availability tracking</li>
+                                <li><strong>Performance Monitoring</strong>: Response time tracking</li>
+                            </ul>
+
+                            <h3>2. Security Monitoring</h3>
+                            <ul>
+                                <li><strong>SSL Certificate Validation</strong>: Certificate health checks</li>
+                                <li><strong>Security Headers</strong>: Header validation</li>
+                                <li><strong>Vulnerability Scanning</strong>: Security assessments</li>
+                                <li><strong>Access Logging</strong>: Traffic monitoring</li>
+                            </ul>
+
+                            <h3>3. Backup and Recovery</h3>
+                            <ul>
+                                <li><strong>Certificate Backups</strong>: SSL certificate backups</li>
+                                <li><strong>Configuration Backups</strong>: Server config backups</li>
+                                <li><strong>DNS Backups</strong>: DNS record backups</li>
+                                <li><strong>Recovery Procedures</strong>: Disaster recovery plans</li>
+                            </ul>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>DNS Issues</h4>
+                                    <ul>
+                                        <li>Check DNS record configuration</li>
+                                        <li>Verify DNS propagation</li>
+                                        <li>Test DNS resolution</li>
+                                        <li>Contact DNS provider</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>SSL Certificate Issues</h4>
+                                    <ul>
+                                        <li>Check certificate validity</li>
+                                        <li>Verify certificate installation</li>
+                                        <li>Test SSL configuration</li>
+                                        <li>Renew expired certificates</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Web Server Issues</h4>
+                                    <ul>
+                                        <li>Check web server configuration</li>
+                                        <li>Verify port accessibility</li>
+                                        <li>Test server connectivity</li>
+                                        <li>Review error logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Branding Issues</h4>
+                                    <ul>
+                                        <li>Check logo file formats</li>
+                                        <li>Verify image dimensions</li>
+                                        <li>Test color compatibility</li>
+                                        <li>Clear browser cache</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Debug Commands</h3>
+                            <div class="code-block">
+                                <pre><code># Check DNS resolution
+nslookup yourdomain.com
+dig yourdomain.com
+
+# Check SSL certificate
+openssl s_client -connect yourdomain.com:443 -servername yourdomain.com
+
+# Test web server
+curl -I https://yourdomain.com
+curl -I http://yourdomain.com
+
+# Check NGINX configuration
+nginx -t
+systemctl status nginx
+
+# Check SSL certificate expiration
+certbot certificates</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Best Practices</h2>
+                            
+                            <h3>1. Domain Selection</h3>
+                            <ul>
+                                <li>Choose a memorable domain name</li>
+                                <li>Use HTTPS by default</li>
+                                <li>Keep domain names short</li>
+                                <li>Consider internationalization</li>
+                            </ul>
+
+                            <h3>2. Security Configuration</h3>
+                            <ul>
+                                <li>Use strong SSL certificates</li>
+                                <li>Implement security headers</li>
+                                <li>Regular security audits</li>
+                                <li>Monitor for vulnerabilities</li>
+                            </ul>
+
+                            <h3>3. Performance Optimization</h3>
+                                <li>Use CDN for static assets</li>
+                                <li>Optimize image delivery</li>
+                                <li>Implement caching strategies</li>
+                                <li>Monitor performance metrics</li>
+                            </ul>
+
+                            <h3>4. Maintenance Procedures</h3>
+                            <ul>
+                                <li>Regular certificate renewal</li>
+                                <li>DNS record validation</li>
+                                <li>Backup procedures</li>
+                                <li>Update security patches</li>
+                            </ul>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After setting up custom domains:</p>
+                            <ol>
+                                <li><strong><a href="dashboard.html">Customize Dashboard</a></strong> - Configure branding and appearance</li>
+                                <li><strong><a href="analytics.html">Set Up Analytics</a></strong> - Track domain performance</li>
+                                <li><strong><a href="user-management.html">Configure Staff Access</a></strong> - Set up domain-specific permissions</li>
+                                <li><strong><a href="categories.html">Optimize Categories</a></strong> - Configure domain-specific categories</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permissions & Roles - Ticket System Documentation</title>
+    <meta name="description" content="Permissions and roles configuration for Ticket System">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" href="../public/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="docs-layout">
+                <!-- Sidebar -->
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav-menu">
+                        <div class="nav-section">
+                            <h4>Getting Started</h4>
+                            <ul>
+                                <li><a href="getting-started.html" class="nav-item">Introduction</a></li>
+                                <li><a href="installation.html" class="nav-item">Installation</a></li>
+                                <li><a href="configuration.html" class="nav-item">Configuration</a></li>
+                                <li><a href="first-setup.html" class="nav-item">First Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Bot Configuration</h4>
+                            <ul>
+                                <li><a href="bot-setup.html" class="nav-item">Discord Bot Setup</a></li>
+                                <li><a href="permissions.html" class="nav-item active">Permissions & Roles</a></li>
+                                <li><a href="categories.html" class="nav-item">Ticket Categories</a></li>
+                                <li><a href="auto-close.html" class="nav-item">Auto-Close System</a></li>
+                            </ul>
+                        </div>
+                        <div class="nav-section">
+                            <h4>Web Panel</h4>
+                            <ul>
+                                <li><a href="dashboard.html" class="nav-item">Dashboard Overview</a></li>
+                                <li><a href="user-management.html" class="nav-item">User Management</a></li>
+                                <li><a href="analytics.html" class="nav-item">Analytics & Reports</a></li>
+                                <li><a href="custom-domains.html" class="nav-item">Custom Domains</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="docs-content">
+                    <article class="docs-article">
+                        <header class="article-header">
+                            <h1>Permissions & Roles</h1>
+                            <p class="article-description">Complete guide to configuring permissions and roles for Ticket System</p>
+                        </header>
+
+                        <section id="overview">
+                            <h2>Permissions Overview</h2>
+                            <p>Ticket System uses a comprehensive permission system that integrates with Discord's role system. This guide covers:</p>
+                            <ul>
+                                <li>Understanding the permission hierarchy</li>
+                                <li>Setting up roles and permissions</li>
+                                <li>Configuring category-specific permissions</li>
+                                <li>Managing staff access levels</li>
+                                <li>Security best practices</li>
+                            </ul>
+                        </section>
+
+                        <section id="permission-hierarchy">
+                            <h2>Permission Hierarchy</h2>
+                            
+                            <h3>System-Level Permissions</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Description</th>
+                                            <th>Default Roles</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>System Administrator</td>
+                                            <td>Full system access, can manage all settings</td>
+                                            <td>Server Owner</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Category Manager</td>
+                                            <td>Can create and manage ticket categories</td>
+                                            <td>Administrator</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Staff Manager</td>
+                                            <td>Can assign staff to categories</td>
+                                            <td>Administrator</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Analytics Viewer</td>
+                                            <td>Can view analytics and reports</td>
+                                            <td>Moderator</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>Ticket-Level Permissions</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Description</th>
+                                            <th>Required Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Create Tickets</td>
+                                            <td>Can create new tickets</td>
+                                            <td>Any user (configurable)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>View Tickets</td>
+                                            <td>Can see and access tickets</td>
+                                            <td>Support Staff</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Respond to Tickets</td>
+                                            <td>Can send messages in tickets</td>
+                                            <td>Support Staff</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Close Tickets</td>
+                                            <td>Can close tickets</td>
+                                            <td>Senior Staff</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delete Tickets</td>
+                                            <td>Can permanently delete tickets</td>
+                                            <td>Administrator</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Generate Transcripts</td>
+                                            <td>Can create ticket transcripts</td>
+                                            <td>Support Staff</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Add Users</td>
+                                            <td>Can add users to tickets</td>
+                                            <td>Support Staff</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Remove Users</td>
+                                            <td>Can remove users from tickets</td>
+                                            <td>Senior Staff</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="role-setup">
+                            <h2>Setting Up Roles</h2>
+                            
+                            <h3>1. Create Base Roles</h3>
+                            <p>In your Discord server, create the following roles in order of hierarchy:</p>
+                            
+                            <div class="role-hierarchy">
+                                <div class="role-level">
+                                    <h4>@Administrator</h4>
+                                    <ul>
+                                        <li>Full system access</li>
+                                        <li>Can manage all categories</li>
+                                        <li>Can delete tickets</li>
+                                        <li>Can manage staff</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>@Senior Staff</h4>
+                                    <ul>
+                                        <li>Can close tickets</li>
+                                        <li>Can remove users</li>
+                                        <li>Can manage transcripts</li>
+                                        <li>Can view analytics</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>@Support Staff</h4>
+                                    <ul>
+                                        <li>Can view tickets</li>
+                                        <li>Can respond to tickets</li>
+                                        <li>Can add users</li>
+                                        <li>Can generate transcripts</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-level">
+                                    <h4>@User</h4>
+                                    <ul>
+                                        <li>Can create tickets</li>
+                                        <li>Can view own tickets</li>
+                                        <li>Basic access only</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Configure Role Colors</h3>
+                            <ul>
+                                <li><strong>Administrator</strong>: Red (#FF0000)</li>
+                                <li><strong>Senior Staff</strong>: Orange (#FF8C00)</li>
+                                <li><strong>Support Staff</strong>: Blue (#5865F2)</li>
+                                <li><strong>User</strong>: Default (no color)</li>
+                            </ul>
+
+                            <h3>3. Set Role Permissions</h3>
+                            <div class="code-block">
+                                <pre><code># Discord Server Settings → Roles
+# Configure each role with appropriate permissions
+
+# Administrator Role
+- Manage Server: ✅
+- Manage Roles: ✅
+- Manage Channels: ✅
+- Kick Members: ✅
+- Ban Members: ✅
+
+# Senior Staff Role
+- Manage Messages: ✅
+- Manage Threads: ✅
+- Send Messages: ✅
+- Read Message History: ✅
+
+# Support Staff Role
+- Send Messages: ✅
+- Read Message History: ✅
+- Attach Files: ✅
+- Embed Links: ✅</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="category-permissions">
+                            <h2>Category-Specific Permissions</h2>
+                            
+                            <h3>1. Required Roles</h3>
+                            <p>Configure which roles are required to create tickets in each category:</p>
+                            <ul>
+                                <li><strong>None</strong>: Anyone can create tickets</li>
+                                <li><strong>Specific Role</strong>: Only users with that role can create tickets</li>
+                                <li><strong>Multiple Roles</strong>: Users need any of the specified roles</li>
+                            </ul>
+
+                            <h3>2. Blocked Roles</h3>
+                            <p>Configure which roles are blocked from creating tickets:</p>
+                            <ul>
+                                <li><strong>Banned Users</strong>: Prevent banned users from creating tickets</li>
+                                <li><strong>Muted Users</strong>: Prevent muted users from creating tickets</li>
+                                <li><strong>Custom Roles</strong>: Block specific roles as needed</li>
+                            </ul>
+
+                            <h3>3. Staff Roles</h3>
+                            <p>Configure which roles can manage tickets in each category:</p>
+                            <ul>
+                                <li><strong>Support Staff</strong>: Can view and respond to tickets</li>
+                                <li><strong>Senior Staff</strong>: Can close and manage tickets</li>
+                                <li><strong>Administrators</strong>: Full access to all tickets</li>
+                            </ul>
+
+                            <h3>4. Example Configuration</h3>
+                            <div class="code-block">
+                                <pre><code># General Support Category
+requiredRoles: []
+blockedRoles: ["@Banned", "@Muted"]
+staffRoles: ["@Support Staff", "@Senior Staff", "@Administrator"]
+
+# VIP Support Category
+requiredRoles: ["@VIP", "@Premium"]
+blockedRoles: ["@Banned"]
+staffRoles: ["@Senior Staff", "@Administrator"]
+
+# Bug Reports Category
+requiredRoles: ["@Tester", "@Developer"]
+blockedRoles: ["@Banned"]
+staffRoles: ["@Developer", "@Administrator"]</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="dashboard-permissions">
+                            <h2>Dashboard Permissions</h2>
+                            
+                            <h3>1. Admin Panel Access</h3>
+                            <div class="permission-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Feature</th>
+                                            <th>Administrator</th>
+                                            <th>Senior Staff</th>
+                                            <th>Support Staff</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>View Dashboard</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Categories</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>View Analytics</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Staff</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>System Settings</td>
+                                            <td>✅</td>
+                                            <td>❌</td>
+                                            <td>❌</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>2. Analytics Permissions</h3>
+                            <ul>
+                                <li><strong>Basic Analytics</strong>: Support Staff can view their own performance</li>
+                                <li><strong>Category Analytics</strong>: Senior Staff can view category performance</li>
+                                <li><strong>System Analytics</strong>: Administrators can view all analytics</li>
+                            </ul>
+                        </section>
+
+                        <section id="security-considerations">
+                            <h2>Security Considerations</h2>
+                            
+                            <h3>1. Principle of Least Privilege</h3>
+                            <ul>
+                                <li>Grant minimum permissions required for each role</li>
+                                <li>Regularly audit role permissions</li>
+                                <li>Remove unused permissions</li>
+                                <li>Monitor permission changes</li>
+                            </ul>
+
+                            <h3>2. Role Hierarchy</h3>
+                            <ul>
+                                <li>Use Discord's role hierarchy to your advantage</li>
+                                <li>Higher roles inherit permissions from lower roles</li>
+                                <li>Be careful with role ordering</li>
+                                <li>Test permissions thoroughly</li>
+                            </ul>
+
+                            <h3>3. Audit Logging</h3>
+                            <ul>
+                                <li>Enable Discord audit logs</li>
+                                <li>Monitor permission changes</li>
+                                <li>Track ticket access</li>
+                                <li>Review logs regularly</li>
+                            </ul>
+
+                            <h3>4. Access Control</h3>
+                            <ul>
+                                <li>Limit admin access to trusted users only</li>
+                                <li>Use temporary permissions when possible</li>
+                                <li>Implement session timeouts</li>
+                                <li>Require 2FA for admin accounts</li>
+                            </ul>
+                        </section>
+
+                        <section id="testing-permissions">
+                            <h2>Testing Permissions</h2>
+                            
+                            <h3>1. Permission Test Checklist</h3>
+                            <div class="test-checklist">
+                                <h4>Create Ticket Tests</h4>
+                                <ul>
+                                    <li>✅ Users with required roles can create tickets</li>
+                                    <li>✅ Users without required roles cannot create tickets</li>
+                                    <li>✅ Blocked users cannot create tickets</li>
+                                    <li>✅ Error messages are clear and helpful</li>
+                                </ul>
+
+                                <h4>Ticket Management Tests</h4>
+                                <ul>
+                                    <li>✅ Support staff can view tickets</li>
+                                    <li>✅ Support staff can respond to tickets</li>
+                                    <li>✅ Senior staff can close tickets</li>
+                                    <li>✅ Administrators can delete tickets</li>
+                                </ul>
+
+                                <h4>Dashboard Access Tests</h4>
+                                <ul>
+                                    <li>✅ Users can access appropriate dashboard sections</li>
+                                    <li>✅ Users cannot access restricted sections</li>
+                                    <li>✅ Analytics are filtered by permission level</li>
+                                    <li>✅ Error messages are shown for unauthorized access</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Automated Testing</h3>
+                            <div class="code-block">
+                                <pre><code># Run permission tests
+npm run test:permissions
+
+# Test specific scenarios
+npm run test:permissions -- --category=general-support
+npm run test:permissions -- --role=support-staff</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="troubleshooting">
+                            <h2>Troubleshooting</h2>
+                            
+                            <h3>Common Permission Issues</h3>
+                            <div class="troubleshooting-grid">
+                                <div class="issue-card">
+                                    <h4>Users Can't Create Tickets</h4>
+                                    <ul>
+                                        <li>Check required roles configuration</li>
+                                        <li>Verify user has the required role</li>
+                                        <li>Check if user is blocked</li>
+                                        <li>Review category settings</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Staff Can't Access Tickets</h4>
+                                    <ul>
+                                        <li>Verify staff role assignment</li>
+                                        <li>Check category staff configuration</li>
+                                        <li>Ensure role hierarchy is correct</li>
+                                        <li>Test with different staff members</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Dashboard Access Issues</h4>
+                                    <ul>
+                                        <li>Check Discord OAuth2 permissions</li>
+                                        <li>Verify user has required server roles</li>
+                                        <li>Clear browser cache and cookies</li>
+                                        <li>Check authentication logs</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Permission Inheritance</h4>
+                                    <ul>
+                                        <li>Check Discord role hierarchy</li>
+                                        <li>Verify role ordering in server settings</li>
+                                        <li>Test with different role combinations</li>
+                                        <li>Review permission inheritance logic</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Debug Commands</h3>
+                            <div class="code-block">
+                                <pre><code># Check user permissions
+/ticket permissions @username
+
+# List category permissions
+/ticket categories
+
+# Test permission system
+npm run debug:permissions -- --user=@username --category=general</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="best-practices">
+                            <h2>Best Practices</h2>
+                            
+                            <h3>1. Role Design</h3>
+                            <ul>
+                                <li>Use descriptive role names</li>
+                                <li>Keep roles focused and specific</li>
+                                <li>Document role purposes</li>
+                                <li>Regularly review and clean up roles</li>
+                            </ul>
+
+                            <h3>2. Permission Management</h3>
+                            <ul>
+                                <li>Start with minimal permissions</li>
+                                <li>Add permissions as needed</li>
+                                <li>Document permission changes</li>
+                                <li>Test permissions thoroughly</li>
+                            </ul>
+
+                            <h3>3. Security Monitoring</h3>
+                                <li>Monitor permission changes</li>
+                                <li>Track access patterns</li>
+                                <li>Review audit logs regularly</li>
+                                <li>Set up alerts for suspicious activity</li>
+                            </ul>
+
+                            <h3>4. User Training</h3>
+                            <ul>
+                                <li>Train staff on permission system</li>
+                                <li>Provide clear documentation</li>
+                                <li>Create permission guides</li>
+                                <li>Regularly review and update training</li>
+                            </ul>
+                        </section>
+
+                        <section id="next-steps">
+                            <h2>Next Steps</h2>
+                            <p>After configuring permissions:</p>
+                            <ol>
+                                <li><strong><a href="categories.html">Create Categories</a></strong> - Set up ticket categories with proper permissions</li>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Set up automatic ticket management</li>
+                                <li><strong><a href="dashboard.html">Set Up Dashboard</a></strong> - Configure the web interface</li>
+                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Set up reporting and monitoring</li>
+                            </ol>
+                        </section>
+                    </article>
+
+                    <!-- Table of Contents -->
+                    <aside class="table-of-contents">
+                        <h4>On this page</h4>
+                        <!-- Auto-generated by JavaScript -->
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/script.js"></script>
+</body>
+</html> 
