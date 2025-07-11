@@ -183,8 +183,8 @@ p {
 }
 
 .nav-logo {
-    width: 2rem;
-    height: 2rem;
+    width: 150px;
+    object-fit: contain;
 }
 
 .nav-title {
@@ -555,8 +555,8 @@ p {
 }
 
 .footer-logo {
-    width: 2rem;
-    height: 2rem;
+    width: 150px;
+    object-fit: contain;
 }
 
 .footer-description {
