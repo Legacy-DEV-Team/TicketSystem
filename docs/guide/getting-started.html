@@ -57,18 +57,19 @@
                     <article class="docs-article">
                         <header class="article-header">
                             <h1>Getting Started</h1>
-                            <p class="article-description">Welcome to Ticket System! This guide will help you set up and configure your professional ticket management system in just a few minutes.</p>
+                            <p class="article-description">Welcome to Ticket System! This guide will help you set up and configure your professional ticket management system.</p>
                         </header>
 
                         <section id="overview">
                             <h2>Overview</h2>
-                            <p>Ticket System is a comprehensive solution for managing customer support tickets within Discord servers. It provides:</p>
+                            <p>Ticket System is a Discord-based ticket management solution that provides:</p>
                             <ul>
                                 <li><strong>Thread-based tickets</strong> with automatic numbering</li>
-                                <li><strong>Web dashboard</strong> for configuration and analytics</li>
-                                <li><strong>Multi-guild support</strong> with custom branding</li>
-                                <li><strong>Enterprise security</strong> with industry-standard encryption</li>
-                                <li><strong>SaaS billing</strong> with multiple subscription tiers</li>
+                                <li><strong>Button interface</strong> for easy ticket creation</li>
+                                <li><strong>Auto-close system</strong> with configurable timers</li>
+                                <li><strong>Transcript generation</strong> for closed tickets</li>
+                                <li><strong>Multi-guild support</strong> for managing multiple servers</li>
+                                <li><strong>Subscription tiers</strong> with different feature limits</li>
                             </ul>
                         </section>
 
@@ -77,13 +78,13 @@
                             <p>Before getting started, ensure you have:</p>
                             <ul>
                                 <li>A Discord server where you have <strong>Administrator</strong> permissions</li>
-                                <li>A Discord application/bot (we'll help you create one)</li>
                                 <li>Basic understanding of Discord permissions and roles</li>
+                                <li>Node.js 18+ and MongoDB for self-hosting</li>
                             </ul>
                         </section>
 
                         <section id="quick-setup">
-                            <h2>Quick Setup (5 minutes)</h2>
+                            <h2>Quick Setup</h2>
                             
                             <div class="setup-step">
                                 <h3>Step 1: Add the Bot</h3>
@@ -96,41 +97,22 @@
                             </div>
 
                             <div class="setup-step">
-                                <h3>Step 2: Access the Dashboard</h3>
+                                <h3>Step 2: Configure Categories</h3>
                                 <ol>
-                                    <li>Visit <a href="https://ticketsystem.fyi/dashboard" target="_blank"><strong>https://ticketsystem.fyi/dashboard</strong></a></li>
-                                    <li>Click <strong>"Login with Discord"</strong></li>
-                                    <li>Authorize the application to access your Discord account</li>
-                                    <li>You'll be redirected to your dashboard</li>
+                                    <li>Set up ticket categories in your Discord server</li>
+                                    <li>Configure channels for ticket creation</li>
+                                    <li>Set up role permissions for staff access</li>
+                                    <li>Configure auto-close settings</li>
                                 </ol>
                             </div>
 
                             <div class="setup-step">
-                                <h3>Step 3: Configure Your First Category</h3>
-                                <ol>
-                                    <li>In the dashboard, select your server</li>
-                                    <li>Navigate to <strong>"Ticket Categories"</strong></li>
-                                    <li>Click <strong>"Create Category"</strong></li>
-                                    <li>Fill in the details:</li>
-                                </ol>
-                                <div class="code-block">
-                                    <pre><code>Name: General Support
-Description: Get help with general questions
-Channel: #support-tickets
-Emoji: 🎫</code></pre>
-                                </div>
-                                <ol start="5">
-                                    <li>Click <strong>"Save Category"</strong></li>
-                                </ol>
-                            </div>
-
-                            <div class="setup-step">
-                                <h3>Step 4: Test Your Setup</h3>
+                                <h3>Step 3: Test Your Setup</h3>
                                 <ol>
                                     <li>Go to your Discord server</li>
-                                    <li>The bot will automatically create buttons in your configured channel</li>
-                                    <li>Click the <strong>"🎫 General Support"</strong> button</li>
-                                    <li>A new ticket thread will be created with the format <code>ticket-0001</code></li>
+                                    <li>Use the ticket creation buttons in configured channels</li>
+                                    <li>A new ticket thread will be created with automatic numbering</li>
+                                    <li>Test the auto-close functionality</li>
                                 </ol>
                                 
                                 <div class="success-message">
@@ -147,19 +129,19 @@ Emoji: 🎫</code></pre>
                                 <div class="arch-component">
                                     <div class="arch-icon">🤖</div>
                                     <h4>Discord Bot</h4>
-                                    <p>Handles all Discord interactions (buttons, modals, threads)</p>
-                                </div>
-                                <div class="arch-arrow">→</div>
-                                <div class="arch-component">
-                                    <div class="arch-icon">🌐</div>
-                                    <h4>Web Dashboard</h4>
-                                    <p>Configuration interface and analytics</p>
+                                    <p>Handles Discord interactions (buttons, threads, auto-close)</p>
                                 </div>
                                 <div class="arch-arrow">→</div>
                                 <div class="arch-component">
                                     <div class="arch-icon">🗄️</div>
                                     <h4>Database</h4>
-                                    <p>Stores tickets, users, configurations, and analytics</p>
+                                    <p>Stores tickets, guilds, users, and configurations</p>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-component">
+                                    <div class="arch-icon">📄</div>
+                                    <h4>Transcripts</h4>
+                                    <p>Generates HTML transcripts for closed tickets</p>
                                 </div>
                             </div>
                         </section>
@@ -173,7 +155,7 @@ Emoji: 🎫</code></pre>
                                     <ul>
                                         <li><strong>Thread-based</strong>: Each ticket is a Discord thread</li>
                                         <li><strong>Automatic numbering</strong>: <code>ticket-0001</code>, <code>ticket-0002</code>, etc.</li>
-                                        <li><strong>Role-based access</strong>: Control who can see and respond to tickets</li>
+                                        <li><strong>Status tracking</strong>: open, closed, pending_close</li>
                                         <li><strong>Auto-close</strong>: Configurable inactivity timer (default: 72 hours)</li>
                                     </ul>
                                 </div>
@@ -181,9 +163,10 @@ Emoji: 🎫</code></pre>
                                 <div class="concept-card">
                                     <h3>Categories</h3>
                                     <ul>
-                                        <li><strong>Flexible routing</strong>: Direct tickets to specific channels</li>
+                                        <li><strong>Channel routing</strong>: Direct tickets to specific channels</li>
                                         <li><strong>Permission control</strong>: Require or block specific roles</li>
                                         <li><strong>Custom branding</strong>: Unique emojis and descriptions</li>
+                                        <li><strong>Role-based access</strong>: Control who can create tickets</li>
                                     </ul>
                                 </div>
                                 
@@ -192,7 +175,8 @@ Emoji: 🎫</code></pre>
                                     <ul>
                                         <li><strong>Multi-guild</strong>: Manage multiple Discord servers</li>
                                         <li><strong>Per-guild config</strong>: Each server has independent settings</li>
-                                        <li><strong>Custom domains</strong>: White-label solutions for enterprises</li>
+                                        <li><strong>Subscription tiers</strong>: Free, Pro, Enterprise plans</li>
+                                        <li><strong>Custom tokens</strong>: Use your own bot token (Pro+)</li>
                                     </ul>
                                 </div>
                             </div>
@@ -242,10 +226,6 @@ Emoji: 🎫</code></pre>
                                     </ul>
                                 </div>
                             </div>
-                            
-                            <div class="cta-section">
-                                <a href="/guide/subscription" class="btn btn-primary">Upgrade your plan →</a>
-                            </div>
                         </section>
 
                         <section id="security">
@@ -266,8 +246,8 @@ Emoji: 🎫</code></pre>
                             <ol>
                                 <li><a href="permissions.html"><strong>Configure permissions</strong></a> - Set up role-based access</li>
                                 <li><a href="categories.html"><strong>Customize categories</strong></a> - Create specialized ticket types</li>
-                                <li><a href="analytics.html"><strong>Set up analytics</strong></a> - Track your team's performance</li>
                                 <li><a href="auto-close.html"><strong>Configure auto-close</strong></a> - Automate ticket management</li>
+                                <li><a href="dashboard.html"><strong>Set up dashboard</strong></a> - Configure the web interface</li>
                             </ol>
                         </section>
 

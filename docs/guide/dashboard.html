@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Overview - Ticket System Documentation</title>
-    <meta name="description" content="Dashboard overview and configuration for Ticket System">
+    <meta name="description" content="Dashboard configuration and usage for Ticket System">
     <link rel="stylesheet" href="../assets/styles.css">
     <link rel="icon" href="../public/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,250 +57,349 @@
                     <article class="docs-article">
                         <header class="article-header">
                             <h1>Dashboard Overview</h1>
-                            <p class="article-description">Complete guide to the Ticket System web dashboard</p>
+                            <p class="article-description">Complete guide to the Ticket System web dashboard and administration panel</p>
                         </header>
 
                         <section id="overview">
                             <h2>Dashboard Overview</h2>
-                            <p>The Ticket System dashboard provides a comprehensive web interface for managing your ticket system. This guide covers:</p>
+                            <p>The Ticket System dashboard provides a web interface for managing your ticket system. This guide covers:</p>
                             <ul>
-                                <li>Dashboard layout and navigation</li>
-                                <li>Key features and functionality</li>
-                                <li>Configuration options</li>
-                                <li>User interface customization</li>
-                                <li>Mobile responsiveness</li>
+                                <li>Dashboard features and capabilities</li>
+                                <li>System configuration management</li>
+                                <li>User authentication and permissions</li>
+                                <li>Administrative functions</li>
                             </ul>
                         </section>
 
-                        <section id="accessing-dashboard">
-                            <h2>Accessing the Dashboard</h2>
+                        <section id="features">
+                            <h2>Dashboard Features</h2>
                             
-                            <h3>1. Login Process</h3>
+                            <h3>1. System Configuration</h3>
+                            <p>The dashboard allows administrators to configure system settings:</p>
+                            <ul>
+                                <li><strong>Guild Management</strong>: Configure settings for each Discord server</li>
+                                <li><strong>Auto-Close Settings</strong>: Configure auto-close timers and behavior</li>
+                                <li><strong>Category Management</strong>: Set up ticket categories and permissions</li>
+                                <li><strong>User Management</strong>: Manage staff roles and permissions</li>
+                            </ul>
+
+                            <h3>2. Authentication System</h3>
+                            <p>The dashboard uses Discord OAuth2 for authentication:</p>
+                            <ul>
+                                <li><strong>Discord Login</strong>: Users authenticate with their Discord account</li>
+                                <li><strong>Role-Based Access</strong>: Access based on Discord roles</li>
+                                <li><strong>Session Management</strong>: Secure session handling with JWT</li>
+                                <li><strong>Permission Checks</strong>: Verify user permissions for actions</li>
+                            </ul>
+
+                            <h3>3. Administrative Functions</h3>
+                            <p>Administrators can perform various management tasks:</p>
+                            <ul>
+                                <li><strong>System Configuration</strong>: Update global system settings</li>
+                                <li><strong>Guild Settings</strong>: Configure per-server settings</li>
+                                <li><strong>User Management</strong>: Manage staff access and permissions</li>
+                                <li><strong>Monitoring</strong>: View system status and logs</li>
+                            </ul>
+                        </section>
+
+                        <section id="architecture">
+                            <h2>Dashboard Architecture</h2>
+                            
+                            <h3>1. Technology Stack</h3>
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <h4>Frontend</h4>
+                                    <ul>
+                                        <li>Next.js 14 (App Router)</li>
+                                        <li>React 18</li>
+                                        <li>TypeScript</li>
+                                        <li>Tailwind CSS</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-item">
+                                    <h4>Backend</h4>
+                                    <ul>
+                                        <li>Next.js API Routes</li>
+                                        <li>MongoDB with Mongoose</li>
+                                        <li>JWT Authentication</li>
+                                        <li>Discord OAuth2</li>
+                                    </ul>
+                                </div>
+                                <div class="tech-item">
+                                    <h4>Security</h4>
+                                    <ul>
+                                        <li>Argon2id Password Hashing</li>
+                                        <li>AES-256-GCM Encryption</li>
+                                        <li>EdDSA JWT Signing</li>
+                                        <li>Role-Based Access Control</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>2. Database Schema</h3>
+                            <div class="code-block">
+                                <pre><code>// System configuration schema
+interface ISystemConfig {
+  id: string;
+  maintenanceMode: boolean;
+  registrationEnabled: boolean;
+  maxGuildsPerUser: number;
+  defaultAutoCloseHours: number;
+  defaultCooldownMinutes: number;
+  transcriptRetentionDays: number;
+  maxFileSize: number;
+  allowedFileTypes: string[];
+  rateLimitRequests: number;
+  rateLimitWindow: number;
+}</code></pre>
+                            </div>
+
+                            <h3>3. API Structure</h3>
+                            <div class="code-block">
+                                <pre><code>// API routes structure
+/api/admin/
+  /system-config/     # System configuration
+  /guilds/           # Guild management
+  /users/            # User management
+  /tickets/          # Ticket management
+  /analytics/        # Analytics and reports
+
+/api/auth/
+  /discord/          # Discord OAuth2
+  /logout/           # Session logout
+  /refresh/          # Token refresh
+
+/api/webhooks/
+  /discord/          # Discord webhook handling</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="authentication">
+                            <h2>Authentication System</h2>
+                            
+                            <h3>1. Discord OAuth2 Flow</h3>
+                            <p>The dashboard uses Discord OAuth2 for secure authentication:</p>
                             <ol>
-                                <li>Navigate to your domain: <code>https://yourdomain.com</code></li>
-                                <li>Click "Sign in with Discord"</li>
-                                <li>Authorize the application</li>
-                                <li>You'll be redirected to the dashboard</li>
+                                <li>User clicks "Login with Discord"</li>
+                                <li>Redirected to Discord authorization page</li>
+                                <li>User authorizes the application</li>
+                                <li>Discord redirects back with authorization code</li>
+                                <li>Server exchanges code for access token</li>
+                                <li>Server fetches user information from Discord</li>
+                                <li>JWT token is created and sent to client</li>
+                                <li>User is logged in and redirected to dashboard</li>
                             </ol>
 
-                            <h3>2. Server Selection</h3>
-                            <p>If you manage multiple Discord servers:</p>
-                            <ul>
-                                <li>Select the server from the dropdown</li>
-                                <li>Ensure you have admin permissions</li>
-                                <li>Switch between servers as needed</li>
-                            </ul>
-
-                            <h3>3. Permission Requirements</h3>
-                            <ul>
-                                <li><strong>Administrator</strong>: Full dashboard access</li>
-                                <li><strong>Senior Staff</strong>: Limited admin access</li>
-                                <li><strong>Support Staff</strong>: Basic dashboard access</li>
-                            </ul>
-                        </section>
-
-                        <section id="dashboard-layout">
-                            <h2>Dashboard Layout</h2>
-                            
-                            <h3>1. Navigation Sidebar</h3>
-                            <div class="dashboard-layout">
-                                <div class="nav-section">
-                                    <h4>Main Navigation</h4>
-                                    <ul>
-                                        <li><strong>Overview</strong>: System summary and quick stats</li>
-                                        <li><strong>Categories</strong>: Manage ticket categories</li>
-                                        <li><strong>Tickets</strong>: View and manage active tickets</li>
-                                        <li><strong>Analytics</strong>: Performance reports and metrics</li>
-                                        <li><strong>Staff</strong>: Manage support staff</li>
-                                        <li><strong>Settings</strong>: System configuration</li>
-                                    </ul>
-                                </div>
+                            <h3>2. JWT Token Structure</h3>
+                            <div class="code-block">
+                                <pre><code>// JWT payload structure
+{
+  userId: string;
+  discordId: string;
+  username: string;
+  avatar: string;
+  guilds: Array<{
+    id: string;
+    name: string;
+    permissions: string[];
+  }>;
+  roles: string[];
+  iat: number;  // Issued at
+  exp: number;  // Expiration
+}</code></pre>
                             </div>
 
-                            <h3>2. Main Content Area</h3>
+                            <h3>3. Permission System</h3>
+                            <p>Access control is based on Discord roles and permissions:</p>
                             <ul>
-                                <li><strong>Breadcrumbs</strong>: Navigate between sections</li>
-                                <li><strong>Page Header</strong>: Section title and actions</li>
-                                <li><strong>Content Area</strong>: Main functionality</li>
-                                <li><strong>Sidebar</strong>: Additional options and filters</li>
-                            </ul>
-
-                            <h3>3. Top Navigation Bar</h3>
-                            <ul>
-                                <li><strong>Server Selector</strong>: Choose Discord server</li>
-                                <li><strong>User Menu</strong>: Profile and logout</li>
-                                <li><strong>Notifications</strong>: System alerts</li>
-                                <li><strong>Help</strong>: Documentation and support</li>
+                                <li><strong>Administrator</strong>: Full access to all features</li>
+                                <li><strong>Manage Server</strong>: Can configure guild settings</li>
+                                <li><strong>Manage Channels</strong>: Can manage ticket categories</li>
+                                <li><strong>View Channels</strong>: Can view tickets and reports</li>
                             </ul>
                         </section>
 
-                        <section id="key-features">
-                            <h2>Key Features</h2>
+                        <section id="system-configuration">
+                            <h2>System Configuration</h2>
                             
-                            <h3>1. Overview Dashboard</h3>
-                            <div class="feature-grid">
-                                <div class="feature-card">
-                                    <h4>Quick Stats</h4>
-                                    <ul>
-                                        <li>Active tickets count</li>
-                                        <li>Today's new tickets</li>
-                                        <li>Average response time</li>
-                                        <li>Staff online status</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="feature-card">
-                                    <h4>Recent Activity</h4>
-                                    <ul>
-                                        <li>Latest ticket updates</li>
-                                        <li>Staff responses</li>
-                                        <li>System notifications</li>
-                                        <li>Performance alerts</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="feature-card">
-                                    <h4>Quick Actions</h4>
-                                    <ul>
-                                        <li>Create new category</li>
-                                        <li>View all tickets</li>
-                                        <li>Generate reports</li>
-                                        <li>Manage staff</li>
-                                    </ul>
-                                </div>
+                            <h3>1. Global Settings</h3>
+                            <div class="setup-form">
+                                <h4>System Configuration</h4>
+                                <ul>
+                                    <li><strong>Maintenance Mode</strong>: Enable/disable system maintenance</li>
+                                    <li><strong>Registration Enabled</strong>: Allow new user registrations</li>
+                                    <li><strong>Max Guilds Per User</strong>: Limit guilds per user account</li>
+                                    <li><strong>Default Auto-Close Hours</strong>: Default auto-close timer</li>
+                                    <li><strong>Default Cooldown Minutes</strong>: Default cooldown between tickets</li>
+                                    <li><strong>Transcript Retention Days</strong>: How long to keep transcripts</li>
+                                </ul>
                             </div>
 
-                            <h3>2. Category Management</h3>
-                            <ul>
-                                <li><strong>Create Categories</strong>: Set up new ticket types</li>
-                                <li><strong>Edit Categories</strong>: Modify existing categories</li>
-                                <li><strong>Reorder Categories</strong>: Change display order</li>
-                                <li><strong>Category Analytics</strong>: Performance metrics</li>
-                            </ul>
-
-                            <h3>3. Ticket Management</h3>
-                            <ul>
-                                <li><strong>View All Tickets</strong>: Browse active and closed tickets</li>
-                                <li><strong>Search Tickets</strong>: Find specific tickets</li>
-                                <li><strong>Filter Options</strong>: Filter by status, category, staff</li>
-                                <li><strong>Bulk Actions</strong>: Manage multiple tickets</li>
-                            </ul>
-
-                            <h3>4. Staff Management</h3>
-                            <ul>
-                                <li><strong>Staff Directory</strong>: View all support staff</li>
-                                <li><strong>Performance Tracking</strong>: Individual staff metrics</li>
-                                <li><strong>Role Assignment</strong>: Assign staff to categories</li>
-                                <li><strong>Activity Monitoring</strong>: Track staff activity</li>
-                            </ul>
-                        </section>
-
-                        <section id="configuration-options">
-                            <h2>Configuration Options</h2>
-                            
-                            <h3>1. System Settings</h3>
-                            <div class="settings-grid">
-                                <div class="setting-group">
-                                    <h4>General Settings</h4>
-                                    <ul>
-                                        <li>System name and branding</li>
-                                        <li>Default language</li>
-                                        <li>Timezone configuration</li>
-                                        <li>Notification preferences</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <h4>Security Settings</h4>
-                                    <ul>
-                                        <li>Session timeout</li>
-                                        <li>Two-factor authentication</li>
-                                        <li>IP whitelisting</li>
-                                        <li>Audit logging</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <h4>Integration Settings</h4>
-                                    <ul>
-                                        <li>Discord bot configuration</li>
-                                        <li>Payment provider settings</li>
-                                        <li>Email notification setup</li>
-                                        <li>Webhook configuration</li>
-                                    </ul>
-                                </div>
+                            <h3>2. Security Settings</h3>
+                            <div class="setup-form">
+                                <h4>Security Configuration</h4>
+                                <ul>
+                                    <li><strong>Max File Size</strong>: Maximum file upload size</li>
+                                    <li><strong>Allowed File Types</strong>: Permitted file extensions</li>
+                                    <li><strong>Rate Limit Requests</strong>: API rate limiting</li>
+                                    <li><strong>Rate Limit Window</strong>: Rate limit time window</li>
+                                    <li><strong>Session Timeout</strong>: JWT token expiration time</li>
+                                </ul>
                             </div>
 
-                            <h3>2. Appearance Customization</h3>
-                            <ul>
-                                <li><strong>Theme Selection</strong>: Light, dark, or auto</li>
-                                <li><strong>Color Scheme</strong>: Customize dashboard colors</li>
-                                <li><strong>Logo Upload</strong>: Add your organization logo</li>
-                                <li><strong>Custom CSS</strong>: Advanced styling options</li>
-                            </ul>
+                            <h3>3. API Configuration</h3>
+                            <div class="code-block">
+                                <pre><code>// System config API endpoints
+GET  /api/admin/system-config     # Get current configuration
+POST /api/admin/system-config     # Update configuration
+GET  /api/admin/system-config/validate  # Validate configuration
 
-                            <h3>3. Notification Settings</h3>
-                            <ul>
-                                <li><strong>Email Notifications</strong>: Configure email alerts</li>
-                                <li><strong>Discord Notifications</strong>: Bot notification settings</li>
-                                <li><strong>Dashboard Alerts</strong>: In-app notification preferences</li>
-                                <li><strong>Webhook Notifications</strong>: External system integration</li>
-                            </ul>
+// Example configuration update
+{
+  "maintenanceMode": false,
+  "registrationEnabled": true,
+  "maxGuildsPerUser": 5,
+  "defaultAutoCloseHours": 72,
+  "defaultCooldownMinutes": 60,
+  "transcriptRetentionDays": 30,
+  "maxFileSize": 10485760,  // 10MB
+  "allowedFileTypes": [".png", ".jpg", ".pdf"],
+  "rateLimitRequests": 100,
+  "rateLimitWindow": 900  // 15 minutes
+}</code></pre>
+                            </div>
                         </section>
 
-                        <section id="mobile-responsiveness">
-                            <h2>Mobile Responsiveness</h2>
+                        <section id="guild-management">
+                            <h2>Guild Management</h2>
                             
-                            <h3>1. Mobile Features</h3>
+                            <h3>1. Guild Configuration</h3>
+                            <p>Each Discord server (guild) has its own configuration:</p>
                             <ul>
-                                <li><strong>Responsive Design</strong>: Works on all screen sizes</li>
-                                <li><strong>Touch-Friendly</strong>: Optimized for touch interfaces</li>
-                                <li><strong>Mobile Navigation</strong>: Collapsible sidebar</li>
-                                <li><strong>Quick Actions</strong>: Easy access to common tasks</li>
+                                <li><strong>Auto-Close Settings</strong>: Per-guild auto-close configuration</li>
+                                <li><strong>Cooldown Settings</strong>: Ticket creation cooldown</li>
+                                <li><strong>Category Management</strong>: Ticket categories and permissions</li>
+                                <li><strong>User Management</strong>: Staff roles and blocked users</li>
+                                <li><strong>Logging</strong>: Log channels and transcript storage</li>
                             </ul>
 
-                            <h3>2. Mobile Limitations</h3>
-                            <ul>
-                                <li>Some advanced features may be simplified</li>
-                                <li>Bulk actions are limited</li>
-                                <li>Complex analytics are optimized</li>
-                                <li>File uploads may be restricted</li>
-                            </ul>
+                            <h3>2. Guild Settings Schema</h3>
+                            <div class="code-block">
+                                <pre><code>interface IGuild {
+  guildId: string;
+  name: string;
+  icon?: string;
+  ownerId: string;
+  memberCount: number;
+  autoCloseEnabled: boolean;
+  autoCloseHours: number;
+  cooldownEnabled: boolean;
+  cooldownMinutes: number;
+  devModeEnabled: boolean;
+  devModeRoles: string[];
+  logChannelId?: string;
+  transcriptChannelId?: string;
+  blockedUsers: string[];
+  maxActiveTickets: number;
+  activeTickets: number;
+  totalTickets: number;
+  categories: ITicketCategory[];
+  subscription: {
+    tier: 'free' | 'pro' | 'enterprise';
+    expiresAt?: Date;
+    features: string[];
+  };
+}</code></pre>
+                            </div>
 
-                            <h3>3. Mobile Best Practices</h3>
-                            <ul>
-                                <li>Use landscape mode for better viewing</li>
-                                <li>Enable notifications for important alerts</li>
-                                <li>Bookmark frequently used pages</li>
-                                <li>Use the mobile app when available</li>
-                            </ul>
+                            <h3>3. Guild API Endpoints</h3>
+                            <div class="code-block">
+                                <pre><code>// Guild management API
+GET    /api/admin/guilds              # List user's guilds
+GET    /api/admin/guilds/:guildId     # Get guild configuration
+PUT    /api/admin/guilds/:guildId     # Update guild configuration
+DELETE /api/admin/guilds/:guildId     # Remove guild
+
+// Guild statistics
+GET    /api/admin/guilds/:guildId/stats     # Get guild statistics
+GET    /api/admin/guilds/:guildId/tickets   # Get guild tickets
+GET    /api/admin/guilds/:guildId/logs      # Get guild logs</code></pre>
+                            </div>
                         </section>
 
-                        <section id="security-features">
+                        <section id="user-management">
+                            <h2>User Management</h2>
+                            
+                            <h3>1. User Roles and Permissions</h3>
+                            <p>The dashboard supports role-based access control:</p>
+                            <ul>
+                                <li><strong>Administrator</strong>: Full system access</li>
+                                <li><strong>Guild Manager</strong>: Can manage specific guilds</li>
+                                <li><strong>Support Staff</strong>: Can view and manage tickets</li>
+                                <li><strong>Viewer</strong>: Read-only access to reports</li>
+                            </ul>
+
+                            <h3>2. User Session Management</h3>
+                            <div class="code-block">
+                                <pre><code>// User session management
+interface IUser {
+  id: string;
+  discordId: string;
+  username: string;
+  avatar?: string;
+  email?: string;
+  guilds: Array<{
+    id: string;
+    name: string;
+    permissions: string[];
+  }>;
+  roles: string[];
+  lastLogin: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}</code></pre>
+                            </div>
+
+                            <h3>3. Authentication Flow</h3>
+                            <div class="code-block">
+                                <pre><code>// Authentication flow
+1. User clicks "Login with Discord"
+2. Redirect to Discord OAuth2
+3. User authorizes application
+4. Discord redirects with code
+5. Server exchanges code for token
+6. Server fetches user info
+7. Create/update user in database
+8. Generate JWT token
+9. Set cookie and redirect to dashboard</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="security">
                             <h2>Security Features</h2>
                             
-                            <h3>1. Authentication</h3>
+                            <h3>1. Data Encryption</h3>
                             <ul>
-                                <li><strong>Discord OAuth2</strong>: Secure login via Discord</li>
-                                <li><strong>Session Management</strong>: Automatic session timeout</li>
-                                <li><strong>Permission-Based Access</strong>: Role-based dashboard access</li>
-                                <li><strong>Audit Logging</strong>: Track all user actions</li>
+                                <li><strong>Password Hashing</strong>: Argon2id with configurable parameters</li>
+                                <li><strong>Token Encryption</strong>: AES-256-GCM for sensitive data</li>
+                                <li><strong>JWT Signing</strong>: EdDSA (Ed25519) for authentication</li>
+                                <li><strong>Session Security</strong>: Secure HTTP-only cookies</li>
                             </ul>
 
-                            <h3>2. Data Protection</h3>
+                            <h3>2. Access Control</h3>
                             <ul>
-                                <li><strong>HTTPS Encryption</strong>: All data encrypted in transit</li>
-                                <li><strong>Data Encryption</strong>: Sensitive data encrypted at rest</li>
-                                <li><strong>GDPR Compliance</strong>: Data protection regulations</li>
-                                <li><strong>Data Retention</strong>: Configurable data retention policies</li>
+                                <li><strong>Role-Based Access</strong>: Permissions based on Discord roles</li>
+                                <li><strong>Guild-Specific Access</strong>: Users can only access their guilds</li>
+                                <li><strong>API Rate Limiting</strong>: Prevent abuse and DDoS attacks</li>
+                                <li><strong>Input Validation</strong>: Sanitize all user inputs</li>
                             </ul>
 
-                            <h3>3. Access Control</h3>
+                            <h3>3. Audit Logging</h3>
                             <ul>
-                                <li><strong>IP Restrictions</strong>: Limit access by IP address</li>
-                                <li><strong>Two-Factor Authentication</strong>: Additional security layer</li>
-                                <li><strong>Session Monitoring</strong>: Track active sessions</li>
-                                <li><strong>Login Alerts</strong>: Notify of suspicious activity</li>
+                                <li><strong>Authentication Logs</strong>: Track login attempts and sessions</li>
+                                <li><strong>Configuration Changes</strong>: Log all system changes</li>
+                                <li><strong>API Access Logs</strong>: Monitor API usage and errors</li>
+                                <li><strong>Security Events</strong>: Track suspicious activities</li>
                             </ul>
                         </section>
 
@@ -310,55 +409,70 @@
                             <h3>Common Issues</h3>
                             <div class="troubleshooting-grid">
                                 <div class="issue-card">
-                                    <h4>Login Problems</h4>
+                                    <h4>Login Issues</h4>
                                     <ul>
-                                        <li>Check Discord authorization</li>
-                                        <li>Verify server permissions</li>
-                                        <li>Clear browser cache</li>
-                                        <li>Try incognito mode</li>
-                                    </ul>
-                                </div>
-                                
-                                <div class="issue-card">
-                                    <h4>Loading Issues</h4>
-                                    <ul>
-                                        <li>Check internet connection</li>
-                                        <li>Verify domain configuration</li>
-                                        <li>Clear browser cache</li>
-                                        <li>Try different browser</li>
+                                        <li>Check Discord OAuth2 configuration</li>
+                                        <li>Verify redirect URI settings</li>
+                                        <li>Check client ID and secret</li>
+                                        <li>Review Discord application settings</li>
                                     </ul>
                                 </div>
                                 
                                 <div class="issue-card">
                                     <h4>Permission Errors</h4>
                                     <ul>
-                                        <li>Check Discord role permissions</li>
-                                        <li>Verify server admin access</li>
-                                        <li>Contact system administrator</li>
-                                        <li>Review audit logs</li>
+                                        <li>Check user's Discord roles</li>
+                                        <li>Verify guild permissions</li>
+                                        <li>Check JWT token validity</li>
+                                        <li>Review role-based access rules</li>
                                     </ul>
                                 </div>
                                 
                                 <div class="issue-card">
-                                    <h4>Performance Issues</h4>
+                                    <h4>Configuration Issues</h4>
                                     <ul>
-                                        <li>Check server resources</li>
-                                        <li>Clear browser cache</li>
-                                        <li>Disable browser extensions</li>
-                                        <li>Contact support</li>
+                                        <li>Check system configuration</li>
+                                        <li>Verify guild settings</li>
+                                        <li>Review database connection</li>
+                                        <li>Check API endpoint responses</li>
                                     </ul>
                                 </div>
+                                
+                                <div class="issue-card">
+                                    <h4>Session Problems</h4>
+                                    <ul>
+                                        <li>Check JWT token expiration</li>
+                                        <li>Verify cookie settings</li>
+                                        <li>Check browser security settings</li>
+                                        <li>Review session management</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Debug Information</h3>
+                            <div class="code-block">
+                                <pre><code>// Check user session
+GET /api/auth/me
+
+// Check guild access
+GET /api/admin/guilds
+
+// Check system status
+GET /api/admin/system-config
+
+// Check authentication status
+GET /api/auth/status</code></pre>
                             </div>
                         </section>
 
                         <section id="next-steps">
                             <h2>Next Steps</h2>
-                            <p>After familiarizing yourself with the dashboard:</p>
+                            <p>After setting up the dashboard:</p>
                             <ol>
-                                <li><strong><a href="user-management.html">Manage Staff</a></strong> - Set up your support team</li>
-                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Set up reporting and monitoring</li>
-                                <li><strong><a href="custom-domains.html">Set Up Custom Domains</a></strong> - Configure branding</li>
-                                <li><strong><a href="categories.html">Create Categories</a></strong> - Set up ticket types</li>
+                                <li><strong><a href="user-management.html">Configure Users</a></strong> - Set up staff access and permissions</li>
+                                <li><strong><a href="categories.html">Set Up Categories</a></strong> - Configure ticket categories</li>
+                                <li><strong><a href="auto-close.html">Configure Auto-Close</a></strong> - Set up automatic ticket management</li>
+                                <li><strong><a href="analytics.html">Set Up Analytics</a></strong> - Configure reporting and monitoring</li>
                             </ol>
                         </section>
                     </article>

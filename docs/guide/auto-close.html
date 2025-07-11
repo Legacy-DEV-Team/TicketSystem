@@ -66,8 +66,7 @@
                             <ul>
                                 <li>Understanding how auto-close works</li>
                                 <li>Configuring auto-close settings</li>
-                                <li>Setting up warning notifications</li>
-                                <li>Customizing auto-close behavior</li>
+                                <li>Transcript generation process</li>
                                 <li>Monitoring and troubleshooting</li>
                             </ul>
                         </section>
@@ -79,175 +78,171 @@
                             <p>The system monitors ticket activity and tracks:</p>
                             <ul>
                                 <li>Last message timestamp</li>
-                                <li>User who sent the last message</li>
                                 <li>Ticket status (open/closed)</li>
-                                <li>Category-specific settings</li>
+                                <li>Auto-close deadline</li>
+                                <li>Guild-specific settings</li>
                             </ul>
 
-                            <h3>2. Warning System</h3>
-                            <p>Before closing a ticket, the system:</p>
+                            <h3>2. Auto-Close Process</h3>
+                            <p>When auto-closing a ticket:</p>
                             <ol>
-                                <li>Sends a warning message to the ticket</li>
-                                <li>Notifies staff about impending closure</li>
-                                <li>Allows time for response</li>
-                                <li>Closes the ticket if no response</li>
+                                <li>Generate HTML transcript of the conversation</li>
+                                <li>Save transcript to file system</li>
+                                <li>Update ticket status to 'closed'</li>
+                                <li>Set closed timestamp and closed by 'system'</li>
+                                <li>Decrement active ticket count for the guild</li>
                             </ol>
 
-                            <h3>3. Closure Process</h3>
-                            <p>When auto-closing a ticket:</p>
+                            <h3>3. Transcript Generation</h3>
+                            <p>For each closed ticket:</p>
                             <ul>
-                                <li>Generates a transcript</li>
-                                <li>Sends closure notification</li>
-                                <li>Archives the ticket thread</li>
-                                <li>Updates analytics</li>
+                                <li>HTML transcript is generated with all messages</li>
+                                <li>Transcript includes user information and timestamps</li>
+                                <li>File is saved to the transcripts directory</li>
+                                <li>Transcript URL is stored in the ticket record</li>
                             </ul>
                         </section>
 
                         <section id="configuration">
                             <h2>Configuring Auto-Close</h2>
                             
-                            <h3>1. Global Settings</h3>
+                            <h3>1. Guild Settings</h3>
                             <div class="setup-form">
                                 <h4>Basic Configuration</h4>
                                 <ul>
-                                    <li><strong>Auto-Close Enabled</strong>: Enable/disable the system</li>
-                                    <li><strong>Default Inactivity Time</strong>: Hours before auto-close (default: 72)</li>
-                                    <li><strong>Warning Time</strong>: Hours before warning (default: 24)</li>
-                                    <li><strong>Check Interval</strong>: How often to check for inactive tickets</li>
+                                    <li><strong>Auto-Close Enabled</strong>: Enable/disable the system (default: true)</li>
+                                    <li><strong>Auto-Close Hours</strong>: Hours before auto-close (default: 72)</li>
+                                    <li><strong>Cooldown Enabled</strong>: Prevent spam (default: true)</li>
+                                    <li><strong>Cooldown Minutes</strong>: Minutes between ticket creation (default: 60)</li>
                                 </ul>
                             </div>
 
-                            <h3>2. Category-Specific Settings</h3>
-                            <p>Each category can have different auto-close settings:</p>
-                            <ul>
-                                <li><strong>General Support</strong>: 72 hours (3 days)</li>
-                                <li><strong>Bug Reports</strong>: 168 hours (7 days)</li>
-                                <li><strong>Premium Support</strong>: 48 hours (2 days)</li>
-                                <li><strong>Feature Requests</strong>: 336 hours (14 days)</li>
-                            </ul>
+                            <h3>2. Database Configuration</h3>
+                            <div class="code-block">
+                                <pre><code>// Guild configuration schema
+interface IGuildConfig {
+  autoCloseEnabled: boolean;        // Default: true
+  autoCloseHours: number;           // Default: 72
+  cooldownEnabled: boolean;         // Default: true
+  cooldownMinutes: number;          // Default: 60
+  devModeEnabled: boolean;          // Default: false
+  devModeRoles: string[];           // Roles that bypass cooldown
+  logChannelId?: string;            // Channel for logs
+  transcriptChannelId?: string;     // Channel for transcripts
+  blockedUsers: string[];           // Users who cannot create tickets
+  maxActiveTickets: number;         // Default: 5
+}</code></pre>
+                            </div>
 
-                            <h3>3. Warning Configuration</h3>
-                            <div class="setup-form">
-                                <h4>Warning Messages</h4>
-                                <ul>
-                                    <li><strong>Warning Message</strong>: Custom message sent before closure</li>
-                                    <li><strong>Warning Color</strong>: Color of the warning embed</li>
-                                    <li><strong>Mention Users</strong>: Mention ticket participants</li>
-                                    <li><strong>Staff Notification</strong>: Notify staff of warnings</li>
-                                </ul>
+                            <h3>3. Ticket Schema</h3>
+                            <div class="code-block">
+                                <pre><code>// Ticket auto-close fields
+interface ITicket {
+  status: 'open' | 'closed' | 'pending_close';
+  lastActivity: Date;               // Updated on each message
+  autoCloseAt?: Date;               // Calculated deadline
+  closedAt?: Date;                  // When ticket was closed
+  closedBy?: string;                // Who closed it ('system' for auto-close)
+  transcriptUrl?: string;           // URL to transcript file
+  transcriptPath?: string;          // File system path
+}</code></pre>
                             </div>
                         </section>
 
-                        <section id="advanced-settings">
-                            <h2>Advanced Settings</h2>
+                        <section id="auto-close-service">
+                            <h2>Auto-Close Service</h2>
                             
-                            <h3>1. Conditional Auto-Close</h3>
-                            <p>Set different rules based on conditions:</p>
-                            <ul>
-                                <li><strong>User Role</strong>: Different times for different user types</li>
-                                <li><strong>Ticket Priority</strong>: Faster closure for low-priority tickets</li>
-                                <li><strong>Staff Response</strong>: Extend time if staff has responded</li>
-                                <li><strong>Weekend/Holiday</strong>: Extended times during non-business hours</li>
-                            </ul>
+                            <h3>1. Service Implementation</h3>
+                            <p>The AutoCloseService runs periodically to check for expired tickets:</p>
+                            <div class="code-block">
+                                <pre><code>class AutoCloseService {
+  async processAutoClose() {
+    // Find tickets that have exceeded their auto-close time
+    const expiredTickets = await Ticket.find({
+      status: 'open',
+      autoCloseAt: { $lte: new Date() }
+    });
 
-                            <h3>2. Escalation Rules</h3>
-                            <p>Configure escalation before closure:</p>
-                            <ul>
-                                <li><strong>Escalation Time</strong>: Time before escalation</li>
-                                <li><strong>Escalation Roles</strong>: Roles to escalate to</li>
-                                <li><strong>Escalation Message</strong>: Custom escalation message</li>
-                                <li><strong>Escalation Extension</strong>: Additional time after escalation</li>
-                            </ul>
+    for (const ticket of expiredTickets) {
+      await this.closeTicket(ticket);
+    }
+  }
 
-                            <h3>3. Exception Rules</h3>
-                            <p>Set up exceptions to auto-close:</p>
-                            <ul>
-                                <li><strong>Staff Tickets</strong>: Never auto-close staff tickets</li>
-                                <li><strong>VIP Users</strong>: Extended time for VIP users</li>
-                                <li><strong>Active Discussions</strong>: Extend if recent activity</li>
-                                <li><strong>Custom Tags</strong>: Skip auto-close for tagged tickets</li>
-                            </ul>
-                        </section>
+  private async closeTicket(ticket: ITicket) {
+    // Generate transcript
+    await this.transcriptService.generateTranscript(ticket);
+    
+    // Update ticket status
+    ticket.status = 'closed';
+    ticket.closedBy = 'system';
+    ticket.closedAt = new Date();
+    await ticket.save();
 
-                        <section id="notification-system">
-                            <h2>Notification System</h2>
-                            
-                            <h3>1. Warning Notifications</h3>
-                            <div class="notification-example">
-                                <h4>Example Warning Message</h4>
-                                <div class="embed-example">
-                                    <div class="embed-header">
-                                        <span class="embed-icon">⚠️</span>
-                                        <span class="embed-title">Ticket Auto-Close Warning</span>
-                                    </div>
-                                    <div class="embed-content">
-                                        <p>This ticket will be automatically closed in <strong>24 hours</strong> due to inactivity.</p>
-                                        <p>If you need further assistance, please respond to this message.</p>
-                                        <p><em>Ticket: #ticket-0001 | Category: General Support</em></p>
-                                    </div>
-                                    <div class="embed-footer">
-                                        <span>Auto-Close System</span>
-                                    </div>
-                                </div>
+    // Update guild statistics
+    await Guild.findOneAndUpdate(
+      { guildId: ticket.guildId },
+      { $inc: { activeTickets: -1 } }
+    );
+  }
+}</code></pre>
                             </div>
 
-                            <h3>2. Closure Notifications</h3>
-                            <div class="notification-example">
-                                <h4>Example Closure Message</h4>
-                                <div class="embed-example">
-                                    <div class="embed-header">
-                                        <span class="embed-icon">🔒</span>
-                                        <span class="embed-title">Ticket Closed</span>
-                                    </div>
-                                    <div class="embed-content">
-                                        <p>This ticket has been automatically closed due to inactivity.</p>
-                                        <p>A transcript has been generated and saved.</p>
-                                        <p><em>Ticket: #ticket-0001 | Duration: 3 days, 2 hours</em></p>
-                                    </div>
-                                    <div class="embed-footer">
-                                        <span>Auto-Close System</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3>3. Staff Notifications</h3>
+                            <h3>2. Cron Job</h3>
+                            <p>The auto-close service runs as a cron job:</p>
                             <ul>
-                                <li><strong>Warning Alerts</strong>: Notify staff of impending closures</li>
-                                <li><strong>Closure Reports</strong>: Daily summary of closed tickets</li>
-                                <li><strong>Escalation Alerts</strong>: Notify when tickets are escalated</li>
-                                <li><strong>Exception Reports</strong>: Report on auto-close exceptions</li>
+                                <li>Runs every 5 minutes by default</li>
+                                <li>Checks for tickets that have exceeded auto-close time</li>
+                                <li>Processes tickets in batches</li>
+                                <li>Logs activity for monitoring</li>
+                            </ul>
+
+                            <h3>3. Transcript Service</h3>
+                            <p>The TranscriptService generates HTML transcripts:</p>
+                            <ul>
+                                <li>Creates formatted HTML with all messages</li>
+                                <li>Includes user information and timestamps</li>
+                                <li>Saves to configured transcripts directory</li>
+                                <li>Updates ticket with transcript URL</li>
                             </ul>
                         </section>
 
                         <section id="monitoring">
                             <h2>Monitoring Auto-Close</h2>
                             
-                            <h3>1. Dashboard Metrics</h3>
+                            <h3>1. Logging</h3>
                             <ul>
-                                <li><strong>Auto-Closed Tickets</strong>: Number of tickets closed automatically</li>
-                                <li><strong>Warning Response Rate</strong>: Percentage of warnings that get responses</li>
-                                <li><strong>Average Closure Time</strong>: Average time before auto-close</li>
-                                <li><strong>Category Performance</strong>: Auto-close metrics by category</li>
+                                <li><strong>Auto-close logs</strong>: Number of tickets auto-closed</li>
+                                <li><strong>Error logs</strong>: Failed auto-close attempts</li>
+                                <li><strong>Transcript logs</strong>: Transcript generation status</li>
+                                <li><strong>Performance logs</strong>: Processing time and efficiency</li>
                             </ul>
 
-                            <h3>2. Logs and Reports</h3>
+                            <h3>2. Database Queries</h3>
                             <div class="code-block">
-                                <pre><code># View auto-close logs
-GET /api/admin/auto-close/logs
+                                <pre><code>// Check auto-close status
+// Find tickets that will be auto-closed soon
+const soonToExpire = await Ticket.find({
+  status: 'open',
+  autoCloseAt: { 
+    $lte: new Date(Date.now() + 24 * 60 * 60 * 1000), // Next 24 hours
+    $gt: new Date()
+  }
+});
 
-# Generate auto-close report
-GET /api/admin/auto-close/report?start=2024-01-01&end=2024-01-31
-
-# Export auto-close data
-GET /api/admin/auto-close/export?format=csv</code></pre>
+// Find recently auto-closed tickets
+const recentlyClosed = await Ticket.find({
+  status: 'closed',
+  closedBy: 'system',
+  closedAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } // Last 24 hours
+});</code></pre>
                             </div>
 
-                            <h3>3. Alert Configuration</h3>
+                            <h3>3. Guild Statistics</h3>
                             <ul>
-                                <li><strong>High Closure Rate</strong>: Alert if too many tickets are auto-closed</li>
-                                <li><strong>Low Response Rate</strong>: Alert if warnings aren't getting responses</li>
-                                <li><strong>System Errors</strong>: Alert on auto-close system failures</li>
-                                <li><strong>Performance Issues</strong>: Alert on slow auto-close processing</li>
+                                <li><strong>Active tickets</strong>: Real-time count of open tickets</li>
+                                <li><strong>Total tickets</strong>: Historical count of all tickets</li>
+                                <li><strong>Auto-close rate</strong>: Percentage of tickets auto-closed</li>
+                                <li><strong>Average ticket lifetime</strong>: Time from creation to closure</li>
                             </ul>
                         </section>
 
@@ -259,61 +254,62 @@ GET /api/admin/auto-close/export?format=csv</code></pre>
                                 <div class="issue-card">
                                     <h4>Auto-Close Not Working</h4>
                                     <ul>
-                                        <li>Check if auto-close is enabled</li>
-                                        <li>Verify inactivity time settings</li>
-                                        <li>Check bot permissions</li>
-                                        <li>Review system logs</li>
+                                        <li>Check if auto-close is enabled in guild config</li>
+                                        <li>Verify auto-close hours setting</li>
+                                        <li>Check if cron job is running</li>
+                                        <li>Review service logs</li>
                                     </ul>
                                 </div>
                                 
                                 <div class="issue-card">
-                                    <h4>Warnings Not Sending</h4>
+                                    <h4>Transcript Generation Fails</h4>
                                     <ul>
-                                        <li>Check warning time configuration</li>
-                                        <li>Verify bot can send messages</li>
-                                        <li>Check notification settings</li>
-                                        <li>Review warning message format</li>
+                                        <li>Check transcripts directory permissions</li>
+                                        <li>Verify file system space</li>
+                                        <li>Check transcript service configuration</li>
+                                        <li>Review error logs</li>
                                     </ul>
                                 </div>
                                 
                                 <div class="issue-card">
                                     <h4>Incorrect Closure Times</h4>
                                     <ul>
-                                        <li>Check category-specific settings</li>
+                                        <li>Check guild auto-close hours setting</li>
                                         <li>Verify timezone configuration</li>
-                                        <li>Check exception rules</li>
-                                        <li>Review activity detection logic</li>
+                                        <li>Check lastActivity field updates</li>
+                                        <li>Review auto-close calculation logic</li>
                                     </ul>
                                 </div>
                                 
                                 <div class="issue-card">
-                                    <h4>Missing Transcripts</h4>
+                                    <h4>Database Update Errors</h4>
                                     <ul>
-                                        <li>Check transcript generation settings</li>
-                                        <li>Verify storage permissions</li>
-                                        <li>Check transcript channel configuration</li>
-                                        <li>Review transcript format settings</li>
+                                        <li>Check database connection</li>
+                                        <li>Verify ticket and guild schemas</li>
+                                        <li>Check for database locks</li>
+                                        <li>Review transaction logs</li>
                                     </ul>
                                 </div>
                             </div>
 
                             <h3>Debug Commands</h3>
                             <div class="code-block">
-                                <pre><code># Check auto-close status
-GET /api/admin/auto-close/status
+                                <pre><code>// Check auto-close status
+// Find tickets that should be auto-closed
+db.tickets.find({
+  status: "open",
+  autoCloseAt: { $lte: new Date() }
+});
 
-# Test auto-close for specific ticket
-POST /api/admin/auto-close/test
-{
-  "ticketId": "ticket-0001",
-  "categoryId": "general-support"
-}
+// Check guild configuration
+db.guilds.findOne({ guildId: "your-guild-id" });
 
-# View auto-close configuration
-GET /api/admin/auto-close/config
-
-# Manually trigger auto-close check
-POST /api/admin/auto-close/check</code></pre>
+// Check recent auto-closed tickets
+db.tickets.find({
+  status: "closed",
+  closedBy: "system",
+  closedAt: { $gte: new Date(Date.now() - 24*60*60*1000) }
+});</code></pre>
                             </div>
                         </section>
 
@@ -322,33 +318,34 @@ POST /api/admin/auto-close/check</code></pre>
                             
                             <h3>1. Timing Configuration</h3>
                             <ul>
-                                <li>Start with longer times and adjust based on usage</li>
+                                <li>Start with 72 hours (3 days) for general support</li>
+                                <li>Use shorter times (24-48 hours) for urgent categories</li>
                                 <li>Consider your support team's response time</li>
                                 <li>Account for weekends and holidays</li>
-                                <li>Set different times for different categories</li>
                             </ul>
 
-                            <h3>2. Warning Strategy</h3>
+                            <h3>2. Monitoring</h3>
                             <ul>
-                                <li>Send warnings at least 24 hours before closure</li>
-                                <li>Use clear, friendly warning messages</li>
-                                <li>Include information about reopening tickets</li>
-                                <li>Mention users to ensure they see the warning</li>
+                                <li>Regularly check auto-close logs</li>
+                                <li>Monitor transcript generation success rate</li>
+                                <li>Track auto-close vs manual close ratio</li>
+                                <li>Review customer feedback on auto-closed tickets</li>
                             </ul>
 
                             <h3>3. Exception Handling</h3>
-                                <li>Set up exceptions for VIP users</li>
-                                <li>Never auto-close staff tickets</li>
-                                <li>Consider business hours in timing</li>
-                                <li>Allow manual extension of auto-close</li>
+                            <ul>
+                                <li>Set up alerts for auto-close failures</li>
+                                <li>Monitor transcript generation errors</li>
+                                <li>Check database performance during auto-close</li>
+                                <li>Have manual override procedures</li>
                             </ul>
 
-                            <h3>4. Monitoring and Optimization</h3>
+                            <h3>4. Performance Optimization</h3>
                             <ul>
-                                <li>Regularly review auto-close metrics</li>
-                                <li>Adjust settings based on user feedback</li>
-                                <li>Monitor warning response rates</li>
-                                <li>Optimize settings for your specific use case</li>
+                                <li>Process tickets in batches</li>
+                                <li>Use database indexes for auto-close queries</li>
+                                <li>Optimize transcript generation</li>
+                                <li>Monitor system resources during processing</li>
                             </ul>
                         </section>
 
@@ -356,10 +353,10 @@ POST /api/admin/auto-close/check</code></pre>
                             <h2>Next Steps</h2>
                             <p>After configuring auto-close:</p>
                             <ol>
-                                <li><strong><a href="dashboard.html">Set Up Dashboard</a></strong> - Configure monitoring and analytics</li>
-                                <li><strong><a href="analytics.html">Configure Analytics</a></strong> - Track auto-close performance</li>
-                                <li><strong><a href="user-management.html">Train Staff</a></strong> - Educate staff on auto-close system</li>
-                                <li><strong><a href="categories.html">Optimize Categories</a></strong> - Fine-tune category-specific settings</li>
+                                <li><strong><a href="categories.html">Configure Categories</a></strong> - Set up ticket categories</li>
+                                <li><strong><a href="permissions.html">Set Up Permissions</a></strong> - Configure role-based access</li>
+                                <li><strong><a href="dashboard.html">Configure Dashboard</a></strong> - Set up the web interface</li>
+                                <li><strong><a href="user-management.html">Manage Staff</a></strong> - Train support staff</li>
                             </ol>
                         </section>
                     </article>
