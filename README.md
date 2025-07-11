@@ -1,4 +1,6 @@
-# 🎫 Ticket System
+<div align="center">
+  <img src="docs/public/logo.png" alt="Ticket System" width="200">
+</div>
 
 > **Professional Discord ticket management system with multi-guild support, custom domains, and powerful analytics.**
 
