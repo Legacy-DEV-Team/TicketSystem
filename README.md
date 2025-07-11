@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/Legacy-DEV-Team/TicketSystem/workflows/CI/badge.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/actions)
 [![Documentation](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/)
-[![Discord](https://img.shields.io/discord/796801815785111612?color=7289da&logo=discord&logoColor=white)](https://discord.gg/tb3KrFc2ED)
+[![Discord](https://img.shields.io/discord/1393113687740518482?color=7289da&logo=discord&logoColor=white)](https://discord.gg/tb3KrFc2ED)
 
 ## ✨ Features
 
