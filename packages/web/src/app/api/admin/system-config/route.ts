@@ -136,8 +136,6 @@ export async function GET(_request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    
     // TODO: Add authentication check for admin users
     // TODO: Implement proper database operations
     
@@ -160,7 +158,7 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const { section, data } = body;
+    const { section } = body;
 
     // TODO: Add authentication check for admin users
     // TODO: Implement proper database operations
