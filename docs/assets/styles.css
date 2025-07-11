@@ -395,12 +395,22 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
     margin: var(--spacing-2xl) 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: var(--spacing-md) 0;
 }
 
-.arch-node {
+@media (max-width: 1024px) {
+    .architecture-diagram {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}
+
+.arch-node,
+.arch-component {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -409,6 +419,21 @@ p {
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
     min-width: 120px;
+    text-align: center;
+}
+
+.arch-component h4 {
+    margin: var(--spacing-sm) 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.arch-component p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
 }
 
 .arch-icon {
@@ -633,10 +658,17 @@ p {
     
     .architecture-diagram {
         flex-direction: column;
+        gap: var(--spacing-lg);
     }
     
     .arch-arrow {
         transform: rotate(90deg);
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .arch-component {
+        min-width: 200px;
+        max-width: 300px;
     }
     
     .footer-content {

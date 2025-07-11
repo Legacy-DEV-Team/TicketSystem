@@ -55,7 +55,7 @@ jobs:
           echo "<!-- Placeholder hero image -->" > docs/assets/hero-dashboard.png
           
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: docs
 
@@ -70,7 +70,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3
         
       - name: Update deployment status
         if: always()

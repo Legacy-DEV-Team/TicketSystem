@@ -24,7 +24,7 @@ Before getting started, ensure you have:
 
 ### Step 1: Add the Bot
 
-1. **[Click here to add the bot](https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot)** to your Discord server
+1. **[Click here to add the bot](https://discord.com/oauth2/authorize?client_id=1393041849148506302&permissions=8&integration_type=0&scope=bot+applications.commands)** to your Discord server
 2. Select your server from the dropdown
 3. Ensure all permissions are checked (required for full functionality)
 4. Click **"Authorize"**
