@@ -11,7 +11,7 @@ permissions:
 
 env:
   NODE_VERSION: '18'
-  PNPM_VERSION: '8'
+  PNPM_VERSION: '10'
 
 jobs:
   validate-tag:
