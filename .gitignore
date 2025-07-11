@@ -306,8 +306,4 @@ docs/.vuepress/dist/
 
 # Package manager files
 package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Keep pnpm-lock.yaml for CI
-!pnpm-lock.yaml 
+yarn.lock 
