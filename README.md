@@ -3,9 +3,9 @@
 > **Professional Discord ticket management system with multi-guild support, custom domains, and powerful analytics.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/yourusername/discord-ticket-saas/workflows/CI/badge.svg)](https://github.com/yourusername/discord-ticket-saas/actions)
-[![Documentation](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://yourusername.github.io/discord-ticket-saas/)
-[![Discord](https://img.shields.io/discord/YOUR_DISCORD_ID?color=7289da&logo=discord&logoColor=white)](https://discord.gg/YOUR_INVITE)
+[![Build Status](https://github.com/yourusername/discord-ticket-saas/workflows/CI/badge.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/actions)
+[![Documentation](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/)
+[![Discord](https://img.shields.io/discord/796801815785111612?color=7289da&logo=discord&logoColor=white)](https://discord.gg/dayewa6xP6)
 
 ## ✨ Features
 
@@ -36,8 +36,8 @@
 
 ### For Server Owners
 
-1. **[Add the Bot](https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands)**
-2. **[Access Dashboard](https://yourdomain.com/dashboard)** and connect with Discord
+1. **[Add the Bot](https://discord.com/oauth2/authorize?client_id=1393041849148506302&permissions=8&integration_type=0&scope=bot+applications.commands)**
+2. **[Access Dashboard](https://ticketsystem.fyi/dashboard)** and connect with Discord
 3. **Configure Categories** and set up your first ticket system
 4. **Start Supporting** your community with professional tools
 
@@ -45,7 +45,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/discord-ticket-saas.git
+git clone https://github.com/Legacy-DEV-Team/TicketSystem.git
 cd discord-ticket-saas
 
 # Install dependencies
@@ -55,7 +55,7 @@ npm install
 npm run dev
 ```
 
-📚 **[Read the full documentation →](https://yourusername.github.io/discord-ticket-saas/)**
+📚 **[Read the full documentation →](https://docs.ticketsystem.fyi)**
 
 ## 💎 Pricing Plans
 
@@ -70,7 +70,7 @@ npm run dev
 | Priority Support | ❌ | ✅ | ✅ |
 | **Price** | **Free** | **$9.99/mo** | **$49.99/mo** |
 
-[**Start Free Trial →**](https://yourdomain.com/dashboard)
+[**Start Free Trial →**](https://ticketsystem.fyi/dashboard)
 
 ## 🏆 Why Choose Discord Ticket SaaS?
 
@@ -102,10 +102,10 @@ npm run dev
 
 ## 🤝 Community & Support
 
-- **[Documentation](https://yourusername.github.io/discord-ticket-saas/)** - Complete guides and API reference
-- **[Discord Server](https://discord.gg/YOUR_INVITE)** - Get help from our community
-- **[GitHub Issues](https://github.com/yourusername/discord-ticket-saas/issues)** - Report bugs and request features
-- **[Email Support](mailto:support@yourdomain.com)** - Enterprise support available
+- **[Documentation](https://docs.ticketsystem.fyi)** - Complete guides and API reference
+- **[Discord Server](https://discord.gg/dayewa6xP6)** - Get help from our community
+- **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)** - Report bugs and request features
+- **[Email Support](mailto:support@ticketsystem.fyi)** - Enterprise support available
 
 ## 🛣️ Roadmap
 
@@ -123,16 +123,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Thanks to all the amazing contributors who have helped build this project!
 
-<a href="https://github.com/yourusername/discord-ticket-saas/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourusername/discord-ticket-saas" />
+<a href="https://github.com/Legacy-DEV-Team/TicketSystem/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Legacy-DEV-Team/TicketSystem" />
 </a>
 
 ---
 
 <p align="center">
   <strong>Built with ❤️ for the Discord community</strong><br>
-  <a href="https://yourdomain.com">Website</a> • 
-  <a href="https://yourusername.github.io/discord-ticket-saas/">Documentation</a> • 
-  <a href="https://discord.gg/YOUR_INVITE">Discord</a> • 
-  <a href="https://twitter.com/yourusername">Twitter</a>
+  <a href="https://ticketsystem.fyi">Website</a> • 
+  <a href="https://docs.ticketsystem.fyi">Documentation</a> • 
+  <a href="https://discord.gg/dayewa6xP6">Discord</a>
 </p>
