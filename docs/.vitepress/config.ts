@@ -3,17 +3,17 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Discord Ticket SaaS',
   description: 'Professional Discord ticket management system documentation',
-  base: '/discord-ticket-saas/',
+  base: '/TicketSystem/',
   
   head: [
-    ['link', { rel: 'icon', href: '/discord-ticket-saas/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/TicketSystem/favicon.ico' }],
     ['meta', { name: 'theme-color', content: '#5865f2' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en' }],
     ['meta', { property: 'og:title', content: 'Discord Ticket SaaS | Documentation' }],
     ['meta', { property: 'og:site_name', content: 'Discord Ticket SaaS' }],
-    ['meta', { property: 'og:image', content: 'https://yourusername.github.io/discord-ticket-saas/og-image.png' }],
-    ['meta', { property: 'og:url', content: 'https://yourusername.github.io/discord-ticket-saas/' }],
+    ['meta', { property: 'og:image', content: 'https://legacy-dev-team.github.io/TicketSystem/og-image.png' }],
+    ['meta', { property: 'og:url', content: 'https://legacy-dev-team.github.io/TicketSystem/' }],
   ],
 
   themeConfig: {
@@ -25,7 +25,7 @@ export default defineConfig({
       { 
         text: 'v1.0.0',
         items: [
-          { text: 'Changelog', link: 'https://github.com/yourusername/discord-ticket-saas/blob/main/CHANGELOG.md' },
+          { text: 'Changelog', link: 'https://github.com/Legacy-DEV-Team/TicketSystem/blob/main/CHANGELOG.md' },
           { text: 'Contributing', link: '/contributing' }
         ]
       }
@@ -146,7 +146,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/yourusername/discord-ticket-saas' },
+      { icon: 'github', link: 'https://github.com/Legacy-DEV-Team/TicketSystem' },
       { icon: 'discord', link: 'https://discord.gg/YOUR_INVITE' }
     ],
 
@@ -156,7 +156,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/yourusername/discord-ticket-saas/edit/main/docs/:path'
+              pattern: 'https://github.com/Legacy-DEV-Team/TicketSystem/edit/main/docs/:path'
     },
 
     search: {

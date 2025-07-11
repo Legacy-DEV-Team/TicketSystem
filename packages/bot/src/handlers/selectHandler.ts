@@ -1,5 +1,5 @@
 import { StringSelectMenuInteraction } from 'discord.js';
-import { logger } from '@discord-ticket-saas/shared';
+import { logger } from '@ticket-system/shared';
 
 export class SelectHandler {
   async handle(interaction: StringSelectMenuInteraction) {

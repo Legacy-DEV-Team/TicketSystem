@@ -2,22 +2,22 @@
 layout: home
 
 hero:
-  name: "Discord Ticket SaaS"
+  name: "Ticket System"
   text: "Professional Discord Ticket Management"
   tagline: Multi-guild support, custom domains, and enterprise-grade security
   image:
     src: /logo.svg
-    alt: Discord Ticket SaaS
+    alt: Ticket System
   actions:
     - theme: brand
       text: Get Started
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/yourusername/discord-ticket-saas
+      link: https://github.com/Legacy-DEV-Team/TicketSystem
     - theme: alt
       text: Live Demo
-      link: https://yourdomain.com/dashboard
+      link: https://ticketsystem.fyi/dashboard
 
 features:
   - icon: 🎫
@@ -68,7 +68,7 @@ Get your Discord ticket system running in minutes:
 https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot
 
 # 2. Access the web dashboard
-https://yourdomain.com/dashboard
+https://ticketsystem.fyi/dashboard
 
 # 3. Configure your first ticket category
 # 4. Start supporting your community!
@@ -78,8 +78,8 @@ https://yourdomain.com/dashboard
 
 ```bash
 # Clone and install
-git clone https://github.com/yourusername/discord-ticket-saas.git
-cd discord-ticket-saas
+git clone https://github.com/Legacy-DEV-Team/TicketSystem.git
+cd TicketSystem
 npm install
 
 # Configure environment
@@ -92,7 +92,7 @@ npm run dev
 
 ## Architecture Overview
 
-Discord Ticket SaaS is built with a modern, scalable architecture:
+Ticket System is built with a modern, scalable architecture:
 
 ```mermaid
 graph TB
@@ -146,10 +146,10 @@ graph TB
 ## Community & Support
 
 - 📚 **[Documentation](/guide/getting-started)** - Complete setup guides and API reference
-- 💬 **[Discord Server](https://discord.gg/YOUR_INVITE)** - Get help from our community
-- 🐛 **[GitHub Issues](https://github.com/yourusername/discord-ticket-saas/issues)** - Report bugs and request features
-- 📧 **[Email Support](mailto:support@yourdomain.com)** - Enterprise support available
+- 💬 **[Discord Server](https://discord.gg/dayewa6xP6)** - Get help from our community
+- 🐛 **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)** - Report bugs and request features
+- 📧 **[Email Support](mailto:support@ticketsystem.fyi)** - Enterprise support available
 
 ## License
 
-This project is open source and available under the [MIT License](https://github.com/yourusername/discord-ticket-saas/blob/main/LICENSE).
+This project is open source and available under the [MIT License](https://github.com/Legacy-DEV-Team/TicketSystem/blob/main/LICENSE).

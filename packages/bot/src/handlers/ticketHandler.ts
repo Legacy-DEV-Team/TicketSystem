@@ -1,5 +1,5 @@
 import { Guild as DiscordGuild, ThreadChannel } from 'discord.js';
-import { Guild, Ticket, logger } from '@discord-ticket-saas/shared';
+import { Guild, Ticket, logger } from '@ticket-system/shared';
 
 export class TicketHandler {
   async createTicket(data: {

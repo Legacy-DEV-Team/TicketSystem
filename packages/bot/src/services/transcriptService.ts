@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { logger } from '@discord-ticket-saas/shared';
+import { logger } from '@ticket-system/shared';
 
 export class TranscriptService {
   private transcriptDir: string;

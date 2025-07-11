@@ -1,7 +1,7 @@
 {
-  "name": "discord-ticket-saas",
+  "name": "ticket-system",
   "version": "1.0.0",
-  "description": "Discord Ticket Bot SaaS Platform",
+  "description": "Professional Discord Ticket Management System",
   "private": true,
   "workspaces": [
     "packages/*"

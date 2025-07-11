@@ -50,7 +50,7 @@ Authorization: ApiKey api_key_your_service_key_here
   "sub": "user_63f9876543210abcdef12345",
   "iat": 1705312800,
   "exp": 1705313700,
-  "aud": "discord-ticket-saas",
+  "aud": "ticket-system",
   "iss": "https://yourdomain.com",
   "scope": ["tickets:read", "tickets:write", "guilds:read"],
   "guild_id": "guild_789012345678901234"

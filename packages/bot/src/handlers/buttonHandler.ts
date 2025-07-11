@@ -1,5 +1,5 @@
 import { ButtonInteraction, EmbedBuilder } from 'discord.js';
-import { Guild, Ticket, TICKET_STATUS, logger } from '@discord-ticket-saas/shared';
+import { Guild, Ticket, TICKET_STATUS, logger } from '@ticket-system/shared';
 
 export class ButtonHandler {
   async handle(interaction: ButtonInteraction) {

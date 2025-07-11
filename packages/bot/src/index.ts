@@ -8,7 +8,7 @@ import {
   SystemConfig,
   Guild,
   ISystemConfig
-} from '@discord-ticket-saas/shared';
+} from '@ticket-system/shared';
 
 import { ButtonHandler } from './handlers/buttonHandler';
 import { ModalHandler } from './handlers/modalHandler';
@@ -237,7 +237,7 @@ class DiscordBot {
   public async start() {
     try {
       await DatabaseService.getInstance().connectMongoDB(
-        process.env.MONGODB_URI || 'mongodb://localhost:27017/discord-ticket-saas'
+        process.env.MONGODB_URI || 'mongodb://localhost:27017/ticket-system'
       );
 
       await DatabaseService.getInstance().connectRedis(

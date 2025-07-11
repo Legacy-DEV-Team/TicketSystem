@@ -26,7 +26,7 @@ const consoleFormat = winston.format.combine(
 export const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   format: logFormat,
-  defaultMeta: { service: 'discord-ticket-saas' },
+      defaultMeta: { service: 'ticket-system' },
   transports: [
     new winston.transports.File({
       filename: path.join(process.cwd(), 'logs', 'error.log'),

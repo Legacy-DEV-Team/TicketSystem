@@ -1,9 +1,9 @@
-# 🎫 Discord Ticket SaaS
+# 🎫 Ticket System
 
 > **Professional Discord ticket management system with multi-guild support, custom domains, and powerful analytics.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/yourusername/discord-ticket-saas/workflows/CI/badge.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/actions)
+[![Build Status](https://github.com/Legacy-DEV-Team/TicketSystem/workflows/CI/badge.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/actions)
 [![Documentation](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/)
 [![Discord](https://img.shields.io/discord/796801815785111612?color=7289da&logo=discord&logoColor=white)](https://discord.gg/dayewa6xP6)
 
@@ -46,7 +46,7 @@
 ```bash
 # Clone the repository
 git clone https://github.com/Legacy-DEV-Team/TicketSystem.git
-cd discord-ticket-saas
+cd TicketSystem
 
 # Install dependencies
 npm install
@@ -72,7 +72,7 @@ npm run dev
 
 [**Start Free Trial →**](https://ticketsystem.fyi/dashboard)
 
-## 🏆 Why Choose Discord Ticket SaaS?
+## 🏆 Why Choose Ticket System?
 
 ### **Proven Scale**
 - Powers **500+ Discord servers**
@@ -92,13 +92,13 @@ npm run dev
 ## 📊 Demo & Screenshots
 
 ### Dashboard Overview
-![Dashboard](https://raw.githubusercontent.com/yourusername/discord-ticket-saas/main/docs/images/dashboard.png)
+![Dashboard](https://raw.githubusercontent.com/Legacy-DEV-Team/TicketSystem/main/docs/images/dashboard.png)
 
 ### Ticket Management
-![Tickets](https://raw.githubusercontent.com/yourusername/discord-ticket-saas/main/docs/images/tickets.png)
+![Tickets](https://raw.githubusercontent.com/Legacy-DEV-Team/TicketSystem/main/docs/images/tickets.png)
 
 ### Analytics & Insights
-![Analytics](https://raw.githubusercontent.com/yourusername/discord-ticket-saas/main/docs/images/analytics.png)
+![Analytics](https://raw.githubusercontent.com/Legacy-DEV-Team/TicketSystem/main/docs/images/analytics.png)
 
 ## 🤝 Community & Support
 

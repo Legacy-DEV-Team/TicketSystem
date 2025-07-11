@@ -283,11 +283,11 @@ Content-Type: application/json
 ### JavaScript/TypeScript
 
 ```bash
-npm install @discord-ticket-saas/api-client
+npm install @ticket-system/api-client
 ```
 
 ```typescript
-import { DiscordTicketAPI } from '@discord-ticket-saas/api-client';
+import { TicketSystemAPI } from '@ticket-system/api-client';
 
 const api = new DiscordTicketAPI({
   baseUrl: 'https://yourdomain.com/api',
@@ -313,7 +313,7 @@ const tickets = await api.tickets.list({
 ### Python
 
 ```bash
-pip install discord-ticket-saas
+pip install ticket-system
 ```
 
 ```python

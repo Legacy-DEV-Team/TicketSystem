@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     appDir: true
   },
-  transpilePackages: ['@discord-ticket-saas/shared'],
+  transpilePackages: ['@ticket-system/shared'],
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'dev-secret-change-in-production'

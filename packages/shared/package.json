@@ -1,5 +1,5 @@
 {
-  "name": "@discord-ticket-saas/shared",
+  "name": "@ticket-system/shared",
   "version": "1.0.0",
   "description": "Shared utilities and models",
   "main": "dist/index.js",

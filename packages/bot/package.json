@@ -1,5 +1,5 @@
 {
-  "name": "@discord-ticket-saas/bot",
+  "name": "@ticket-system/bot",
   "version": "1.0.0",
   "description": "Discord Ticket Bot",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@discord-ticket-saas/shared": "workspace:*",
+    "@ticket-system/shared": "workspace:*",
     "discord.js": "^14.14.0",
     "cron": "^3.1.0",
     "cheerio": "^1.0.0-rc.12",

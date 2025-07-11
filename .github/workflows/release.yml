@@ -88,7 +88,7 @@ jobs:
       - name: Run tests
         run: pnpm test
         env:
-          MONGODB_URI: mongodb://localhost:27017/discord-ticket-saas-test
+          MONGODB_URI: mongodb://localhost:27017/ticket-system-test
           REDIS_URL: redis://localhost:6379
           NODE_ENV: test
           
@@ -98,7 +98,7 @@ jobs:
       - name: Create release artifacts
         run: |
           # Create distribution archives
-          tar -czf discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz \
+          tar -czf ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz \
             packages/*/dist \
             package.json \
             pnpm-workspace.yaml \
@@ -108,14 +108,14 @@ jobs:
             docs/
             
           # Create checksums
-          sha256sum discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz > checksums.txt
+          sha256sum ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz > checksums.txt
           
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: release-artifacts
           path: |
-            discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz
+            ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz
             checksums.txt
 
   docker-release:
@@ -155,7 +155,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            yourusername/discord-ticket-${{ matrix.service }}
+            legacy-dev-team/ticket-system-${{ matrix.service }}
             ghcr.io/${{ github.repository }}-${{ matrix.service }}
           tags: |
             type=semver,pattern={{version}}
@@ -211,14 +211,14 @@ jobs:
           else
             echo "## Initial Release" > CHANGELOG.md
             echo "" >> CHANGELOG.md
-            echo "🎉 First release of Discord Ticket SaaS!" >> CHANGELOG.md
+            echo "🎉 First release of Ticket System!" >> CHANGELOG.md
           fi
           
           echo "" >> CHANGELOG.md
           echo "## Docker Images" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
-          echo "- \`yourusername/discord-ticket-bot:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
-          echo "- \`yourusername/discord-ticket-web:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          echo "- \`legacy-dev-team/ticket-system-bot:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
+          echo "- \`legacy-dev-team/ticket-system-web:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
           echo "- \`ghcr.io/${{ github.repository }}-bot:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
           echo "- \`ghcr.io/${{ github.repository }}-web:${{ needs.validate-tag.outputs.version }}\`" >> CHANGELOG.md
           
@@ -227,8 +227,8 @@ jobs:
           echo "" >> CHANGELOG.md
           echo "\`\`\`bash" >> CHANGELOG.md
           echo "# Download and extract" >> CHANGELOG.md
-          echo "wget https://github.com/${{ github.repository }}/releases/download/v${{ needs.validate-tag.outputs.version }}/discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
-          echo "tar -xzf discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
+          echo "wget https://github.com/${{ github.repository }}/releases/download/v${{ needs.validate-tag.outputs.version }}/ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
+          echo "tar -xzf ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz" >> CHANGELOG.md
           echo "" >> CHANGELOG.md
           echo "# Or use Docker" >> CHANGELOG.md
           echo "docker-compose up -d" >> CHANGELOG.md
@@ -238,11 +238,11 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ needs.validate-tag.outputs.version }}
-          name: Discord Ticket SaaS v${{ needs.validate-tag.outputs.version }}
+          name: Ticket System v${{ needs.validate-tag.outputs.version }}
           body_path: CHANGELOG.md
           prerelease: ${{ needs.validate-tag.outputs.is-prerelease }}
           files: |
-            discord-ticket-saas-${{ needs.validate-tag.outputs.version }}.tar.gz
+            ticket-system-${{ needs.validate-tag.outputs.version }}.tar.gz
             checksums.txt
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -314,7 +314,7 @@ jobs:
             
             📥 **Download**: [GitHub Releases](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.validate-tag.outputs.version }})
             🐳 **Docker**: `yourusername/discord-ticket-bot:${{ needs.validate-tag.outputs.version }}`
-            📚 **Docs**: https://yourusername.github.io/discord-ticket-saas/
+            📚 **Docs**: https://legacy-dev-team.github.io/TicketSystem/
             
             ✅ All artifacts published successfully!
             

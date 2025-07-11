@@ -1,4 +1,4 @@
-import { Ticket, Guild, logger } from '@discord-ticket-saas/shared';
+import { Ticket, Guild, logger } from '@ticket-system/shared';
 import { TranscriptService } from './transcriptService';
 
 export class AutoCloseService {

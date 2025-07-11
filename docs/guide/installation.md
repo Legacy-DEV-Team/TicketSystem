@@ -69,8 +69,8 @@ Before installation, ensure you have:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/discord-ticket-saas.git
-cd discord-ticket-saas
+git clone https://github.com/Legacy-DEV-Team/TicketSystem.git
+cd TicketSystem
 
 # Check out the latest stable release
 git checkout tags/v1.0.0
@@ -104,9 +104,9 @@ NODE_ENV=production
 LOG_LEVEL=info
 
 # MongoDB Configuration
-MONGODB_URI=mongodb://localhost:27017/discord-ticket-saas
+MONGODB_URI=mongodb://localhost:27017/ticket-system
 # or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/discord-ticket-saas
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ticket-system
 
 # Redis Configuration
 REDIS_URL=redis://localhost:6379
@@ -152,8 +152,8 @@ sudo systemctl start redis-server
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/discord-ticket-saas.git
-cd discord-ticket-saas
+git clone https://github.com/Legacy-DEV-Team/TicketSystem.git
+cd TicketSystem
 
 # Copy and edit environment file
 cp docker-compose.env.example docker-compose.env
@@ -286,12 +286,12 @@ After=network.target mongodb.service redis.service
 [Service]
 Type=simple
 User=discord-ticket
-WorkingDirectory=/opt/discord-ticket-saas
+WorkingDirectory=/opt/ticket-system
 ExecStart=/usr/bin/node packages/bot/dist/index.js
 Restart=always
 RestartSec=10
 Environment=NODE_ENV=production
-EnvironmentFile=/opt/discord-ticket-saas/.env
+EnvironmentFile=/opt/ticket-system/.env
 
 [Install]
 WantedBy=multi-user.target
@@ -306,13 +306,13 @@ After=network.target mongodb.service redis.service
 [Service]
 Type=simple
 User=discord-ticket
-WorkingDirectory=/opt/discord-ticket-saas
+WorkingDirectory=/opt/ticket-system
 ExecStart=/usr/bin/node packages/web/server.js
 Restart=always
 RestartSec=10
 Environment=NODE_ENV=production
 Environment=PORT=3000
-EnvironmentFile=/opt/discord-ticket-saas/.env
+EnvironmentFile=/opt/ticket-system/.env
 
 [Install]
 WantedBy=multi-user.target
@@ -337,7 +337,7 @@ sudo journalctl -u discord-ticket-web -f
 ### NGINX Configuration
 
 ```nginx
-# /etc/nginx/sites-available/discord-ticket-saas
+# /etc/nginx/sites-available/ticket-system
 server {
     listen 80;
     server_name yourdomain.com;
@@ -386,14 +386,14 @@ server {
 
     # Static files
     location /transcripts/ {
-        alias /opt/discord-ticket-saas/transcripts/;
+        alias /opt/ticket-system/transcripts/;
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
 }
 
 # Enable the site
-sudo ln -s /etc/nginx/sites-available/discord-ticket-saas /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/ticket-system /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -440,19 +440,19 @@ curl -I https://yourdomain.com
 
 ```bash
 # Install monitoring tools
-npm install -g @discord-ticket-saas/monitoring
+npm install -g @ticket-system/monitoring
 
 # Setup health checks
-cat > /opt/discord-ticket-saas/health-check.sh << 'EOF'
+cat > /opt/ticket-system/health-check.sh << 'EOF'
 #!/bin/bash
 curl -f http://localhost:3000/api/health || exit 1
 curl -f http://localhost:3001/health || exit 1
 EOF
 
-chmod +x /opt/discord-ticket-saas/health-check.sh
+chmod +x /opt/ticket-system/health-check.sh
 
 # Add to crontab for monitoring
-echo "*/5 * * * * /opt/discord-ticket-saas/health-check.sh" | crontab -
+echo "*/5 * * * * /opt/ticket-system/health-check.sh" | crontab -
 ```
 
 ## Troubleshooting

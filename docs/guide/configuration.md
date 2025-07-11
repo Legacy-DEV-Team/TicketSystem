@@ -317,7 +317,7 @@ For development and initial setup, these environment variables are used:
 
 ```bash
 # MongoDB
-MONGODB_URI=mongodb://localhost:27017/discord-ticket-saas
+MONGODB_URI=mongodb://localhost:27017/ticket-system
 MONGODB_OPTIONS=retryWrites=true&w=majority
 
 # Redis

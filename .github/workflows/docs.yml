@@ -128,7 +128,7 @@ jobs:
           args: |
             📚 **Documentation Updated**
             
-            🌍 **Live Site**: https://yourusername.github.io/discord-ticket-saas/
+            🌍 **Live Site**: https://legacy-dev-team.github.io/TicketSystem/
             🔗 **Commit**: [`{{ github.sha }}`]({{ github.event.head_commit.url }})
             👤 **Author**: {{ github.event.head_commit.author.name }}
             

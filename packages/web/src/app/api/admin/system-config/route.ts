@@ -6,12 +6,12 @@ import {
   logger,
   SystemConfigSchema,
   validateInput
-} from '@discord-ticket-saas/shared';
+} from '@ticket-system/shared';
 
 export async function GET(request: NextRequest) {
   try {
     await DatabaseService.getInstance().connectMongoDB(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/discord-ticket-saas'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/ticket-system'
     );
 
     let config = await SystemConfig.findOne({ name: 'system' });
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     // TODO: Add authentication check for admin users
     
     await DatabaseService.getInstance().connectMongoDB(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/discord-ticket-saas'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/ticket-system'
     );
 
     const validatedData = validateInput(SystemConfigSchema, body);
@@ -157,7 +157,7 @@ export async function PUT(request: NextRequest) {
     // TODO: Add authentication check for admin users
 
     await DatabaseService.getInstance().connectMongoDB(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/discord-ticket-saas'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/ticket-system'
     );
 
     const config = await SystemConfig.findOne({ name: 'system' });

@@ -1,5 +1,5 @@
 import { ModalSubmitInteraction } from 'discord.js';
-import { logger } from '@discord-ticket-saas/shared';
+import { logger } from '@ticket-system/shared';
 
 export class ModalHandler {
   async handle(interaction: ModalSubmitInteraction) {

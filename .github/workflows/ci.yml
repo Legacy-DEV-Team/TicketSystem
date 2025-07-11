@@ -122,7 +122,7 @@ jobs:
       - name: Run tests
         run: pnpm test
         env:
-          MONGODB_URI: mongodb://localhost:27017/discord-ticket-saas-test
+          MONGODB_URI: mongodb://localhost:27017/ticket-system-test
           REDIS_URL: redis://localhost:6379
           NODE_ENV: test
           

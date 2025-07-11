@@ -183,4 +183,4 @@ Now that you have the basics working:
 - 📚 **Documentation**: Browse our complete guides
 - 💬 **[Discord Support](https://discord.gg/YOUR_INVITE)**: Get help from our community
 - 📧 **[Email Support](mailto:support@yourdomain.com)**: Direct access to our team
-- 🐛 **[GitHub Issues](https://github.com/yourusername/discord-ticket-saas/issues)**: Report bugs or request features
+- 🐛 **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)**: Report bugs or request features
