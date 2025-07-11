@@ -6,7 +6,7 @@ hero:
   text: "Professional Discord Ticket Management"
   tagline: Multi-guild support, custom domains, and enterprise-grade security
   image:
-    src: /logo.svg
+    src: /logo.png
     alt: Ticket System
   actions:
     - theme: brand
@@ -146,7 +146,7 @@ graph TB
 ## Community & Support
 
 - 📚 **[Documentation](/guide/getting-started)** - Complete setup guides and API reference
-- 💬 **[Discord Server](https://discord.gg/dayewa6xP6)** - Get help from our community
+- 💬 **[Discord Server](https://discord.gg/tb3KrFc2ED)** - Get help from our community
 - 🐛 **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)** - Report bugs and request features
 - 📧 **[Email Support](mailto:support@ticketsystem.fyi)** - Enterprise support available
 

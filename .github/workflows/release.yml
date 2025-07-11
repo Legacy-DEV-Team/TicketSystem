@@ -314,7 +314,8 @@ jobs:
             
             📥 **Download**: [GitHub Releases](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.validate-tag.outputs.version }})
             🐳 **Docker**: `yourusername/discord-ticket-bot:${{ needs.validate-tag.outputs.version }}`
-            📚 **Docs**: https://legacy-dev-team.github.io/TicketSystem/
+            📚 **Docs**: https://docs.ticketsystem.fyi/
+            📚 **Backup**: https://legacy-dev-team.github.io/TicketSystem/
             
             ✅ All artifacts published successfully!
             

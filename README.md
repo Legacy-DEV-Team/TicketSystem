@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/Legacy-DEV-Team/TicketSystem/workflows/CI/badge.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/actions)
 [![Documentation](https://img.shields.io/badge/docs-live-brightgreen.svg)](https://github.com/Legacy-DEV-Team/TicketSystem/)
-[![Discord](https://img.shields.io/discord/796801815785111612?color=7289da&logo=discord&logoColor=white)](https://discord.gg/dayewa6xP6)
+[![Discord](https://img.shields.io/discord/796801815785111612?color=7289da&logo=discord&logoColor=white)](https://discord.gg/tb3KrFc2ED)
 
 ## ✨ Features
 
@@ -55,7 +55,7 @@ npm install
 npm run dev
 ```
 
-📚 **[Read the full documentation →](https://docs.ticketsystem.fyi)**
+📚 **[Read the full documentation →](https://docs.ticketsystem.fyi/)**
 
 ## 💎 Pricing Plans
 
@@ -102,8 +102,8 @@ npm run dev
 
 ## 🤝 Community & Support
 
-- **[Documentation](https://docs.ticketsystem.fyi)** - Complete guides and API reference
-- **[Discord Server](https://discord.gg/dayewa6xP6)** - Get help from our community
+- **[Documentation](https://docs.ticketsystem.fyi/)** - Complete guides and API reference
+- **[Discord Server](https://discord.gg/tb3KrFc2ED)** - Get help from our community
 - **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)** - Report bugs and request features
 - **[Email Support](mailto:support@ticketsystem.fyi)** - Enterprise support available
 
@@ -132,6 +132,6 @@ Thanks to all the amazing contributors who have helped build this project!
 <p align="center">
   <strong>Built with ❤️ for the Discord community</strong><br>
   <a href="https://ticketsystem.fyi">Website</a> • 
-  <a href="https://docs.ticketsystem.fyi">Documentation</a> • 
-  <a href="https://discord.gg/dayewa6xP6">Discord</a>
+  <a href="https://docs.ticketsystem.fyi/">Documentation</a> • 
+  <a href="https://discord.gg/tb3KrFc2ED">Discord</a>
 </p>

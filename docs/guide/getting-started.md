@@ -181,6 +181,6 @@ Now that you have the basics working:
 ## Need Help?
 
 - 📚 **Documentation**: Browse our complete guides
-- 💬 **[Discord Support](https://discord.gg/YOUR_INVITE)**: Get help from our community
+- 💬 **[Discord Support](https://discord.gg/tb3KrFc2ED)**: Get help from our community
 - 📧 **[Email Support](mailto:support@yourdomain.com)**: Direct access to our team
 - 🐛 **[GitHub Issues](https://github.com/Legacy-DEV-Team/TicketSystem/issues)**: Report bugs or request features

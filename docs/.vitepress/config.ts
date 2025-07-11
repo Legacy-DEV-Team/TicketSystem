@@ -1,19 +1,23 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Discord Ticket SaaS',
+  title: 'Ticket System',
   description: 'Professional Discord ticket management system documentation',
-  base: '/TicketSystem/',
+  // Custom domain: docs.ticketsystem.fyi
+  // Backup domain: legacy-dev-team.github.io/TicketSystem
+  base: '/',
   
   head: [
-    ['link', { rel: 'icon', href: '/TicketSystem/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/icon.png' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/icon.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/icon.png' }],
     ['meta', { name: 'theme-color', content: '#5865f2' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en' }],
-    ['meta', { property: 'og:title', content: 'Discord Ticket SaaS | Documentation' }],
-    ['meta', { property: 'og:site_name', content: 'Discord Ticket SaaS' }],
-    ['meta', { property: 'og:image', content: 'https://legacy-dev-team.github.io/TicketSystem/og-image.png' }],
-    ['meta', { property: 'og:url', content: 'https://legacy-dev-team.github.io/TicketSystem/' }],
+    ['meta', { property: 'og:title', content: 'Ticket System | Documentation' }],
+    ['meta', { property: 'og:site_name', content: 'Ticket System' }],
+    ['meta', { property: 'og:image', content: 'https://docs.ticketsystem.fyi/logo.png' }],
+    ['meta', { property: 'og:url', content: 'https://docs.ticketsystem.fyi/' }],
   ],
 
   themeConfig: {
@@ -22,6 +26,15 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/getting-started' },
       { text: 'API', link: '/api/overview' },
       { text: 'Examples', link: '/examples/basic-setup' },
+      { 
+        text: 'Legal',
+        items: [
+          { text: 'Legal Overview', link: '/legal' },
+          { text: 'Terms of Service', link: '/terms-of-service' },
+          { text: 'Privacy Policy', link: '/privacy-policy' },
+          { text: 'Cookie Policy', link: '/cookie-policy' }
+        ]
+      },
       { 
         text: 'v1.0.0',
         items: [
@@ -147,12 +160,17 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Legacy-DEV-Team/TicketSystem' },
-      { icon: 'discord', link: 'https://discord.gg/YOUR_INVITE' }
+      { icon: 'discord', link: 'https://discord.gg/tb3KrFc2ED' }
     ],
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024 Discord Ticket SaaS'
+      copyright: 'Copyright © 2024 Ticket System',
+      links: [
+        { text: 'Terms of Service', link: '/terms-of-service' },
+        { text: 'Privacy Policy', link: '/privacy-policy' },
+        { text: 'Cookie Policy', link: '/cookie-policy' }
+      ]
     },
 
     editLink: {
