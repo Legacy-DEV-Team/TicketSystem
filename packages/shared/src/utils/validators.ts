@@ -159,5 +159,5 @@ export function validateInput<T>(schema: z.ZodSchema<T>, data: unknown): T {
 }
 
 export function validatePartial<T>(schema: z.ZodSchema<T>, data: unknown): Partial<T> {
-  return schema.partial().parse(data);
+  return (schema as any).partial().parse(data);
 }

@@ -47,8 +47,8 @@ export class AuthService {
       crv: 'Ed25519'
     });
     
-    this.jwtPrivateKey = new Uint8Array(await crypto.subtle.exportKey('raw', privateKey));
-    this.jwtPublicKey = new Uint8Array(await crypto.subtle.exportKey('raw', publicKey));
+    this.jwtPrivateKey = new Uint8Array(await crypto.subtle.exportKey('raw', privateKey as any));
+    this.jwtPublicKey = new Uint8Array(await crypto.subtle.exportKey('raw', publicKey as any));
   }
 
   async hashPassword(password: string): Promise<string> {
@@ -75,7 +75,7 @@ export class AuthService {
     }
 
     const iv = crypto.randomBytes(12);
-    const cipher = crypto.createCipherGCM('aes-256-gcm', this.encryptionKey);
+    const cipher = crypto.createCipher('aes-256-gcm', this.encryptionKey);
     cipher.setAAD(Buffer.from('token'));
     
     let encrypted = cipher.update(token, 'utf8', 'hex');
@@ -100,7 +100,7 @@ export class AuthService {
     const iv = Buffer.from(ivHex, 'hex');
     const authTag = Buffer.from(authTagHex, 'hex');
 
-    const decipher = crypto.createDecipherGCM('aes-256-gcm', this.encryptionKey);
+    const decipher = crypto.createDecipher('aes-256-gcm', this.encryptionKey);
     decipher.setAAD(Buffer.from('token'));
     decipher.setAuthTag(authTag);
 
@@ -156,7 +156,7 @@ export class AuthService {
         algorithms: ['EdDSA']
       });
 
-      const tokenPayload = payload as TokenPayload;
+      const tokenPayload = payload as unknown as TokenPayload;
       
       if (tokenPayload.type !== type) {
         throw new Error('Invalid token type');
