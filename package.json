@@ -17,8 +17,8 @@
     "start": "concurrently \"npm run start:bot\" \"npm run start:web\"",
     "start:bot": "cd packages/bot && npm start",
     "start:web": "cd packages/web && npm start",
-    "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces",
+    "test": "pnpm run test --recursive",
+    "lint": "pnpm run lint --recursive",
     "clean": "rimraf packages/*/dist packages/*/build packages/*/.next"
   },
   "devDependencies": {
